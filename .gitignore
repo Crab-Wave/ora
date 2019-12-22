@@ -1,5 +1,9 @@
+*.swp
 
 # Build directories
 bin/
 obj/
+
+# Visual Studio 2015
+.vs/
 
