@@ -7,8 +7,9 @@ solution: ORA.sln
 jobs:
   include:
     - os: windows
-    script:
-      - choco install dotnetcore-sdk
+    before_install:
+    - choco install dotnetcore-sdk
+
     - os: linux
     dotnet: 3.1.100
 
