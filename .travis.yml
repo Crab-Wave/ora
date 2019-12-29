@@ -1,6 +1,5 @@
 language: csharp
 mono: none
-dotnet: 3.1.100
 
 solution: ORA.sln
 
@@ -15,7 +14,6 @@ jobs:
     - os: linux
       dotnet: 3.1.100
       install:
-        - dotnet tool install -g dotnet-format
         - dotnet restore
 
 script:
