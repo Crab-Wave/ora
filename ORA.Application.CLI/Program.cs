@@ -6,7 +6,7 @@ namespace ORA.Application.CLI
     {
         public static void Main(string[] args)
         {
-            ORACore.Initialize();
+            OraCore.Initialize();
         }
     }
 }

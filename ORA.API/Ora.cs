@@ -3,27 +3,32 @@ using ORA.API.Loggers;
 
 namespace ORA.API
 {
-    public abstract class ORA
+    public abstract class Ora
     {
-        private static ORA _instance;
+        private static Ora _instance;
 
-        protected static ORA SetInstance(ORA instance)
+        protected static Ora SetInstance(Ora instance)
         {
-            if (ORA._instance != null)
+            if (Ora._instance != null)
             {
                 throw new InvalidOperationException("Cannot redefine ORA instance !");
             }
 
             instance.Logger().Info("API initialized !");
-            return ORA._instance = instance;
+            return Ora._instance = instance;
         }
 
-        public static ORA Get()
+        public static Ora Get()
         {
             return _instance;
         }
 
-        protected ORA()
+        public static ILogger GetLogger()
+        {
+            return Get().Logger();
+        }
+
+        protected Ora()
         {
         }
 

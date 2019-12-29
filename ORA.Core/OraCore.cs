@@ -1,20 +1,21 @@
-﻿using ORA.API.Loggers;
+﻿using ORA.API;
+using ORA.API.Loggers;
 using ORA.Core.Loggers;
 
 namespace ORA.Core
 {
-    public class ORACore : API.ORA
+    public class OraCore : Ora
     {
         public static void Initialize()
         {
-            SetInstance(new ORACore());
+            SetInstance(new OraCore());
         }
 
         private readonly ILogger _logger;
 
-        private ORACore()
+        private OraCore()
         {
-            _logger = new SimpleLogger("ORACore");
+            _logger = new SimpleLogger("OraCore");
         }
 
         public override ILogger Logger()
