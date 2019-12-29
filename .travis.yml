@@ -1,6 +1,9 @@
 language: csharp
 mono: none
 
+git:
+  autocrlf: true
+
 solution: ORA.sln
 
 jobs:
