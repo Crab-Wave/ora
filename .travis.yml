@@ -4,9 +4,13 @@ dotnet: 3.1.100
 
 solution: ORA.sln
 
-os:
-  - windows
-  - linux
+jobs:
+  include:
+    - os: windows
+    script:
+      - choco install dotnetcore-sdk
+    - os: linux
+    dotnet: 3.1.100
 
 # TODO: add test
 install:
@@ -17,7 +21,7 @@ script:
   - dotnet build
 
 after_success:
-  - dotnet format --check --dry-run
+  - dotnet-format --check --dry-run
 
 cache:
   directories:
