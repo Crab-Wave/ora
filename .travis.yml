@@ -1,0 +1,24 @@
+language: csharp
+mono: none
+dotnet: 2.1.801
+
+solution: ORA.sln
+
+os:
+  - windows
+  - linux
+
+# TODO: add test
+install:
+  - dotnet tool install -g dotnet-format
+  - dotnet restore
+
+script:
+  - dotnet build
+
+after_success:
+  - dotnet format --check --dry-run
+
+cache:
+  directories:
+    - '$HOME/.dotnet/tools'
