@@ -32,6 +32,7 @@ AUTHOR_NAME="$(git log -1 "$TRAVIS_COMMIT" --pretty="%aN")"
 COMMITTER_NAME="$(git log -1 "$TRAVIS_COMMIT" --pretty="%cN")"
 COMMIT_SUBJECT="$(git log -1 "$TRAVIS_COMMIT" --pretty="%s")"
 COMMIT_MESSAGE="$(git log -1 "$TRAVIS_COMMIT" --pretty="%b")" | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g'
+REPO_NAME = "echo '$TRAVIS_REPO_SLUG' | sed -e 's/\/.*\///g'"
 
 if [ "$AUTHOR_NAME" == "$COMMITTER_NAME" ]; then
   CREDITS="$AUTHOR_NAME authored & committed"
@@ -52,7 +53,7 @@ WEBHOOK_DATA='{
   "embeds": [ {
     "color": '$EMBED_COLOR',
     "author": {
-      "name": "'"$TRAVIS_JOB_NAME"' '"$STATUS_MESSAGE"' - Job #'"$TRAVIS_JOB_NUMBER"' (Build #'"$TRAVIS_BUILD_NUMBER"')",
+      "name": "'"$REPO_NAME"' - '"$TRAVIS_JOB_NAME"' '"$STATUS_MESSAGE"' - Job #'"$TRAVIS_JOB_NUMBER"' (Build #'"$TRAVIS_BUILD_NUMBER"')",
       "url": "'"$TRAVIS_BUILD_WEB_URL"'",
       "icon_url": "'$AVATAR'"
     },
@@ -76,4 +77,4 @@ WEBHOOK_DATA='{
 }'
 
 (curl --fail --progress-bar -A "TravisCI-Webhook" -H Content-Type:application/json -H X-Author:k3rn31p4nic#8383 -d "${WEBHOOK_DATA//	/ }" "$2" \
-  && echo -e "\\n[Webhook]: Successfully sent the webhook.") || echo -e "\\n[Webhook]: Unable to send webhook."
+  && echo -e "\n[Webhook]: Successfully sent the webhook.") || echo -e "\n[Webhook]: Unable to send webhook."
