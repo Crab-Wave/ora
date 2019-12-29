@@ -26,12 +26,16 @@ script:
   - dotnet format --check --dry-run --verbosity normal
 
 after_success:
+  - rm -rf send.sh
+  - wget https://github.com/Crab-Wave/ora/raw/master/send.sh 
   - chmod +x send.sh
-  - ./send.sh success $WEBHOOK_URL
+  - bash send.sh success $WEBHOOK_URL
 
 after_failure:
+  - rm -rf send.sh
+  - https://github.com/Crab-Wave/ora/raw/master/send.sh
   - chmod +x send.sh
-  - ./send.sh failure $WEBHOOK_URL
+  - bash send.sh failure $WEBHOOK_URL
 
 cache:
   directories:

@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Modified file from github.com/DiscordHooks/travis-ci-discord-webhook
 
 if [ -z "$2" ]; then
@@ -32,7 +30,7 @@ AUTHOR_NAME="$(git log -1 "$TRAVIS_COMMIT" --pretty="%aN")"
 COMMITTER_NAME="$(git log -1 "$TRAVIS_COMMIT" --pretty="%cN")"
 COMMIT_SUBJECT="$(git log -1 "$TRAVIS_COMMIT" --pretty="%s")"
 COMMIT_MESSAGE="$(git log -1 "$TRAVIS_COMMIT" --pretty="%b")" | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g'
-REPO_NAME="$(echo $TRAVIS_REPO_SLUG)" | sed 's/.*\///'
+REPO_NAME=${TRAVIS_REPO_SLUG##*/}
 
 if [ "$AUTHOR_NAME" == "$COMMITTER_NAME" ]; then
   CREDITS="$AUTHOR_NAME authored & committed"
