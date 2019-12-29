@@ -7,16 +7,16 @@ solution: ORA.sln
 jobs:
   include:
     - os: windows
-    before_install:
-    - choco install dotnetcore-sdk
+      install:
+        - choco install dotnetcore-sdk
+        - dotnet tool install -g dotnet-format
+        - dotnet restore
 
     - os: linux
-    dotnet: 3.1.100
-
-# TODO: add test
-install:
-  - dotnet tool install -g dotnet-format
-  - dotnet restore
+      dotnet: 3.1.100
+      install:
+        - dotnet tool install -g dotnet-format
+        - dotnet restore
 
 script:
   - dotnet build
