@@ -1,6 +1,6 @@
 language: csharp
 mono: none
-dotnet: 2.1.801
+dotnet: 2.1
 
 solution: ORA.sln
 
