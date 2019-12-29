@@ -6,22 +6,21 @@ solution: ORA.sln
 jobs:
   include:
     - os: windows
-      install:
+      before_install:
         - choco install dotnetcore-sdk
-        - dotnet tool install -g dotnet-format
-        - dotnet restore
 
     - os: linux
       dotnet: 3.1.100
-      install:
-        - dotnet tool install -g dotnet-format || true
-        - dotnet restore
+
+install:
+  - dotnet tool install -g dotnet-format || true
+  - dotnet restore
 
 script:
   - dotnet build
 
 after_success:
-  - dotnet-format --check --dry-run
+  - dotnet format --check --dry-run --verbosity n
 
 cache:
   directories:
