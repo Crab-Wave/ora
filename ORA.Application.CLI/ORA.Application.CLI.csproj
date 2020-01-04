@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ORA.Core\ORA.Core.csproj">
-	  <Name>ORA.Core</Name>
-	</ProjectReference>
+      <Name>ORA.Core</Name>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>
