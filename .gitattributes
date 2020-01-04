@@ -1,0 +1,16 @@
+# Auto detect text files and perform LF normlization
+* text=auto
+
+# Check out with crlf (Windows) line endings
+*.sln text eol=crlf
+*.csproj text eol=crlf
+*.cs text diff=csharp eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Check out with lf (UNIX) line endings
+*.sh text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+*.md text eol=lf
+.travis.yml text eol=lf
