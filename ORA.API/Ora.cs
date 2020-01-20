@@ -18,15 +18,9 @@ namespace ORA.API
             return Ora._instance = instance;
         }
 
-        public static Ora Get()
-        {
-            return _instance;
-        }
+        public static Ora Get() => _instance;
 
-        public static ILogger GetLogger()
-        {
-            return Get().Logger();
-        }
+        public static ILogger GetLogger() => Get().Logger();
 
         protected Ora()
         {

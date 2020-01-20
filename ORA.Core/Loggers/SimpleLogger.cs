@@ -14,12 +14,12 @@ namespace ORA.Core.Loggers
 
         public SimpleLogger(string name)
         {
-            _dateFormat = "dd/MM/yyyy HH:mm:ss";
-            var newName = Regex.Replace(name, "([^_A-Z])([A-Z])", "$1-$2").ToLower();
+            this._dateFormat = "dd/MM/yyyy HH:mm:ss";
+            string newName = Regex.Replace(name, "([^_A-Z])([A-Z])", "$1-$2").ToLower();
             try
             {
                 Directory.CreateDirectory("logs");
-                _stream = File.CreateText("logs" + "/" + newName + "-" + DateTime.Now.ToFileTime() + ".log");
+                this._stream = File.CreateText("logs" + "/" + newName + "-" + DateTime.Now.ToFileTime() + ".log");
             }
             catch (IOException e)
             {
@@ -27,18 +27,19 @@ namespace ORA.Core.Loggers
                 throw;
             }
 
-            _fileFormat = "[{0}] [{1}] [" + name + "] - {2}\n";
-            _outFormat = "[" + name + "/{0}] - {1}";
+            this._fileFormat = "[{0}] [{1}] [" + name + "] - {2}\n";
+            this._outFormat = "[" + name + "/{0}] - {1}";
         }
 
         public void Log(LogLevel level, string message)
         {
-            var output = string.Format(_outFormat, level.ToString().ToUpper(), message);
+            string output = String.Format(this._outFormat, level.ToString().ToUpper(), message);
             Console.WriteLine(output);
             try
             {
-                _stream.Write(_fileFormat, DateTime.Now.ToString(_dateFormat), level.ToString().ToUpper(), message);
-                _stream.Flush();
+                this._stream.Write(this._fileFormat, DateTime.Now.ToString(this._dateFormat),
+                    level.ToString().ToUpper(), message);
+                this._stream.Flush();
             }
             catch (IOException e)
             {
@@ -47,9 +48,6 @@ namespace ORA.Core.Loggers
             }
         }
 
-        public void Log(LogLevel level, Exception cause)
-        {
-            Log(level, cause.Message);
-        }
+        public void Log(LogLevel level, Exception cause) => this.Log(level, cause.Message);
     }
 }

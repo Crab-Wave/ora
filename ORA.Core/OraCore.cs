@@ -6,21 +6,15 @@ namespace ORA.Core
 {
     public class OraCore : Ora
     {
-        public static void Initialize()
-        {
-            SetInstance(new OraCore());
-        }
+        public static void Initialize() => SetInstance(new OraCore());
 
         private readonly ILogger _logger;
 
         private OraCore()
         {
-            _logger = new SimpleLogger("OraCore");
+            this._logger = new SimpleLogger("OraCore");
         }
 
-        public override ILogger Logger()
-        {
-            return _logger;
-        }
+        public override ILogger Logger() => this._logger;
     }
 }

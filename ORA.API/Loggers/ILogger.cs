@@ -4,17 +4,17 @@ namespace ORA.API.Loggers
 {
     public interface ILogger
     {
-        void Info(Exception cause) => Log(LogLevel.Info, cause);
+        void Info(Exception cause) => this.Log(LogLevel.Info, cause);
 
-        void Info(string message) => Log(LogLevel.Info, message);
+        void Info(string message) => this.Log(LogLevel.Info, message);
 
-        void Debug(Exception cause) => Log(LogLevel.Debug, cause);
+        void Debug(Exception cause) => this.Log(LogLevel.Debug, cause);
 
-        void Debug(string message) => Log(LogLevel.Debug, message);
+        void Debug(string message) => this.Log(LogLevel.Debug, message);
 
-        void Error(Exception cause) => Log(LogLevel.Error, cause);
+        void Error(Exception cause) => this.Log(LogLevel.Error, cause);
 
-        void Error(string message) => Log(LogLevel.Error, message);
+        void Error(string message) => this.Log(LogLevel.Error, message);
 
         void Log(LogLevel level, Exception cause);
 
