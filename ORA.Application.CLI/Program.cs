@@ -1,4 +1,5 @@
-﻿using ORA.Core;
+﻿using ORA.API;
+using ORA.Core;
 
 namespace ORA.Application.CLI
 {
