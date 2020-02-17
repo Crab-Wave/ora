@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Text;
 using ORA.API;
 using ORA.API.Http;
+using ORA.Core.Encryption;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -13,15 +15,22 @@ namespace ORA.Core.Tests
         public Tests(ITestOutputHelper testOutputHelper)
         {
             this.TestOutputHelper = testOutputHelper;
+            OraCore.Initialize();
         }
 
         [Fact]
         public void HttpTests()
         {
-            OraCore.Initialize();
             HttpResponse httpResponse = Ora.GetHttpClient().Get("http://httpbin.org/get");
             Assert.NotNull(httpResponse);
             Assert.NotEmpty(httpResponse.Body);
+        }
+
+        [Fact]
+        public void CipherTests()
+        {
+            byte[] enc = Ora.GetCipher().Encrypt(Encoding.ASCII.GetBytes("Hello World"));
+            Assert.Equal(Ora.GetCipher().Decrypt(enc),Encoding.ASCII.GetBytes("Hello World"));
         }
     }
 }
