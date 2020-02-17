@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Project">
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -13,8 +13,8 @@
     <PackageReference Include="coverlet.collector" Version="1.0.1" />
   </ItemGroup>
 
-  <ItemGroup Label="Project References">
-    <ProjectReference Include="..\ORA.Application.CLI\ORA.Application.CLI.csproj" />
+  <ItemGroup>
+    <ProjectReference Include="..\ORA.Application.CLI.CoreWrapper\ORA.Application.CLI.CoreWrapper.csproj" />
   </ItemGroup>
 
 </Project>
