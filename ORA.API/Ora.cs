@@ -1,5 +1,7 @@
 ﻿using System;
+using ORA.API.Http;
 using ORA.API.Loggers;
+using ORA.API.Managers;
 
 namespace ORA.API
 {
@@ -9,23 +11,35 @@ namespace ORA.API
 
         protected static Ora SetInstance(Ora instance)
         {
-            if (Ora._instance != null)
+            if (_instance != null)
             {
                 throw new InvalidOperationException("Cannot redefine ORA instance !");
             }
 
             instance.Logger().Info("API initialized !");
-            return Ora._instance = instance;
+            return _instance = instance;
         }
 
         public static Ora Get() => _instance;
 
         public static ILogger GetLogger() => Get().Logger();
 
+        public static IHttpClient GetHttpClient() => Get().HttpClient();
+
+        public static IClusterManager GetClusterManager() => Get().ClusterManager();
+
+        public static INodeManager GetNodeManager() => Get().NodeManager();
+
         protected Ora()
         {
         }
 
         public abstract ILogger Logger();
+
+        public abstract IHttpClient HttpClient();
+
+        public abstract IClusterManager ClusterManager();
+
+        public abstract INodeManager NodeManager();
     }
 }
