@@ -12,10 +12,8 @@ namespace ORA.Core.Encryption
         {
             CspParameters cspParameters = new CspParameters();
             cspParameters.KeyContainerName = this.container;
-            using (var rsa = new RSACryptoServiceProvider(cspParameters))
-            {
-                keys = rsa.ExportParameters(true);
-            }
+            var rsa = new RSACryptoServiceProvider(cspParameters);
+            keys = rsa.ExportParameters(true);
         }
 
         public string GetPublicKey()
@@ -32,12 +30,11 @@ namespace ORA.Core.Encryption
             CspParameters cspParameters = new CspParameters();
             cspParameters.KeyContainerName = this.container;
             byte[] encrypted;
-            using (var rsa = new RSACryptoServiceProvider(cspParameters))
-            {
-                rsa.PersistKeyInCsp = false;
-                rsa.ImportParameters(keys);
-                encrypted = rsa.Encrypt(message, true);
-            }
+            var rsa = new RSACryptoServiceProvider(cspParameters);
+            rsa.PersistKeyInCsp = false;
+            rsa.ImportParameters(keys);
+            encrypted = rsa.Encrypt(message, true);
+
             return encrypted;
         }
 
@@ -46,12 +43,10 @@ namespace ORA.Core.Encryption
             CspParameters cspParameters = new CspParameters();
             cspParameters.KeyContainerName = this.container;
             byte[] decrypted;
-            using (var rsa = new RSACryptoServiceProvider(cspParameters))
-            {
-                rsa.PersistKeyInCsp = false;
-                rsa.ImportParameters(keys);
-                decrypted = rsa.Decrypt(encrypted, true);
-            }
+            var rsa = new RSACryptoServiceProvider(cspParameters);
+            rsa.PersistKeyInCsp = false;
+            rsa.ImportParameters(keys);
+            decrypted = rsa.Decrypt(encrypted, true);
 
             return decrypted;
         }
@@ -64,10 +59,8 @@ namespace ORA.Core.Encryption
             rsa.PersistKeyInCsp = false;
             rsa.Clear();
 
-            using (var rsaa = new RSACryptoServiceProvider(cspParameters))
-            {
-                keys = rsaa.ExportParameters(true);
-            }
+            var rsaa = new RSACryptoServiceProvider(cspParameters);
+            keys = rsaa.ExportParameters(true);
         }
     }
 }
