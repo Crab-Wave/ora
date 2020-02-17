@@ -1,4 +1,4 @@
-﻿using ORA.Core;
+﻿using ORA.API;
 
 namespace ORA.Application.CLI
 {
@@ -6,7 +6,6 @@ namespace ORA.Application.CLI
     {
         public static void Main(string[] args)
         {
-            OraCore.Initialize();
         }
     }
 }
