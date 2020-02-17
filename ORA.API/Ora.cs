@@ -1,4 +1,5 @@
 ﻿using System;
+using ORA.API.Encryption;
 using ORA.API.Http;
 using ORA.API.Loggers;
 using ORA.API.Managers;
@@ -26,6 +27,8 @@ namespace ORA.API
 
         public static IHttpClient GetHttpClient() => Get().HttpClient();
 
+        public static ICipher GetCipher() => Get().Cipher();
+
         public static IClusterManager GetClusterManager() => Get().ClusterManager();
 
         public static INodeManager GetNodeManager() => Get().NodeManager();
@@ -37,6 +40,8 @@ namespace ORA.API
         public abstract ILogger Logger();
 
         public abstract IHttpClient HttpClient();
+
+        public abstract ICipher Cipher();
 
         public abstract IClusterManager ClusterManager();
 
