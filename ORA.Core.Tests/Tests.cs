@@ -15,7 +15,6 @@ namespace ORA.Core.Tests
         public Tests(ITestOutputHelper testOutputHelper)
         {
             this.TestOutputHelper = testOutputHelper;
-            OraCore.Initialize();
         }
 
         [Fact]
