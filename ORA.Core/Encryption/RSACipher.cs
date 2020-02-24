@@ -6,24 +6,32 @@ namespace ORA.Core.Encryption
     public class RsaCipher : ICipher
     {
         private static RSAParameters keys;
+        private string container = "My Key Container";
 
         public RsaCipher()
         {
-            var rsa = new RSACryptoServiceProvider(2048);
+            CspParameters cspParameters = new CspParameters();
+            cspParameters.KeyContainerName = this.container;
+            var rsa = new RSACryptoServiceProvider(cspParameters);
             keys = rsa.ExportParameters(true);
         }
 
         public string GetPublicKey()
         {
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048);
-            rsa.ImportParameters(keys);
+            CspParameters cspParameters = new CspParameters();
+            cspParameters.KeyContainerName = this.container;
+
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(cspParameters);
             return rsa.ToXmlString(false);
         }
 
         public byte[] Encrypt(byte[] message)
         {
+            CspParameters cspParameters = new CspParameters();
+            cspParameters.KeyContainerName = this.container;
             byte[] encrypted;
-            var rsa = new RSACryptoServiceProvider(2048);
+            var rsa = new RSACryptoServiceProvider(cspParameters);
+            rsa.PersistKeyInCsp = false;
             rsa.ImportParameters(keys);
             encrypted = rsa.Encrypt(message, true);
 
@@ -32,8 +40,11 @@ namespace ORA.Core.Encryption
 
         public byte[] Decrypt(byte[] encrypted)
         {
+            CspParameters cspParameters = new CspParameters();
+            cspParameters.KeyContainerName = this.container;
             byte[] decrypted;
-            var rsa = new RSACryptoServiceProvider(2048);
+            var rsa = new RSACryptoServiceProvider(cspParameters);
+            rsa.PersistKeyInCsp = false;
             rsa.ImportParameters(keys);
             decrypted = rsa.Decrypt(encrypted, true);
 
@@ -42,11 +53,13 @@ namespace ORA.Core.Encryption
 
         public void NewKey()
         {
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048);
+            CspParameters cspParameters = new CspParameters();
+            cspParameters.KeyContainerName = this.container;
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(cspParameters);
             rsa.PersistKeyInCsp = false;
             rsa.Clear();
 
-            var rsaa = new RSACryptoServiceProvider(2048);
+            var rsaa = new RSACryptoServiceProvider(cspParameters);
             keys = rsaa.ExportParameters(true);
         }
     }
