@@ -20,7 +20,7 @@ namespace ORA.Core.Encryption
 
         public string GetPublicKey()
         {
-            var rsa = new RSACryptoServiceProvider(2048);
+            var rsa = new RSACryptoServiceProvider();
             rsa.ImportParameters(this.publickey);
             return rsa.ToXmlString(false);
         }
@@ -28,9 +28,8 @@ namespace ORA.Core.Encryption
         public byte[] Encrypt(byte[] message)
         {
             byte[] encrypted;
-            using (var rsa = new RSACryptoServiceProvider(2048))
+            using (var rsa = new RSACryptoServiceProvider())
             {
-                rsa.PersistKeyInCsp = false;
                 rsa.ImportParameters(this.publickey);
                 encrypted = rsa.Encrypt(message, true);
             }
@@ -41,7 +40,7 @@ namespace ORA.Core.Encryption
         public byte[] Decrypt(byte[] encrypted)
         {
             byte[] decrypted;
-            using (var rsa = new RSACryptoServiceProvider(2048))
+            using (var rsa = new RSACryptoServiceProvider())
             {
                 rsa.PersistKeyInCsp = false;
                 rsa.ImportParameters(this.privatekey);
@@ -52,17 +51,11 @@ namespace ORA.Core.Encryption
 
         public void NewKey()
         {
-            using var rsa = new RSACryptoServiceProvider(2048);
+            using (var rsa = new RSACryptoServiceProvider(2048))
             {
                 rsa.PersistKeyInCsp = false;
-                rsa.Clear();
-            }
-
-            using (var rsaa = new RSACryptoServiceProvider(2048))
-            {
-                rsaa.PersistKeyInCsp = false;
-                this.publickey = rsaa.ExportParameters(false);
-                this.privatekey = rsaa.ExportParameters(true);
+                this.publickey = rsa.ExportParameters(false);
+                this.privatekey = rsa.ExportParameters(true);
             }
         }
     }
