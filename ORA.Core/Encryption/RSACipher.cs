@@ -41,15 +41,5 @@ namespace ORA.Core.Encryption
 
             return decrypted;
         }
-
-        public void NewKey()
-        {
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048);
-            rsa.PersistKeyInCsp = false;
-            rsa.Clear();
-
-            var rsaa = new RSACryptoServiceProvider(2048);
-            keys = rsaa.ExportParameters(true);
-        }
     }
 }
