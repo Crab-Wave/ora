@@ -5,23 +5,23 @@ namespace ORA.Core.Encryption
 {
     public class RsaCipher : ICipher
     {
-        private static RSAParameters publickey;
-        private static RSAParameters privatekey;
+        private RSAParameters publickey;
+        private RSAParameters privatekey;
 
         public RsaCipher()
         {
             using (var rsa = new RSACryptoServiceProvider(2048))
             {
                 rsa.PersistKeyInCsp = false;
-                publickey = rsa.ExportParameters(false);
-                privatekey = rsa.ExportParameters(true);
+                this.publickey = rsa.ExportParameters(false);
+                this.privatekey = rsa.ExportParameters(true);
             }
         }
 
         public string GetPublicKey()
         {
             var rsa = new RSACryptoServiceProvider(2048);
-            rsa.ImportParameters(publickey);
+            rsa.ImportParameters(this.publickey);
             return rsa.ToXmlString(false);
         }
 
@@ -31,7 +31,7 @@ namespace ORA.Core.Encryption
             using (var rsa = new RSACryptoServiceProvider(2048))
             {
                 rsa.PersistKeyInCsp = false;
-                rsa.ImportParameters(publickey);
+                rsa.ImportParameters(this.publickey);
                 encrypted = rsa.Encrypt(message, true);
             }
 
@@ -44,7 +44,7 @@ namespace ORA.Core.Encryption
             using (var rsa = new RSACryptoServiceProvider(2048))
             {
                 rsa.PersistKeyInCsp = false;
-                rsa.ImportParameters(privatekey);
+                rsa.ImportParameters(this.privatekey);
                 decrypted = rsa.Decrypt(encrypted, true);
             }
             return decrypted;
@@ -61,8 +61,8 @@ namespace ORA.Core.Encryption
             using (var rsaa = new RSACryptoServiceProvider(2048))
             {
                 rsaa.PersistKeyInCsp = false;
-                publickey = rsaa.ExportParameters(false);
-                privatekey = rsaa.ExportParameters(true);
+                this.publickey = rsaa.ExportParameters(false);
+                this.privatekey = rsaa.ExportParameters(true);
             }
         }
     }

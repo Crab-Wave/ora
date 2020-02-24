@@ -2,7 +2,7 @@
 using System.Text;
 using ORA.API;
 using ORA.API.Http;
-using ORA.Core.Encryption;
+using ORA.API.Encryption;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -15,6 +15,7 @@ namespace ORA.Core.Tests
         public Tests(ITestOutputHelper testOutputHelper)
         {
             this.TestOutputHelper = testOutputHelper;
+            OraCore.Initialize();
         }
 
         [Fact]
@@ -28,8 +29,9 @@ namespace ORA.Core.Tests
         [Fact]
         public void CipherTests()
         {
-            byte[] enc = Ora.GetCipher().Encrypt(Encoding.ASCII.GetBytes("Hello World"));
-            Assert.Equal(Ora.GetCipher().Decrypt(enc),Encoding.ASCII.GetBytes("Hello World"));
+            ICipher cip = Ora.GetCipher();
+            byte[] enc = cip.Encrypt(Encoding.ASCII.GetBytes("Hello World"));
+            Assert.Equal(cip.Decrypt(enc),Encoding.ASCII.GetBytes("Hello World"));
         }
     }
 }
