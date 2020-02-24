@@ -5,28 +5,35 @@ namespace ORA.Core.Encryption
 {
     public class RsaCipher : ICipher
     {
-        private static RSAParameters keys;
+        private static RSAParameters publickey;
+        private static RSAParameters privatekey;
 
         public RsaCipher()
         {
-            var rsa = new RSACryptoServiceProvider(2048);
-            keys = rsa.ExportParameters(true);
+            using (var rsa = new RSACryptoServiceProvider(2048))
+            {
+                rsa.PersistKeyInCsp = false;
+                publickey = rsa.ExportParameters(false);
+                privatekey = rsa.ExportParameters(true);
+            }
         }
 
         public string GetPublicKey()
         {
-
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048);
+            var rsa = new RSACryptoServiceProvider(2048);
+            rsa.ImportParameters(publickey);
             return rsa.ToXmlString(false);
         }
 
         public byte[] Encrypt(byte[] message)
         {
             byte[] encrypted;
-            var rsa = new RSACryptoServiceProvider(2048);
-            rsa.PersistKeyInCsp = false;
-            rsa.ImportParameters(keys);
-            encrypted = rsa.Encrypt(message, true);
+            using (var rsa = new RSACryptoServiceProvider(2048))
+            {
+                rsa.PersistKeyInCsp = false;
+                rsa.ImportParameters(publickey);
+                encrypted = rsa.Encrypt(message, true);
+            }
 
             return encrypted;
         }
@@ -34,12 +41,29 @@ namespace ORA.Core.Encryption
         public byte[] Decrypt(byte[] encrypted)
         {
             byte[] decrypted;
-            var rsa = new RSACryptoServiceProvider(2048);
-            rsa.PersistKeyInCsp = false;
-            rsa.ImportParameters(keys);
-            decrypted = rsa.Decrypt(encrypted, true);
-
+            using (var rsa = new RSACryptoServiceProvider(2048))
+            {
+                rsa.PersistKeyInCsp = false;
+                rsa.ImportParameters(privatekey);
+                decrypted = rsa.Decrypt(encrypted, true);
+            }
             return decrypted;
+        }
+
+        public void NewKey()
+        {
+            using var rsa = new RSACryptoServiceProvider(2048);
+            {
+                rsa.PersistKeyInCsp = false;
+                rsa.Clear();
+            }
+
+            using (var rsaa = new RSACryptoServiceProvider(2048))
+            {
+                rsaa.PersistKeyInCsp = false;
+                publickey = rsaa.ExportParameters(false);
+                privatekey = rsaa.ExportParameters(true);
+            }
         }
     }
 }
