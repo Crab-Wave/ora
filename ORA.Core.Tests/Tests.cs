@@ -31,8 +31,12 @@ namespace ORA.Core.Tests
         public void ClusterTests()
         {
             OraCluster test = new OraCluster("test","oui");
+            Ora.Get().ClusterManager().CreateCluster("test").Should().Be(test);
+            Ora.Get().ClusterManager().CreateCluster("test").Should().Throw<Exception>("Cluster already exists");
             Ora.Get().ClusterManager().GetCluster("oui").Should().Be(test);
-            Ora.Get().ClusterManager().GetCluster("oui").Should().Throw<ArgumentException>("Cluster already exists");
+            Ora.Get().ClusterManager().GetCluster("non").Should().Throw<Exception>("Couldn't find cluster with this non");
+            Ora.Get().ClusterManager().DeleteCluster("oui").Should().Be(true);
+            Ora.Get().ClusterManager().DeleteCluster("oui").Should().Be(false);
         }
     }
 }
