@@ -62,7 +62,9 @@ namespace ORA.Core.Managers
             this._clusters.Remove(identifier);
             HttpResponse
                 response = Ora.GetHttpClient().Delete("", new HttpRequest().Set("identifier", identifier));
-
+            int code = response.Code;
+            if (code == 200)
+                return true;
             Exception exception = new Exception($"Couldn't find cluster with this {identifier}");
             Ora.GetLogger().Error(exception);
             return false;
