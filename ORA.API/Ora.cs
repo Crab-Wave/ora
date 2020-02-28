@@ -12,7 +12,8 @@ namespace ORA.API
 
         protected static Ora SetInstance(Ora instance)
         {
-            if (_instance != null) throw new InvalidOperationException("Cannot redefine ORA instance !");
+            if (_instance != null)
+                throw new InvalidOperationException("Cannot redefine ORA instance !");
 
             instance.Logger().Info("API initialized !");
             return _instance = instance;
