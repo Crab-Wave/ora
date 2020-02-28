@@ -30,7 +30,7 @@ namespace ORA.Core.Tests
         {
             ICipher cip = Ora.GetCipher();
             byte[] enc = cip.Encrypt(Encoding.ASCII.GetBytes("Hello World"));
-            Assert.Equal(cip.Decrypt(enc),Encoding.ASCII.GetBytes("Hello World"));
+            Assert.Equal(cip.Decrypt(enc), Encoding.ASCII.GetBytes("Hello World"));
         }
     }
 
