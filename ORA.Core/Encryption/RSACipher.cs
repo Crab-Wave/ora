@@ -7,10 +7,12 @@ namespace ORA.Core.Encryption
     {
         private RSAParameters publickey;
         private RSAParameters privatekey;
+        private int keysize;
 
-        public RsaCipher()
+        public RsaCipher(int keysize)
         {
-            using (var rsa = new RSACryptoServiceProvider(2048))
+            this.keysize = keysize;
+            using (var rsa = new RSACryptoServiceProvider(keysize))
             {
                 rsa.PersistKeyInCsp = false;
                 this.publickey = rsa.ExportParameters(false);
@@ -51,7 +53,7 @@ namespace ORA.Core.Encryption
 
         public void NewKey()
         {
-            using (var rsa = new RSACryptoServiceProvider(2048))
+            using (var rsa = new RSACryptoServiceProvider(this.keysize))
             {
                 rsa.PersistKeyInCsp = false;
                 this.publickey = rsa.ExportParameters(false);

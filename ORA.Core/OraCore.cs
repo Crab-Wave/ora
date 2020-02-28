@@ -22,7 +22,7 @@ namespace ORA.Core
         {
             this._logger = new SimpleLogger("OraCore");
             this._httpClient = new UnirestHttpClient();
-            this._cipher = new RsaCipher();
+            this._cipher = new RsaCipher(4096);
         }
 
         public override ILogger Logger() => this._logger;
