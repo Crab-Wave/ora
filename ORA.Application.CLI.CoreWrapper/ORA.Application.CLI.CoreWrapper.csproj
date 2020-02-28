@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ORA.Application.CLI\ORA.Application.CLI.csproj" />
+      <ProjectReference Include="..\ORA.Core\ORA.Core.csproj" />
+    </ItemGroup>
+
+</Project>
