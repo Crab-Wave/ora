@@ -4,6 +4,7 @@ using ORA.API.Encryption;
 using ORA.API.Http;
 using ORA.API.Loggers;
 using ORA.API.Managers;
+using ORA.Core.Encryption;
 using ORA.Core.Http;
 using ORA.Core.Loggers;
 
@@ -15,18 +16,20 @@ namespace ORA.Core
 
         private readonly ILogger _logger;
         private readonly IHttpClient _httpClient;
+        private readonly ICipher _cipher;
 
         private OraCore()
         {
             this._logger = new SimpleLogger("OraCore");
             this._httpClient = new UnirestHttpClient();
+            this._cipher = new RsaCipher(4096);
         }
 
         public override ILogger Logger() => this._logger;
 
         public override IHttpClient HttpClient() => this._httpClient;
 
-        public override ICipher Cipher() => throw new NotImplementedException("Cipher not implemented");
+        public override ICipher Cipher() => this._cipher;
 
         public override IClusterManager ClusterManager() =>
             throw new NotImplementedException("ClusterManager not implemented");

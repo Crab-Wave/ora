@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Text;
 using ORA.API;
 using ORA.API.Http;
+using ORA.API.Encryption;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace ORA.Core.Tests
 {
-    public class Tests
+    public class Tests : IClassFixture<CoreInitializationFixture>
     {
         private readonly ITestOutputHelper TestOutputHelper;
 
@@ -18,10 +20,25 @@ namespace ORA.Core.Tests
         [Fact]
         public void HttpTests()
         {
-            OraCore.Initialize();
             HttpResponse httpResponse = Ora.GetHttpClient().Get("http://httpbin.org/get");
             Assert.NotNull(httpResponse);
             Assert.NotEmpty(httpResponse.Body);
+        }
+
+        [Fact]
+        public void CipherTests()
+        {
+            ICipher cip = Ora.GetCipher();
+            byte[] enc = cip.Encrypt(Encoding.ASCII.GetBytes("Hello World"));
+            Assert.Equal(cip.Decrypt(enc), Encoding.ASCII.GetBytes("Hello World"));
+        }
+    }
+
+    public class CoreInitializationFixture
+    {
+        public CoreInitializationFixture()
+        {
+            OraCore.Initialize();
         }
     }
 }
