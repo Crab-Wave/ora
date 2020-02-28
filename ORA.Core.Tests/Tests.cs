@@ -8,14 +8,13 @@ using Xunit.Abstractions;
 
 namespace ORA.Core.Tests
 {
-    public class Tests
+    public class Tests : IClassFixture<CoreInitializationFixture>
     {
         private readonly ITestOutputHelper TestOutputHelper;
 
         public Tests(ITestOutputHelper testOutputHelper)
         {
             this.TestOutputHelper = testOutputHelper;
-            OraCore.Initialize();
         }
 
         [Fact]
@@ -32,6 +31,14 @@ namespace ORA.Core.Tests
             ICipher cip = Ora.GetCipher();
             byte[] enc = cip.Encrypt(Encoding.ASCII.GetBytes("Hello World"));
             Assert.Equal(cip.Decrypt(enc),Encoding.ASCII.GetBytes("Hello World"));
+        }
+    }
+
+    public class CoreInitializationFixture
+    {
+        public CoreInitializationFixture()
+        {
+            OraCore.Initialize();
         }
     }
 }
