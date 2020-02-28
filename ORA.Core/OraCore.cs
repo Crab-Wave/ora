@@ -1,5 +1,6 @@
 ﻿using System;
 using ORA.API;
+using ORA.API.Encryption;
 using ORA.API.Http;
 using ORA.API.Loggers;
 using ORA.API.Managers;
@@ -24,11 +25,12 @@ namespace ORA.Core
         public override ILogger Logger() => this._logger;
 
         public override IHttpClient HttpClient() => this._httpClient;
+        public override ICipher Cipher() => throw new NotImplementedException();
 
         public override IClusterManager ClusterManager() =>
             throw new NotImplementedException("ClusterManager not implemented");
 
         public override INodeManager NodeManager() =>
-            throw new NotImplementedException("ClusterManager not implemented");
+            throw new NotImplementedException("NodeManager not implemented");
     }
 }
