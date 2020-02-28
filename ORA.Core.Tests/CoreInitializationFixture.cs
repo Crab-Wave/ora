@@ -2,7 +2,7 @@
 {
     public class CoreInitializationFixture
     {
-        public CoreInitializationFixture()
+        static CoreInitializationFixture()
         {
             OraCore.Initialize();
         }
