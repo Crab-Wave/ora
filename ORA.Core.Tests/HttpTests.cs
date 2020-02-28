@@ -9,7 +9,7 @@ namespace ORA.Core.Tests
         [Fact]
         public void HttpClientTests()
         {
-            HttpResponse httpResponse = Ora.CreateHttpClient().Get("http://httpbin.org/get");
+            HttpResponse httpResponse = Ora.GetHttpClient().Get("http://httpbin.org/get");
             Assert.NotNull(httpResponse);
             Assert.NotEmpty(httpResponse.Body);
         }
