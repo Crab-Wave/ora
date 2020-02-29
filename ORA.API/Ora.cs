@@ -13,9 +13,7 @@ namespace ORA.API
         protected static Ora SetInstance(Ora instance)
         {
             if (_instance != null)
-            {
                 throw new InvalidOperationException("Cannot redefine ORA instance !");
-            }
 
             instance.Logger().Info("API initialized !");
             return _instance = instance;
@@ -25,9 +23,7 @@ namespace ORA.API
 
         public static ILogger GetLogger() => Get().Logger();
 
-        public static HttpClient CreateHttpClient() => Get().NewHttpClient();
-
-        public static HttpClient CreateHttpClient(string baseUrl) => Get().NewHttpClient(baseUrl);
+        public static HttpClient GetHttpClient() => Get().HttpClient();
 
         public static ICipher GetCipher() => Get().Cipher();
 
@@ -35,15 +31,9 @@ namespace ORA.API
 
         public static INodeManager GetNodeManager() => Get().NodeManager();
 
-        protected Ora()
-        {
-        }
-
         public abstract ILogger Logger();
 
-        public abstract HttpClient NewHttpClient();
-
-        public abstract HttpClient NewHttpClient(string baseUrl);
+        public abstract HttpClient HttpClient();
 
         public abstract ICipher Cipher();
 

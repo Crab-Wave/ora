@@ -13,24 +13,27 @@ namespace ORA.Core
 {
     public class OraCore : Ora
     {
-        public static void Initialize() => SetInstance(new OraCore());
-
         private readonly ILogger _logger;
+
+        private readonly HttpClient _httpClient;
+
         private readonly ICipher _cipher;
+
         private readonly IClusterManager _clusterManager;
 
         private OraCore()
         {
             this._logger = new SimpleLogger("OraCore");
+            this._httpClient = new UnirestHttpClient();
             this._cipher = new RsaCipher(4096);
             this._clusterManager = new ClusterManager();
         }
 
+        public static void Initialize() => SetInstance(new OraCore());
+
         public override ILogger Logger() => this._logger;
 
-        public override HttpClient NewHttpClient() => new UnirestHttpClient();
-
-        public override HttpClient NewHttpClient(string baseUrl) => new UnirestHttpClient(baseUrl);
+        public override HttpClient HttpClient() => this._httpClient;
 
         public override ICipher Cipher() => this._cipher;
 
