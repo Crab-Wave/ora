@@ -1,15 +1,16 @@
-﻿using ORA.API;
-using ORA.API.Http;
+﻿using ORA.API.Http;
+using ORA.Core.Http;
 using Xunit;
 
 namespace ORA.Core.Tests
 {
-    public class Tests : IClassFixture<CoreInitializationFixture>
+    public class HttpClientTests : IClassFixture<CoreInitializationFixture>
     {
         [Fact]
         public void GetRequestTests()
         {
-            HttpResponse httpResponse = Ora.GetHttpClient().Get("http://httpbin.org/get");
+            var httpClient = new UnirestHttpClient();
+            HttpResponse httpResponse = httpClient.Get("http://httpbin.org/get");
             Assert.NotNull(httpResponse);
             Assert.NotEmpty(httpResponse.Body);
         }
