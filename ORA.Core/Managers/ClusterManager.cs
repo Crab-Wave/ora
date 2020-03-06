@@ -20,7 +20,7 @@ namespace ORA.Core.Managers
         {
             HttpResponse
                 response = Ora.GetHttpClient()
-                    .Post("/clusters", new HttpRequest().Set("name", name)); //a modif avec léo
+                    .Post("/clusters?name=" + name, new HttpRequest().Set("Authorization", "dummy"));
             int code = response.Code;
             if (code == 200)
             {
@@ -42,7 +42,7 @@ namespace ORA.Core.Managers
                 return this._clusters[identifier];
 
             HttpResponse
-                response = Ora.GetHttpClient().Get("/clusters", new HttpRequest().Set("id", identifier));
+                response = Ora.GetHttpClient().Get("/clusters?id=" + identifier);
             int code = response.Code;
             if (code == 200)
             {
@@ -61,7 +61,7 @@ namespace ORA.Core.Managers
         {
             this._clusters.Remove(identifier);
             HttpResponse
-                response = Ora.GetHttpClient().Delete("/clusters", new HttpRequest().Set("id", identifier));
+                response = Ora.GetHttpClient().Delete("/clusters?id=" + identifier, new HttpRequest().Set("Authorization", "dummy"));
             int code = response.Code;
             if (code == 200)
                 return true;
