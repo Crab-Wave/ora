@@ -25,6 +25,7 @@ namespace ORA.Core
         {
             this._logger = new SimpleLogger("OraCore");
             this._httpClient = new UnirestHttpClient();
+            this._httpClient.BaseUrl = "https://tracker.ora.crabwave.com";
             this._cipher = new RsaCipher(4096);
             this._clusterManager = new ClusterManager();
         }
