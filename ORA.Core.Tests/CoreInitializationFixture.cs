@@ -7,7 +7,6 @@ namespace ORA.Core.Tests
         static CoreInitializationFixture()
         {
             OraCore.Initialize();
-            Ora.GetHttpClient().BaseUrl = "https://www.crabwave.com";
         }
     }
 }
