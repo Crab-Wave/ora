@@ -60,11 +60,13 @@ namespace ORA.Core.Managers
         public bool DeleteCluster(string identifier)
         {
             this._clusters.Remove(identifier);
+
             HttpResponse
                 response = Ora.GetHttpClient().Delete("/clusters/" + identifier, new HttpRequest().Set("Authorization", "dummy"));
             int code = response.Code;
             if (code == 200)
                 return true;
+
             Exception exception = new Exception($"Couldn't find cluster with identifier {identifier}");
             Ora.GetLogger().Error(exception);
             return false;
