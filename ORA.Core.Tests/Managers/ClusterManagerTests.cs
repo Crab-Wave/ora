@@ -3,7 +3,7 @@ using FluentAssertions;
 using ORA.API;
 using Xunit;
 
-namespace ORA.Core.Tests
+namespace ORA.Core.Tests.Managers
 {
     public class ClusterManagerTests : IClassFixture<CoreInitializationFixture>
     {
