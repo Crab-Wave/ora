@@ -22,6 +22,7 @@ namespace ORA.Core.Compression
             {
                 data = decomp.Unwrap(data);
             }
+
             return data;
         }
     }
