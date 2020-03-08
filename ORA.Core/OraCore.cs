@@ -7,22 +7,27 @@ using ORA.API.Managers;
 using ORA.Core.Encryption;
 using ORA.Core.Http;
 using ORA.Core.Loggers;
+using ORA.Core.Managers;
 
 namespace ORA.Core
 {
     public class OraCore : Ora
     {
-        private readonly ICipher _cipher;
+        private readonly ILogger _logger;
 
         private readonly HttpClient _httpClient;
 
-        private readonly ILogger _logger;
+        private readonly ICipher _cipher;
+
+        private readonly IClusterManager _clusterManager;
 
         private OraCore()
         {
             this._logger = new SimpleLogger("OraCore");
-            this._cipher = new RsaCipher(4096);
             this._httpClient = new UnirestHttpClient();
+            this._httpClient.BaseUrl = "https://tracker.ora.crabwave.com";
+            this._cipher = new RsaCipher(4096);
+            this._clusterManager = new ClusterManager();
         }
 
         public static void Initialize() => SetInstance(new OraCore());
@@ -33,8 +38,7 @@ namespace ORA.Core
 
         public override ICipher Cipher() => this._cipher;
 
-        public override IClusterManager ClusterManager() =>
-            throw new NotImplementedException("ClusterManager not implemented");
+        public override IClusterManager ClusterManager() => this._clusterManager;
 
         public override INodeManager NodeManager() =>
             throw new NotImplementedException("NodeManager not implemented");
