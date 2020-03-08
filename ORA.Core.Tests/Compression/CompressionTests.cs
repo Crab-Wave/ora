@@ -1,17 +1,18 @@
-﻿﻿using System.Text;
- using FluentAssertions;
- using ORA.API.Compression;
-using ORA.Core.Compression;
+﻿using System.Text;
+using FluentAssertions;
+using ORA.API;
+using ORA.API.Compression;
 using Xunit;
 
- namespace ORA.Core.Tests.Compression
+namespace ORA.Core.Tests.Compression
 {
     public class CompressionTests : IClassFixture<CoreInitializationFixture>
     {
         [Fact]
         public void CompTests()
         {
-            ICompressor c = new ZstdCompressor();
+
+            ICompressor c = Ora.GetCompressor();
             byte[] test = Encoding.ASCII.GetBytes("Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. " +
                                                   "It’s not a story the Jedi would tell you. It’s a Sith legend. Darth Plagueis was a Dark Lord of the Sith,"+
                                                   "so powerful and so wise he could use the Force to influence the midichlorians to create life… "+

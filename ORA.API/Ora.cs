@@ -1,4 +1,5 @@
 ﻿using System;
+using ORA.API.Compression;
 using ORA.API.Encryption;
 using ORA.API.Http;
 using ORA.API.Loggers;
@@ -31,6 +32,8 @@ namespace ORA.API
 
         public static INodeManager GetNodeManager() => Get().NodeManager();
 
+        public static ICompressor GetCompressor() => Get().Compressor();
+
         public abstract ILogger Logger();
 
         public abstract HttpClient HttpClient();
@@ -40,5 +43,8 @@ namespace ORA.API
         public abstract IClusterManager ClusterManager();
 
         public abstract INodeManager NodeManager();
+
+        public abstract ICompressor Compressor();
+
     }
 }
