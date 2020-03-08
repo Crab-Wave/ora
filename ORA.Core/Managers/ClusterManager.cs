@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using ORA.API;
 using ORA.API.Http;
 using ORA.API.Managers;
@@ -18,12 +19,14 @@ namespace ORA.Core.Managers
         public Cluster CreateCluster(string name)
         {
             HttpResponse
-                response = Ora.GetHttpClient().Post("", new HttpRequest().Set("name", name)); //a modif avec léo
+                response = Ora.GetHttpClient()
+                    .Post("/clusters?name=" + name, new HttpRequest().Set("Authorization", "dummy"));
             int code = response.Code;
             if (code == 200)
             {
-                string identifier = response.Body; //a modif avec léo
-                Cluster cluster = new BasicCluster(name, identifier);
+                string identifier = JObject.Parse(response.Body)["id"].Value<string>();
+                Cluster cluster = new OraCluster(name, identifier);
+                this._clusters.Add(identifier, cluster);
                 Ora.GetLogger().Info($"Created cluster {name} with identifier {identifier}");
                 return cluster;
             }
@@ -33,8 +36,40 @@ namespace ORA.Core.Managers
             throw exception;
         }
 
-        public Cluster GetCluster(string identifier) => throw new System.NotImplementedException();
+        public Cluster GetCluster(string identifier)
+        {
+            if (this._clusters.ContainsKey(identifier))
+                return this._clusters[identifier];
 
-        public bool DeleteCluster(string identifier) => throw new System.NotImplementedException();
+            HttpResponse
+                response = Ora.GetHttpClient().Get("/clusters/" + identifier);
+            int code = response.Code;
+            if (code == 200)
+            {
+                string name = JObject.Parse(response.Body)["name"].Value<string>();
+                Cluster cluster = new OraCluster(name, identifier);
+                this._clusters.Add(identifier, cluster);
+                return cluster;
+            }
+
+            Exception exception = new Exception($"Couldn't find cluster with identifier {identifier}");
+            Ora.GetLogger().Error(exception);
+            throw exception;
+        }
+
+        public bool DeleteCluster(string identifier)
+        {
+            this._clusters.Remove(identifier);
+
+            HttpResponse
+                response = Ora.GetHttpClient().Delete("/clusters/" + identifier, new HttpRequest().Set("Authorization", "dummy"));
+            int code = response.Code;
+            if (code == 200)
+                return true;
+
+            Exception exception = new Exception($"Couldn't find cluster with identifier {identifier}");
+            Ora.GetLogger().Error(exception);
+            return false;
+        }
     }
 }
