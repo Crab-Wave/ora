@@ -10,16 +10,10 @@ namespace ORA.Application.CLI.Commands
         public static void Exec(string command, string[] args)
         {
             if (args.Length == 0)
-            {
-                ArgumentException exception = new ArgumentException("Missing arguments");
-                throw exception;
-            }
+                throw new ArgumentException("Missing arguments");
 
             if (args.Length > 1)
-            {
-                ArgumentException exception = new ArgumentException("To much arguments");
-                throw exception;
-            }
+                throw new ArgumentException("To much arguments");
 
             switch (command)
             {
