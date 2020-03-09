@@ -10,4 +10,16 @@
     <ProjectReference Include="..\ORA.API\ORA.API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Commands\Options\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Commands\Options\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Commands\Options\**" />
+  </ItemGroup>
+
 </Project>
