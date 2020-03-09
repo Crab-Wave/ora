@@ -16,24 +16,6 @@ namespace ORA.Application.CLI
             set;
         }
 
-        public OraApplication()
-        {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-
-            path = Path.Combine(path,"ora-tracker.txt");
-            if (!File.Exists(path))
-                return;
-
-            string text = File.ReadAllText(path).Trim();
-            Uri uriResult;
-            bool result = Uri.TryCreate(text, UriKind.Absolute, out uriResult)
-                          && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
-            if (result)
-                Ora.GetHttpClient().BaseUrl = text;
-        }
-
         [Command(Description = "change the tracker url", Name = "url")]
         public void Url([Operand(Description = " ")] string url)
         {
@@ -45,14 +27,21 @@ namespace ORA.Application.CLI
 
                 bool result = Uri.TryCreate(url, UriKind.Absolute, out uriResult)
                               && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
-                if (!result)
+                if (url.ToLower().Equals("reset"))
+                {
+                    File.WriteAllText(
+                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                            "ora-tracker.txt"), "https://tracker.ora.crabwave.com");
+                    Console.WriteLine("Url has been sucessfully reset to https://tracker.ora.crabwave.com");
+                }
+                else if (!result)
                     Console.WriteLine($"{url} is not a valid url");
                 else
                 {
                     File.WriteAllText(
                         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                             "ora-tracker.txt"), url);
-                    Console.WriteLine("Url has been sucessfully changed");
+                    Console.WriteLine($"Url has been sucessfully changed to {url}");
                 }
             }
         }
