@@ -10,4 +10,31 @@
     <ProjectReference Include="..\ORA.API\ORA.API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Commands\Options\**" />
+    <Compile Remove="Commands\**" />
+    <Compile Remove="Options\**" />
+    <Compile Remove="CommandManager.cs" />
+    <Compile Remove="Validators\Objects\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Commands\Options\**" />
+    <EmbeddedResource Remove="Commands\**" />
+    <EmbeddedResource Remove="Options\**" />
+    <EmbeddedResource Remove="Validators\Objects\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Commands\Options\**" />
+    <None Remove="Commands\**" />
+    <None Remove="Options\**" />
+    <None Remove="Validators\Objects\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandDotNet" Version="3.0.1" />
+    <PackageReference Include="CommandDotNet.FluentValidation" Version="2.0.0-preview1" />
+  </ItemGroup>
+
 </Project>
