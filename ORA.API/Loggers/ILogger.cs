@@ -19,5 +19,9 @@ namespace ORA.API.Loggers
         void Log(LogLevel level, Exception cause);
 
         void Log(LogLevel level, string message);
+
+        bool ShouldPrint();
+
+        void ShouldPrint(bool value);
     }
 }

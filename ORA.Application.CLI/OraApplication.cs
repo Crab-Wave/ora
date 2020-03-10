@@ -6,7 +6,7 @@ using ORA.API;
 
 namespace ORA.Application.CLI
 {
-    [Command]
+    [Command(Name = "ora", Description = "ORA base command")]
     public class OraApplication
     {
         [SubCommand]
@@ -16,11 +16,11 @@ namespace ORA.Application.CLI
             set;
         }
 
-        [Command(Description = "change the tracker url", Name = "url")]
-        public void Url([Operand(Description = " ")] string url)
+        [Command(Name = "url", Description = "Change the tracker URL", Usage = "url [url]")]
+        public void Url([Operand(Description = "Tracker URL")] string url)
         {
             if (String.IsNullOrWhiteSpace(url))
-                Console.WriteLine("The current url is " + Ora.GetHttpClient().BaseUrl);
+                Console.WriteLine("The current URL is " + Ora.GetHttpClient().BaseUrl);
             else
             {
                 Uri uriResult;
@@ -32,7 +32,7 @@ namespace ORA.Application.CLI
                     File.WriteAllText(
                         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                             "ora-tracker.txt"), "https://tracker.ora.crabwave.com");
-                    Console.WriteLine("Url has been sucessfully reset to https://tracker.ora.crabwave.com");
+                    Console.WriteLine("URL has been sucessfully reset to https://tracker.ora.crabwave.com");
                 }
                 else if (!result)
                     Console.WriteLine($"{url} is not a valid url");
@@ -41,7 +41,7 @@ namespace ORA.Application.CLI
                     File.WriteAllText(
                         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                             "ora-tracker.txt"), url);
-                    Console.WriteLine($"Url has been sucessfully changed to {url}");
+                    Console.WriteLine($"URL has been sucessfully changed to {url}");
                 }
             }
         }

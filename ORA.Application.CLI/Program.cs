@@ -2,6 +2,7 @@
 using System.IO;
 using CommandDotNet;
 using CommandDotNet.FluentValidation;
+using CommandDotNet.Help;
 using ORA.API;
 
 namespace ORA.Application.CLI
@@ -25,7 +26,10 @@ namespace ORA.Application.CLI
                     Ora.GetHttpClient().BaseUrl = text;
             }
 
-            return new AppRunner<OraApplication>().UseFluentValidation().Run(args);
+            AppRunner appRunner = new AppRunner<OraApplication>().UseFluentValidation();
+            appRunner.AppSettings.Help.UsageAppName = "ora";
+
+            return appRunner.Run(args);
         }
     }
 }
