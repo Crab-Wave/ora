@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-#
+# 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORA.API", "ORA.API\ORA.API.csproj", "{136A8B44-75CA-4AA7-95B5-75D50713C258}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORA.Core", "ORA.Core\ORA.Core.csproj", "{AEA32F64-B92A-447C-98F1-9540EFB8659B}"
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORA.Core.Tests", "ORA.Core.Tests\ORA.Core.Tests.csproj", "{098CA64E-726F-40B2-93D8-BA9FD29BA903}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORA.Application.CLI.CoreWrapper", "ORA.Application.CLI.CoreWrapper\ORA.Application.CLI.CoreWrapper.csproj", "{DA80223E-161A-47B5-895A-F7FD2391C685}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORA.Application.GUI", "ORA.Application.GUI\ORA.Application.GUI.csproj", "{22B10176-B833-4031-8F74-BC2B832FD5AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -98,5 +100,17 @@ Global
 		{DA80223E-161A-47B5-895A-F7FD2391C685}.Release|x64.Build.0 = Release|Any CPU
 		{DA80223E-161A-47B5-895A-F7FD2391C685}.Release|x86.ActiveCfg = Release|Any CPU
 		{DA80223E-161A-47B5-895A-F7FD2391C685}.Release|x86.Build.0 = Release|Any CPU
+		{22B10176-B833-4031-8F74-BC2B832FD5AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22B10176-B833-4031-8F74-BC2B832FD5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22B10176-B833-4031-8F74-BC2B832FD5AE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{22B10176-B833-4031-8F74-BC2B832FD5AE}.Debug|x64.Build.0 = Debug|Any CPU
+		{22B10176-B833-4031-8F74-BC2B832FD5AE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{22B10176-B833-4031-8F74-BC2B832FD5AE}.Debug|x86.Build.0 = Debug|Any CPU
+		{22B10176-B833-4031-8F74-BC2B832FD5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22B10176-B833-4031-8F74-BC2B832FD5AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22B10176-B833-4031-8F74-BC2B832FD5AE}.Release|x64.ActiveCfg = Release|Any CPU
+		{22B10176-B833-4031-8F74-BC2B832FD5AE}.Release|x64.Build.0 = Release|Any CPU
+		{22B10176-B833-4031-8F74-BC2B832FD5AE}.Release|x86.ActiveCfg = Release|Any CPU
+		{22B10176-B833-4031-8F74-BC2B832FD5AE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
