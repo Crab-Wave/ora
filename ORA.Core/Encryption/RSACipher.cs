@@ -1,13 +1,13 @@
-﻿using ORA.API.Encryption;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
+using ORA.API.Encryption;
 
 namespace ORA.Core.Encryption
 {
     public class RsaCipher : ICipher
     {
-        private RSAParameters publickey;
+        private readonly int keysize;
         private RSAParameters privatekey;
-        private int keysize;
+        private RSAParameters publickey;
 
         public RsaCipher(int keysize)
         {
@@ -18,13 +18,6 @@ namespace ORA.Core.Encryption
                 this.publickey = rsa.ExportParameters(false);
                 this.privatekey = rsa.ExportParameters(true);
             }
-        }
-
-        public string GetPublicKey()
-        {
-            var rsa = new RSACryptoServiceProvider();
-            rsa.ImportParameters(this.publickey);
-            return rsa.ToXmlString(false);
         }
 
         public byte[] Encrypt(byte[] message)
@@ -48,7 +41,15 @@ namespace ORA.Core.Encryption
                 rsa.ImportParameters(this.privatekey);
                 decrypted = rsa.Decrypt(encrypted, true);
             }
+
             return decrypted;
+        }
+
+        public string GetPublicKey()
+        {
+            var rsa = new RSACryptoServiceProvider();
+            rsa.ImportParameters(this.publickey);
+            return rsa.ToXmlString(false);
         }
 
         public void NewKey()
