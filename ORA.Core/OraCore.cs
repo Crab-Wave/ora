@@ -19,6 +19,8 @@ namespace ORA.Core
 
         private readonly ICipher _cipher;
 
+        private readonly IIdentityManager _identityManager;
+
         private readonly IClusterManager _clusterManager;
 
         private OraCore()
@@ -27,6 +29,7 @@ namespace ORA.Core
             this._httpClient = new UnirestHttpClient();
             this._httpClient.BaseUrl = "https://tracker.ora.crabwave.com";
             this._cipher = new RsaCipher(4096);
+            this._identityManager = new IdentityManager();
             this._clusterManager = new ClusterManager();
         }
 
@@ -37,6 +40,8 @@ namespace ORA.Core
         public override HttpClient HttpClient() => this._httpClient;
 
         public override ICipher Cipher() => this._cipher;
+
+        public override IIdentityManager IdentityManager() => this._identityManager;
 
         public override IClusterManager ClusterManager() => this._clusterManager;
 
