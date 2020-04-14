@@ -32,7 +32,7 @@ namespace ORA.Core
             this._httpClient.BaseUrl = "https://tracker.ora.crabwave.com";
             this._cipher = new RsaCipher(4096);
             this._clusterManager = new ClusterManager();
-            this._compressor = new ZstdCompressor();
+            this._compressor = new ZipLibCompressor();
         }
 
         public static void Initialize() => SetInstance(new OraCore());
