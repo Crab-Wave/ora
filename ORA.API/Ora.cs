@@ -27,6 +27,8 @@ namespace ORA.API
 
         public static ICipher GetCipher() => Get().Cipher();
 
+        public static IIdentityManager GetIdentityManager() => Get().IdentityManager();
+
         public static IClusterManager GetClusterManager() => Get().ClusterManager();
 
         public static INodeManager GetNodeManager() => Get().NodeManager();
@@ -36,6 +38,8 @@ namespace ORA.API
         public abstract HttpClient HttpClient();
 
         public abstract ICipher Cipher();
+
+        public abstract IIdentityManager IdentityManager();
 
         public abstract IClusterManager ClusterManager();
 
