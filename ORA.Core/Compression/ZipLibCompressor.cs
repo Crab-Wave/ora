@@ -14,19 +14,16 @@ namespace ORA.Core.Compression
         {
             n = data.Length;
             var bos = new MemoryStream(data.Length);
-
             var compressor = new Deflater();
             compressor.SetLevel(level);
             compressor.SetInput(data);
             compressor.Finish();
-            
             byte[] buf = new byte[1024];
             while (!compressor.IsFinished)
             {
                 int count = compressor.Deflate(buf);
                 bos.Write(buf, 0, count);
             }
-
             return bos.ToArray();
         }
 
