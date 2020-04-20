@@ -10,10 +10,11 @@ namespace ORA.Application.CLI
     public class Identities
     {
         [Command(Description = "Get the pubilc key ", Name = "get", Usage = "get")]
+
         public void Get([Operand(Description = "get identity")] IdentityPublicKeyModel publicKey)
         {
-            byte[] publickey = Ora.GetIdentityManager().GetIdentity().PublicKey;
-            Console.WriteLine($"Your public key is {publickey}");
+            publicKey.PublicKey = Ora.GetIdentityManager().GetIdentity().PublicKey;
+            Console.WriteLine($"Your public key is {publicKey.PublicKey}");
         }
     }
 }
