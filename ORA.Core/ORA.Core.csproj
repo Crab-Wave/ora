@@ -14,4 +14,8 @@
     <PackageReference Include="Unirest-APIMATIC" Version="1.0.1.27" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="BasicCluster.cs" />
+  </ItemGroup>
+
 </Project>

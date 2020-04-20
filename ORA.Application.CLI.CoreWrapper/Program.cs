@@ -1,4 +1,6 @@
-﻿using ORA.Core;
+﻿using System;
+using ORA.API;
+using ORA.Core;
 
 namespace ORA.Application.CLI.CoreWrapper
 {
@@ -7,7 +9,15 @@ namespace ORA.Application.CLI.CoreWrapper
         public static void Main(string[] args)
         {
             OraCore.Initialize();
-            ORA.Application.CLI.Program.Main(args);
+            try
+            {
+                ORA.Application.CLI.Program.Main(args);
+            }
+            catch (Exception e)
+            {
+                Ora.GetLogger().Error(e);
+                Console.WriteLine("An Error has occured :(");
+            }
         }
     }
 }
