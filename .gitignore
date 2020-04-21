@@ -435,3 +435,5 @@ $RECYCLE.BIN/
 # Vim
 *.swp
 
+# Cake
+tools
