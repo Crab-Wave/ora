@@ -1,20 +1,22 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
-using ORA.App.GUI.ViewModels;
+using System.Reactive.Disposables;
 using ReactiveUI;
+
+using ORA.App.GUI.ViewModels;
 
 namespace ORA.App.GUI.Views
 {
-    public class MainWindow : ReactiveWindow<MainWindowViewModel>
+    public class HomeView : ReactiveUserControl<HomeViewModel>
     {
-        public MainWindow()
+        public HomeView()
         {
-            this.InitializeComponent();
-            ViewModel = new MainWindowViewModel();
+            InitializeComponent();
             this.WhenActivated(disposables => {
-                // this.OneWayBind(ViewModel, x => x.Router, x => x.RoutedViewHost.Router)
+                // this.OneWayBind(ViewModel, x => x.UrlPathSegment)
                 //     .DisposeWith(disposables);
             });
         }

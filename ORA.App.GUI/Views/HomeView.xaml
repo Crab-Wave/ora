@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ORA.App.GUI.Views.HomeView">
+  <DockPanel>
+    <TextBlock DockPanel.Dock="Top">Hey dude</TextBlock>
+    <TextBlock DockPanel.Dock="Top"
+               Text="{Binding UrlPathSegment}"></TextBlock>
+    <TextBlock DockPanel.Dock="Top">Yay</TextBlock>
+    <StackPanel>
+      <Button Content="Go to settings view"
+              Command="{Binding GoSettings}" />
+    </StackPanel>
+  </DockPanel>
+</UserControl>
