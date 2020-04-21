@@ -50,5 +50,7 @@ namespace ORA.Core.Managers
         }
 
         public Identity GetIdentity() => this._identity;
+
+        public Identity GenerateIdentity(string name) => this._generateIdentity(name);
     }
 }

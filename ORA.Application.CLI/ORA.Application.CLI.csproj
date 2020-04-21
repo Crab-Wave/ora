@@ -16,6 +16,8 @@
     <Compile Remove="Options\**" />
     <Compile Remove="CommandManager.cs" />
     <Compile Remove="Validators\Objects\**" />
+    <Compile Remove="Objects\IdentityPublicKeyModel.cs" />
+    <Compile Remove="Validators\IdentityPublicKeyValidator.cs" />
   </ItemGroup>
 
   <ItemGroup>
