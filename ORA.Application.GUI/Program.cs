@@ -13,7 +13,7 @@ namespace ORA.Application.GUI
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseElectron(args);
+                .UseElectron(args)
+                .UseStartup<Startup>();
     }
 }

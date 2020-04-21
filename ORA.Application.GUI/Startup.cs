@@ -64,7 +64,7 @@ namespace ORA.Application.GUI
             });
 
             browserWindow.OnReadyToShow += () => browserWindow.Show();
-            browserWindow.SetTitle("Electron.NET API Demos");
+            browserWindow.SetTitle("ORA");
         }
     }
 }
