@@ -28,11 +28,11 @@ namespace ORA.Core.Compression
             var bos = new MemoryStream(data.Length);
             var inf = new Inflater();
             inf.SetInput(data);
-            byte[] result = new byte[1024];
+            byte[] buf = new byte[1024];
             while (!inf.IsFinished)
             {
-                int count = inf.Inflate(result);
-                bos.Write(result, 0, count);
+                int count = inf.Inflate(buf);
+                bos.Write(buf, 0, count);
             }
             return bos.ToArray();
         }
