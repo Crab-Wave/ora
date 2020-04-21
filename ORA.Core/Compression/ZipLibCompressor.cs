@@ -7,12 +7,8 @@ namespace ORA.Core.Compression
 {
     public class ZipLibCompressor : ICompressor
     {
-
-        private static int n;
-
         public byte[] Compress(byte[] data, int level)
         {
-            n = data.Length;
             var bos = new MemoryStream(data.Length);
             var compressor = new Deflater();
             compressor.SetLevel(level);
@@ -29,15 +25,16 @@ namespace ORA.Core.Compression
 
         public byte[] Decompress(byte[] data)
         {
-            byte[] result = new byte[n];
-            Inflater inf = new Inflater();
+            var bos = new MemoryStream(data.Length);
+            var inf = new Inflater();
             inf.SetInput(data);
-            int error = inf.Inflate(result, 0, n);
-            if (error == 0)
+            byte[] result = new byte[1024];
+            while (!inf.IsFinished)
             {
-                throw new FileLoadException("The a section of the swf file could not be decompressed.");
+                int count = inf.Inflate(result);
+                bos.Write(result, 0, count);
             }
-            return result;
+            return bos.ToArray();
         }
     }
 }

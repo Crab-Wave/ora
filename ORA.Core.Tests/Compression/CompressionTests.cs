@@ -23,7 +23,7 @@ namespace ORA.Core.Tests.Compression
         public void AssertNotEqualDeflate()
         {
             ICompressor c = Ora.GetCompressor();
-            (c.Compress(this.test)).Should().NotEqual(this.test);
+            c.Compress(this.test).Should().NotEqual(this.test);
         }
 
         [Fact]
