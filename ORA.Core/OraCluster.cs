@@ -40,7 +40,7 @@ namespace ORA.Core
             throw exception;
         }
 
-        public override bool RemoveMemeber(string identifier)
+        public override bool RemoveMember(string identifier)
         {
             HttpResponse
                 response = Ora.GetHttpClient().Delete("/clusters/" + this.Identifier + "/members/" + identifier,

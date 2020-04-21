@@ -10,7 +10,7 @@ namespace ORA.API
 
         protected Member(string identifier, string name)
         {
-            this._identifier= identifier;
+            this._identifier = identifier;
             this._name = name;
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using FluentValidation;
 using ORA.Application.CLI.Objects;
+
 namespace ORA.Application.CLI.Validators
 {
     public class IdentityPublicKeyValidator : AbstractValidator<IdentityPublicKeyModel>

@@ -20,6 +20,6 @@ namespace ORA.API
 
         public abstract Member GetMember(string identifier);
 
-        public abstract bool RemoveMemeber(string identifier);
+        public abstract bool RemoveMember(string identifier);
     }
 }
