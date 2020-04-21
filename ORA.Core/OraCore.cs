@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ORA.API;
 using ORA.API.Encryption;
 using ORA.API.Http;
@@ -15,7 +16,7 @@ namespace ORA.Core
     {
         private readonly ILogger _logger;
 
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClient _httpClient;
 
         private readonly ICipher _cipher;
 
@@ -25,7 +26,7 @@ namespace ORA.Core
         {
             this._logger = new SimpleLogger("OraCore");
             this._httpClient = new UnirestHttpClient();
-            this._httpClient.BaseUrl = "https://tracker.ora.crabwave.com";
+            this._httpClient.SetBaseUrl("https://tracker.ora.crabwave.com");
             this._cipher = new RsaCipher(4096);
             this._clusterManager = new ClusterManager();
         }
@@ -34,7 +35,7 @@ namespace ORA.Core
 
         public override ILogger Logger() => this._logger;
 
-        public override HttpClient HttpClient() => this._httpClient;
+        public override IHttpClient HttpClient() => this._httpClient;
 
         public override ICipher Cipher() => this._cipher;
 

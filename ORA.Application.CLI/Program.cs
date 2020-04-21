@@ -23,7 +23,7 @@ namespace ORA.Application.CLI
                 bool result = Uri.TryCreate(text, UriKind.Absolute, out uriResult)
                               && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
                 if (result)
-                    Ora.GetHttpClient().BaseUrl = text;
+                    Ora.GetHttpClient().SetBaseUrl(text);
             }
 
             AppRunner appRunner = new AppRunner<OraApplication>().UseFluentValidation();

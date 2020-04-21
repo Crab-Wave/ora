@@ -1,6 +1,8 @@
 ﻿using System;
 using ORA.API;
+using ORA.API.Loggers;
 using ORA.Core;
+using ORA.Core.IPC;
 
 namespace ORA.Application.CLI.CoreWrapper
 {
@@ -8,7 +10,7 @@ namespace ORA.Application.CLI.CoreWrapper
     {
         public static void Main(string[] args)
         {
-            OraCore.Initialize();
+            OraCoreIpc.Initialize();
             try
             {
                 ORA.Application.CLI.Program.Main(args);

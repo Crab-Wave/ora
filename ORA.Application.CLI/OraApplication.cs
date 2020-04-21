@@ -20,7 +20,7 @@ namespace ORA.Application.CLI
         public void Url([Operand(Description = "Tracker URL")] string url)
         {
             if (String.IsNullOrWhiteSpace(url))
-                Console.WriteLine("The current URL is " + Ora.GetHttpClient().BaseUrl);
+                Console.WriteLine("The current URL is " + Ora.GetHttpClient().GetBaseUrl());
             else
             {
                 Uri uriResult;
