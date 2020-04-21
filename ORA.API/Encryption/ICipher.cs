@@ -12,9 +12,7 @@
     ///
     ///         Console.WriteLine(cipher.Decrypt(encrypted).Equals(data));
     ///     </code>
-    ///     will print the value
-    ///     <c>true</c>
-    ///     .
+    ///     will print the value true.
     /// </example>
     public interface ICipher
     {
