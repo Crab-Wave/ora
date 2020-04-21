@@ -10,31 +10,30 @@ namespace ORA.Application.CLI
     [Command(Description = "Members management command", Name = "members")]
     public class Members
     {
-        private Cluster _cluster = Ora.Get().ClusterManager().CreateCluster("cluster test");
 
-        [Command(Description = "Get the members of the current cluster", Name = "get all", Usage = "get")]
-        public void GetMembers()
+        [Command(Description = "Get the members of the current cluster", Name = "get", Usage = "get <cluster>")]
+        public void GetMembers([Operand(Description = "Cluster identifier")] ClusterIdentifierModel identifier)
         {
-            List<Member> members = this._cluster.GetMembers();
+            List<Member> members = Ora.Get().ClusterManager().GetCluster(identifier.Identifier).GetMembers();
             string phrase = "";
             for (int i = 0; i < members.Count - 1; i++)
                 phrase += members[i].Name + ", ";
 
             phrase += members[members.Count - 1].Name;
-            Console.WriteLine("those are the members of the current cluster : " + phrase);
+            Console.WriteLine("Those are the members of the current cluster : " + phrase);
         }
 
-        [Command(Description = "Delete a cluster", Name = "delete", Usage = "cluster delete <identifier>")]
-        public bool Delete(string identifier)
+        [Command(Description = "Remove a member", Name = "remove", Usage = "remove <cluster> <member>")]
+        public bool Remove([Operand(Description = "Cluster identifier")] ClusterIdentifierModel cluster, [Operand(Description = "member identifier")] MemberIdentifierModel member )
         {
-            bool sucess = this._cluster.RemoveMember(identifier);
+            bool sucess = Ora.GetClusterManager().GetCluster(cluster.Identifier).RemoveMember(member.Identifier);
             if (!sucess)
             {
-                Console.WriteLine($"Could not delete member with identifier {identifier}");
+                Console.WriteLine($"Could not remove member with identifier {member.Identifier}");
                 return true;
             }
 
-            Console.WriteLine($"Successfully deleted member with identifier {identifier}");
+            Console.WriteLine($"Successfully remove member with identifier {member.Identifier}");
             return false;
         }
     }
