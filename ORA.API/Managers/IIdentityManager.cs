@@ -4,5 +4,6 @@
     {
 
         Identity GetIdentity();
+        Identity GenerateIdentity(string name);
     }
 }
