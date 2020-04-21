@@ -18,8 +18,6 @@
     <Compile Remove="Validators\Objects\**" />
     <Compile Remove="Objects\IdentityPublicKeyModel.cs" />
     <Compile Remove="Validators\IdentityPublicKeyValidator.cs" />
-    <Compile Remove="Objects\MemberIdentifierModel.cs" />
-    <Compile Remove="Validators\MemberIdentifierValidator.cs" />
   </ItemGroup>
 
   <ItemGroup>
