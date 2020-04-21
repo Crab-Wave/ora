@@ -24,7 +24,7 @@ namespace ORA.Application.CLI
         }
 
         [Command(Description = "Remove a member", Name = "remove", Usage = "remove <cluster> <member>")]
-        public bool Remove([Operand(Description = "Cluster identifier")] ClusterIdentifierModel cluster, [Operand(Description = "member identifier")] MemberIdentifierModel member )
+        public bool Remove([Operand(Description = "Cluster identifier")] ClusterIdentifierModel cluster, [Operand(Description = "member identifier")] MemberIdentifierModel member)
         {
             bool sucess = Ora.GetClusterManager().GetCluster(cluster.Identifier).RemoveMember(member.Identifier);
             if (!sucess)
