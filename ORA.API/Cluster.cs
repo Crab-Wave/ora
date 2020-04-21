@@ -16,7 +16,7 @@ namespace ORA.API
             this._identifier = identifier;
         }
 
-        public abstract List<Member> GetMembers() ;
+        public abstract List<Member> GetMembers();
 
         public abstract Member GetMember(string identifier);
 
