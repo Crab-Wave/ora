@@ -5,9 +5,15 @@ namespace ORA.API.Http
 {
     public class HttpRequest
     {
+        /// <summary>
+        /// A HttpRequest is composed of two parts : a body and some headers
+        /// </summary>
         private string _body;
         private Dictionary<string, object> _headers;
 
+        /// <summary>
+        /// Those attributes have both a getter
+        /// </summary>
         public string Body => this._body;
         public Dictionary<string, object> Headers => this._headers;
 
