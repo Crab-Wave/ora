@@ -1,37 +1,65 @@
-﻿using ORA.API.Encryption;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
+using ORA.API.Encryption;
 
 namespace ORA.Core.Encryption
 {
     public class RsaCipher : ICipher
     {
-        private RSACryptoServiceProvider _rsa;
-        private int _keySize;
+        private readonly int keysize;
+        private RSAParameters privatekey;
+        private RSAParameters publickey;
 
-        public int KeySize => this._keySize;
-
-        public RsaCipher(int keySize, byte[] publicKey, byte[] privateKey)
+        public RsaCipher(int keysize)
         {
-            this._keySize = keySize;
-            this._rsa = new RSACryptoServiceProvider(keySize);
-            this._rsa.ImportRSAPublicKey(publicKey, out int _);
-            this._rsa.ImportRSAPrivateKey(privateKey, out int _);
+            this.keysize = keysize;
+            using (var rsa = new RSACryptoServiceProvider(keysize))
+            {
+                rsa.PersistKeyInCsp = false;
+                this.publickey = rsa.ExportParameters(false);
+                this.privatekey = rsa.ExportParameters(true);
+            }
         }
 
-        public RsaCipher(int keySize)
+        public byte[] Encrypt(byte[] message)
         {
-            this._keySize = keySize;
-            this._rsa = new RSACryptoServiceProvider(keySize);
+            byte[] encrypted;
+            using (var rsa = new RSACryptoServiceProvider())
+            {
+                rsa.ImportParameters(this.publickey);
+                encrypted = rsa.Encrypt(message, true);
+            }
+
+            return encrypted;
         }
 
-        public byte[] GetPublicKey() => this._rsa.ExportRSAPublicKey();
+        public byte[] Decrypt(byte[] encrypted)
+        {
+            byte[] decrypted;
+            using (var rsa = new RSACryptoServiceProvider())
+            {
+                rsa.PersistKeyInCsp = false;
+                rsa.ImportParameters(this.privatekey);
+                decrypted = rsa.Decrypt(encrypted, true);
+            }
 
-        public byte[] GetPrivateKey() => this._rsa.ExportRSAPrivateKey();
+            return decrypted;
+        }
 
-        public byte[] Encrypt(byte[] message) => this._rsa.Encrypt(message, true);
+        public string GetPublicKey()
+        {
+            var rsa = new RSACryptoServiceProvider();
+            rsa.ImportParameters(this.publickey);
+            return rsa.ToXmlString(false);
+        }
 
-        public byte[] Decrypt(byte[] encrypted) => this._rsa.Decrypt(encrypted, true);
-
-        public void NewKey() => this._rsa = new RSACryptoServiceProvider(this._keySize);
+        public void NewKey()
+        {
+            using (var rsa = new RSACryptoServiceProvider(this.keysize))
+            {
+                rsa.PersistKeyInCsp = false;
+                this.publickey = rsa.ExportParameters(false);
+                this.privatekey = rsa.ExportParameters(true);
+            }
+        }
     }
 }
