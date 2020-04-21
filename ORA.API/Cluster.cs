@@ -16,12 +16,10 @@ namespace ORA.API
             this._identifier = identifier;
         }
 
-        public abstract List<T> GetNodes<T>() where T : Node;
+        public abstract List<Member> GetMembers() ;
 
-        public abstract T GetNode<T>(string identifier) where T : Node;
+        public abstract Member GetMember(string identifier);
 
-        public abstract void AddNode<T>(T node) where T : Node;
-
-        public abstract void RemoveNode(string identifier);
+        public abstract bool RemoveMemeber(string identifier);
     }
 }
