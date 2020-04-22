@@ -9,14 +9,14 @@
             A cluster is a group where members which own Nodes will be able to share their files and their directories.
             </summary>
         </member>
-        <member name="F:ORA.API.Cluster._name">
-            <summary>
-            A cluster has 2 attributes : a name and an identifier
-            </summary>
-        </member>
         <member name="P:ORA.API.Cluster.Name">
             <summary>
-            There is a getter for both of those.
+                The cluster name
+            </summary>
+        </member>
+        <member name="P:ORA.API.Cluster.Identifier">
+            <summary>
+                The cluster identifier
             </summary>
         </member>
         <member name="M:ORA.API.Cluster.#ctor(System.String,System.String)">
@@ -25,26 +25,6 @@
             </summary>
             <param name="name">the name of the new cluster </param>
             <param name="identifier">the identifier of the new cluster</param>
-        </member>
-        <member name="M:ORA.API.Cluster.GetMembers">
-            <summary>
-            Get the list of the members of the current cluster
-            </summary>
-            <returns>the list of the memebers of the current cluster </returns>
-        </member>
-        <member name="M:ORA.API.Cluster.GetMember(System.String)">
-            <summary>
-            Get the member of the current cluster with the specified identifier
-            </summary>
-            <param name="identifier">the specified identifier</param>
-            <returns>the member in the current cluster with the identifier specified</returns>
-        </member>
-        <member name="M:ORA.API.Cluster.RemoveMember(System.String)">
-            <summary>
-            Remove a member of a cluster with the identifier specified
-            </summary>
-            <param name="identifier">the specified identifier</param>
-            <returns>True if the member has been removed or false otherwise</returns>
         </member>
         <member name="T:ORA.API.Compression.ICompressor">
              <summary>
@@ -114,11 +94,6 @@
             <param name="data">The data to decrypt</param>
             <returns>The Decrypted data</returns>
         </member>
-        <member name="T:ORA.API.Http.HttpClient">
-            <summary>
-            A class to send HTTP request and receive HTTP response from endpoints of a base url.
-            </summary>
-        </member>
         <member name="T:ORA.API.Http.HttpRequest">
             <summary>
             A HttpRequest is composed of two parts : a body and some headers
@@ -166,6 +141,11 @@
             Method to transform a HttpResponse in a long string
             </summary>
             <returns>the wanted string</returns>
+        </member>
+        <member name="T:ORA.API.Http.IHttpClient">
+            <summary>
+            A class to send HTTP request and receive HTTP response from endpoints of a base url.
+            </summary>
         </member>
         <member name="T:ORA.API.Identity">
             <summary>
@@ -230,26 +210,50 @@
                 An interface representing the management of the Clusters through many methods such as CreateCluster, GetCluster and DeleteCluster.
             </summary>
         </member>
-        <member name="M:ORA.API.Managers.IClusterManager.CreateCluster(System.String)">
+        <member name="M:ORA.API.Managers.IClusterManager.CreateCluster(System.String,System.String)">
             <summary>
                 Create a cluster with the specified name
             </summary>
             <param name="name">The name of the cluster</param>
+            <param name="userDisplayName">The display name of the user creating the cluster</param>
             <returns>The created cluster</returns>
         </member>
         <member name="M:ORA.API.Managers.IClusterManager.GetCluster(System.String)">
             <summary>
                Get the cluster with the specified identifier.
             </summary>
-            <param name="identifier">The identifier of the cluster wanted</param>
+            <param name="cluster">The identifier of the cluster</param>
             <returns>The cluster which has the specified identifier</returns>
         </member>
         <member name="M:ORA.API.Managers.IClusterManager.DeleteCluster(System.String)">
             <summary>
                 Delete the cluster with the specified identifier.
             </summary>
-            <param name="identifier">The identifier of the cluster wanted</param>
+            <param name="cluster">The identifier of the cluster</param>
             <returns>True if the deletion has succeeded or false otherwise.</returns>
+        </member>
+        <member name="M:ORA.API.Managers.IClusterManager.GetMembers(System.String)">
+            <summary>
+                Get the list of the members of the specified cluster
+            </summary>
+            <param name="cluster">The identifier of the cluster</param>
+            <returns>The list of the members of the current cluster </returns>
+        </member>
+        <member name="M:ORA.API.Managers.IClusterManager.GetMember(System.String,System.String)">
+            <summary>
+                Get the member with the specified identifier from the specified cluster
+            </summary>
+            <param name="cluster">The identifier of the cluster</param>
+            <param name="member">The member identifier</param>
+            <returns>The member in the specified cluster with the specified identifier</returns>
+        </member>
+        <member name="M:ORA.API.Managers.IClusterManager.RemoveMember(System.String,System.String)">
+            <summary>
+                Remove the member with the specified identifier from the specified cluster
+            </summary>
+            <param name="cluster">The identifier of the cluster</param>
+            <param name="member">The member identifier</param>
+            <returns>True if the member has been removed or false otherwise</returns>
         </member>
         <member name="T:ORA.API.Managers.IIdentityManager">
             <summary>
@@ -296,14 +300,14 @@
             A node is a device used by a member which provides the files and the directories to share.
             </summary>
         </member>
-        <member name="F:ORA.API.Node._name">
-            <summary>
-            A node has two attributes : a name and an identifier.
-            </summary>
-        </member>
         <member name="P:ORA.API.Node.Name">
             <summary>
-            Those two attributes have both a getter.
+                The node name
+            </summary>
+        </member>
+        <member name="P:ORA.API.Node.Identifier">
+            <summary>
+                The node identifier
             </summary>
         </member>
         <member name="M:ORA.API.Node.#ctor(System.String,System.String)">

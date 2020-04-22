@@ -1,6 +1,5 @@
 using System;
 using CommandDotNet;
-using CommandDotNet.Help;
 using ORA.API;
 using ORA.Application.CLI.Objects;
 
@@ -20,7 +19,7 @@ namespace ORA.Application.CLI
         public void Create([Operand(Description = "Cluster name")]
             ClusterNameModel name)
         {
-            Cluster cluster = Ora.GetClusterManager().CreateCluster(name.Name);
+            Cluster cluster = Ora.GetClusterManager().CreateCluster(name.Name, "dummy"); // TODO
             Console.WriteLine($"Cluster {cluster.Name} created with identifier {cluster.Identifier}");
         }
 

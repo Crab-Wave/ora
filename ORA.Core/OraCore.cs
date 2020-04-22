@@ -17,28 +17,28 @@ namespace ORA.Core
     {
         private readonly ILogger _logger;
 
+        private readonly ICipher _cipher;
+
+        private readonly ICompressor _compressor;
+
         private readonly IHttpClient _httpClient;
 
-        private readonly ICipher _cipher;
+        private readonly IAuthManager _authManager;
 
         private readonly IIdentityManager _identityManager;
 
         private readonly IClusterManager _clusterManager;
 
-        private readonly ICompressor _compressor;
-
-        private readonly IAuthManager _authManager;
-
         private OraCore()
         {
             this._logger = new SimpleLogger("OraCore");
+            this._cipher = new RsaCipher();
+            this._compressor = new ZipLibCompressor();
             this._httpClient = new UnirestHttpClient();
             this._httpClient.SetBaseUrl("https://tracker.ora.crabwave.com");
-            this._cipher = new RsaCipher();
+            this._authManager = new AuthManager();
             this._identityManager = new IdentityManager();
             this._clusterManager = new ClusterManager();
-            this._compressor = new ZipLibCompressor();
-            this._authManager = new AuthManager();
         }
 
         public static void Initialize() => SetInstance(new OraCore());

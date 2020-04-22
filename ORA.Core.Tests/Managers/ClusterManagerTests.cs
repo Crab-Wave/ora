@@ -19,7 +19,7 @@ namespace ORA.Core.Tests.Managers
         {
             string name = "test_create_cluster_" + this._random.Next(1_000_000);
 
-            Cluster cluster = Ora.GetClusterManager().CreateCluster(name);
+            Cluster cluster = Ora.GetClusterManager().CreateCluster(name, "dummy");
 
             cluster.Name.Should().Be(name);
             cluster.Identifier.Should().NotBeNullOrEmpty();
@@ -29,7 +29,7 @@ namespace ORA.Core.Tests.Managers
         public void GetClusterTest()
         {
             Cluster cluster = Ora.GetClusterManager()
-                .CreateCluster("test_get_cluster_" + this._random.Next(1_000_000));
+                .CreateCluster("test_get_cluster_" + this._random.Next(1_000_000), "dummy");
 
             Cluster sameCluster = Ora.GetClusterManager().GetCluster(cluster.Identifier);
             sameCluster.Name.Should().Be(cluster.Name);
@@ -40,7 +40,7 @@ namespace ORA.Core.Tests.Managers
         public void DeleteClusterTest()
         {
             Cluster cluster = Ora.GetClusterManager()
-                .CreateCluster("test_delete_cluster_" + this._random.Next(1_000_000));
+                .CreateCluster("test_delete_cluster_" + this._random.Next(1_000_000), "dummy");
 
             Ora.GetClusterManager().DeleteCluster(cluster.Identifier).Should().Be(true);
         }

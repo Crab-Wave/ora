@@ -1,4 +1,5 @@
-﻿using JKang.IpcServiceFramework;
+﻿using System.Collections.Generic;
+using JKang.IpcServiceFramework;
 using ORA.API;
 using ORA.API.Managers;
 
@@ -13,13 +14,22 @@ namespace ORA.Core.IPC.Managers
             this._client = client;
         }
 
-        public Cluster CreateCluster(string name) =>
-            this._client.InvokeAsync(manager => manager.CreateCluster(name)).Result;
+        public Cluster CreateCluster(string name, string userDisplayName) =>
+            this._client.InvokeAsync(manager => manager.CreateCluster(name, userDisplayName)).Result;
 
-        public Cluster GetCluster(string identifier) =>
-            this._client.InvokeAsync(manager => manager.GetCluster(identifier)).Result;
+        public Cluster GetCluster(string cluster) =>
+            this._client.InvokeAsync(manager => manager.GetCluster(cluster)).Result;
 
-        public bool DeleteCluster(string identifier) =>
-            this._client.InvokeAsync(manager => manager.DeleteCluster(identifier)).Result;
+        public bool DeleteCluster(string cluster) =>
+            this._client.InvokeAsync(manager => manager.DeleteCluster(cluster)).Result;
+
+        public List<Member> GetMembers(string cluster) =>
+            this._client.InvokeAsync(manager => manager.GetMembers(cluster)).Result;
+
+        public Member GetMember(string cluster, string member) =>
+            this._client.InvokeAsync(manager => manager.GetMember(cluster, member)).Result;
+
+        public bool RemoveMember(string cluster, string member) =>
+            this._client.InvokeAsync(manager => manager.RemoveMember(cluster, member)).Result;
     }
 }
