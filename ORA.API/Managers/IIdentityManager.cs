@@ -1,7 +1,7 @@
 ﻿namespace ORA.API.Managers
 {
     /// <summary>
-    ///     the management of the Identities through many methods such as GetIdentity and GenerateIdentity.
+    ///     An interface representing the management of the Identities through many methods such as GetIdentity and GenerateIdentity.
     /// </summary>
     public interface IIdentityManager
     {

@@ -11,6 +11,7 @@ namespace ORA.API
         /// A cluster has 2 attributes : a name and an identifier
         /// </summary>
         private string _name;
+
         private string _identifier;
 
         /// <summary>
@@ -18,14 +19,14 @@ namespace ORA.API
         /// </summary>
 
         public string Name => this._name;
+
         public string Identifier => this._identifier;
 
         /// <summary>
-        ///Initializes a new cluster
+        /// Initializes a new cluster
         /// </summary>
         /// <param name="name">the name of the new cluster </param>
         /// <param name="identifier">the identifier of the new cluster</param>
-
         protected Cluster(string name, string identifier)
         {
             this._name = name;

@@ -1,7 +1,7 @@
 namespace ORA.API
 {
     /// <summary>
-    /// A member is a user.
+    /// A member represents a user in a cluster, with an identifier pointing to his identity and a display name.
     /// </summary>
     public class Member
     {
@@ -9,12 +9,14 @@ namespace ORA.API
         /// A member has two attributes : a name and an identifier.
         /// </summary>
         private string _identifier;
+
         private string _name;
 
         /// <summary>
         /// These two attibutes have both a getter.
         /// </summary>
         public string Name => this._name;
+
         public string Identifier => this._identifier;
 
         /// <summary>

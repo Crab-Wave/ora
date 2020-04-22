@@ -2,24 +2,21 @@
 
 namespace ORA.API.Http
 {
+    /// <summary>
+    /// A HttpResponse has three parts : a body, a return code and some headers.
+    /// </summary>
     public class HttpResponse
     {
-        /// <summary>
-        /// A HttpResponse has three parts : a body, a code and some headers.
-        /// </summary>
         private string _body;
         private int _code;
         private Dictionary<string, string> _headers;
 
-        /// <summary>
-        /// All of those three attributes has a getter.
-        /// </summary>
         public string Body => this._body;
         public int Code => this._code;
         public Dictionary<string, string> Headers => this._headers;
 
         /// <summary>
-        /// Initialise a new HttpResponse.
+        /// Initializes a new HttpResponse.
         /// </summary>
         /// <param name="body">the body of the new HttpResponse. </param>
         /// <param name="code">the code of the new HttpResponse.</param>

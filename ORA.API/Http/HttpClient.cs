@@ -7,9 +7,6 @@
     {
         protected string _baseUrl;
 
-        /// <summary>
-        /// This url has a getter and a setter.
-        /// </summary>
         public string BaseUrl
         {
             get => this._baseUrl;

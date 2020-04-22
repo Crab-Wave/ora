@@ -1,7 +1,7 @@
 ﻿namespace ORA.API.Managers
 {
     /// <summary>
-    ///     the management of the Clusters through many methods such as CreateCluster, GetCluster and DeleteCluster.
+    ///     An interface representing the management of the Clusters through many methods such as CreateCluster, GetCluster and DeleteCluster.
     /// </summary>
     public interface IClusterManager
     {

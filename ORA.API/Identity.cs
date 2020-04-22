@@ -1,7 +1,7 @@
 ﻿namespace ORA.API
 {
     /// <summary>
-    /// An identity is ...
+    /// An identity represents a user
     /// </summary>
     public class Identity
     {
@@ -11,6 +11,7 @@
         /// the second is confidential and personal.
         /// </summary>
         private byte[] _publicKey;
+
         private byte[] _privateKey;
 
         /// <summary>
@@ -18,6 +19,7 @@
         /// </summary>
 
         public byte[] PublicKey => this._publicKey;
+
         public byte[] PrivateKey => this._privateKey;
 
         /// <summary>

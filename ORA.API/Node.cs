@@ -9,12 +9,14 @@
         /// A node has two attributes : a name and an identifier.
         /// </summary>
         private string _name;
+
         private string _identifier;
 
         /// <summary>
         /// Those two attributes have both a getter.
         /// </summary>
         public string Name => this._name;
+
         public string Identifier => this._identifier;
 
         /// <summary>
