@@ -20,14 +20,13 @@ namespace ORA.Application.CLI
                 phrase += members[i].Name + ", ";
 
             phrase += members[members.Count - 1].Name;
-            Console.WriteLine("Those are the members of the current cluster : " + phrase);
+            Console.WriteLine($"Cluster :{identifier}\nMembers: "+ phrase);
         }
 
         [Command(Description = "Remove a member", Name = "remove", Usage = "remove <cluster> <member>")]
         public bool Remove([Operand(Description = "Cluster identifier")] ClusterIdentifierModel cluster, [Operand(Description = "member identifier")] MemberIdentifierModel member)
         {
-            bool sucess = Ora.GetClusterManager().GetCluster(cluster.Identifier).RemoveMember(member.Identifier);
-            if (!sucess)
+            if (!Ora.GetClusterManager().GetCluster(cluster.Identifier).RemoveMember(member.Identifier))
             {
                 Console.WriteLine($"Could not remove member with identifier {member.Identifier}");
                 return true;
