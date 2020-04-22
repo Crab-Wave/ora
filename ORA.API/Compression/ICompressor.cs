@@ -1,5 +1,19 @@
 ﻿namespace ORA.API.Compression
 {
+    /// <summary>
+    ///     An object capable of compressing data or decompressing data that has been previously encrypted with the same algorithm.
+    /// </summary>
+    /// <example>
+    ///     The following code
+    ///     <code>
+    ///         ICompressor comp = ...;
+    ///         byte[] data = ...;
+    ///         byte[] compressed = comp.Compress(data);
+    ///
+    ///         Console.WriteLine(comp.Decompress(encrypted).Equals(data));
+    ///     </code>
+    ///     will print the value true.
+    /// </example>
     public interface ICompressor
     {
         /// <summary>
