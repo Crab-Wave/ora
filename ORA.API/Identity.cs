@@ -21,7 +21,7 @@
         public byte[] PrivateKey => this._privateKey;
 
         /// <summary>
-        /// Initialise a new identity
+        /// Initializes a new identity
         /// </summary>
         /// <param name="publicKey">the public key of the new identity</param>
         /// <param name="privateKey">the private key of the new identity</param>
