@@ -26,6 +26,8 @@ namespace ORA.Application.CLI
                     Ora.GetHttpClient().SetBaseUrl(text);
             }
 
+            Ora.GetAuthManager().Authenticate();
+
             AppRunner appRunner = new AppRunner<OraApplication>().UseFluentValidation();
             appRunner.AppSettings.Help.UsageAppName = "ora";
 

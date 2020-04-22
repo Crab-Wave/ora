@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using ORA.API.Compression;
 using ORA.API.Encryption;
 using ORA.API.Http;
 using ORA.API.Loggers;
@@ -28,9 +28,15 @@ namespace ORA.API
 
         public static ICipher GetCipher() => Get().Cipher();
 
+        public static IIdentityManager GetIdentityManager() => Get().IdentityManager();
+
         public static IClusterManager GetClusterManager() => Get().ClusterManager();
 
         public static INodeManager GetNodeManager() => Get().NodeManager();
+
+        public static ICompressor GetCompressor() => Get().Compressor();
+
+        public static IAuthManager GetAuthManager() => Get().AuthManager();
 
         public abstract ILogger Logger();
 
@@ -38,8 +44,14 @@ namespace ORA.API
 
         public abstract ICipher Cipher();
 
+        public abstract IIdentityManager IdentityManager();
+
         public abstract IClusterManager ClusterManager();
 
         public abstract INodeManager NodeManager();
+
+        public abstract ICompressor Compressor();
+
+        public abstract IAuthManager AuthManager();
     }
 }

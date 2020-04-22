@@ -2,6 +2,9 @@
 
 namespace ORA.API.Loggers
 {
+    /// <summary>
+    /// An ILogger represents a logger object that is capable of logging things into console and in a log file.
+    /// </summary>
     public interface ILogger
     {
         void Info(Exception cause) => this.Log(LogLevel.Info, cause);
