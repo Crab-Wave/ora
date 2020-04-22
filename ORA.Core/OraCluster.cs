@@ -42,9 +42,9 @@ namespace ORA.Core
 
         public override bool RemoveMember(string identifier)
         {
-            HttpResponse
-                response = Ora.GetHttpClient().Delete("/clusters/" + this.Identifier + "/members/" + identifier,
-                    new HttpRequest().Set("Authorization", "dummy"));
+            HttpResponse response = Ora.GetHttpClient().Delete(
+                "/clusters/" + this.Identifier + "/members/" + identifier,
+                new HttpRequest().Set("Authorization", Ora.GetAuthManager().GetToken()));
             int code = response.Code;
             if (code == 200)
                 return true;
