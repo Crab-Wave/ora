@@ -14,13 +14,8 @@ namespace ORA.Application.CLI
         [Command(Description = "Get the members of the current cluster", Name = "get", Usage = "get <cluster>")]
         public void GetMembers([Operand(Description = "Cluster identifier")] ClusterIdentifierModel identifier)
         {
-            List<Member> members = Ora.Get().ClusterManager().GetCluster(identifier.Identifier).GetMembers();
-            string phrase = "";
-            for (int i = 0; i < members.Count - 1; i++)
-                phrase += members[i].Name + ", ";
-
-            phrase += members[members.Count - 1].Name;
-            Console.WriteLine($"Cluster :{identifier}\nMembers: "+ phrase);
+            Console.WriteLine($"Cluster: {identifier.Identifier}");
+            Console.WriteLine($"Members: {String.Join(",\n       - ", Ora.Get().ClusterManager().GetCluster(identifier.Identifier).GetMembers())}");
         }
 
         [Command(Description = "Remove a member", Name = "remove", Usage = "remove <cluster> <member>")]
