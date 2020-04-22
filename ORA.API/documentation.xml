@@ -1,0 +1,317 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ORA.API</name>
+    </assembly>
+    <members>
+        <member name="T:ORA.API.Cluster">
+            <summary>
+            A cluster is a group where members which own Nodes will be able to share their files and their directories.
+            </summary>
+        </member>
+        <member name="F:ORA.API.Cluster._name">
+            <summary>
+            A cluster has 2 attributes : a name and an identifier
+            </summary>
+        </member>
+        <member name="P:ORA.API.Cluster.Name">
+            <summary>
+            There is a getter for both of those.
+            </summary>
+        </member>
+        <member name="M:ORA.API.Cluster.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new cluster
+            </summary>
+            <param name="name">the name of the new cluster </param>
+            <param name="identifier">the identifier of the new cluster</param>
+        </member>
+        <member name="M:ORA.API.Cluster.GetMembers">
+            <summary>
+            Get the list of the members of the current cluster
+            </summary>
+            <returns>the list of the memebers of the current cluster </returns>
+        </member>
+        <member name="M:ORA.API.Cluster.GetMember(System.String)">
+            <summary>
+            Get the member of the current cluster with the specified identifier
+            </summary>
+            <param name="identifier">the specified identifier</param>
+            <returns>the member in the current cluster with the identifier specified</returns>
+        </member>
+        <member name="M:ORA.API.Cluster.RemoveMember(System.String)">
+            <summary>
+            Remove a member of a cluster with the identifier specified
+            </summary>
+            <param name="identifier">the specified identifier</param>
+            <returns>True if the member has been removed or false otherwise</returns>
+        </member>
+        <member name="T:ORA.API.Compression.ICompressor">
+             <summary>
+                 An object capable of compressing data or decompressing data that has been previously encrypted with the same algorithm.
+             </summary>
+             <example>
+                 The following code
+                 <code>
+                     ICompressor comp = ...;
+                     byte[] data = ...;
+                     byte[] compressed = comp.Compress(data);
+            
+                     Console.WriteLine(comp.Decompress(encrypted).Equals(data));
+                 </code>
+                 will print the value true.
+             </example>
+        </member>
+        <member name="M:ORA.API.Compression.ICompressor.Compress(System.Byte[])">
+            <summary>
+                Compresses the given data following a specific algorithm with a default compression level of 3.
+            </summary>
+            <param name="data">The data to compress</param>
+            <returns>The compressed data</returns>
+        </member>
+        <member name="M:ORA.API.Compression.ICompressor.Compress(System.Byte[],System.Int32)">
+            <summary>
+                Compresses the given data following a specific algorithm with a given compression level.
+            </summary>
+            <param name="data">The data to compress</param>
+            <param name="level">The compression level</param>
+            <returns>The compressed data</returns>
+        </member>
+        <member name="M:ORA.API.Compression.ICompressor.Decompress(System.Byte[])">
+            <summary>
+                Decompresses the given data if it has previously been compressed using the same algorithm.
+            </summary>
+            <param name="data">The data to decompress</param>
+            <returns>The decompressed data</returns>
+        </member>
+        <member name="T:ORA.API.Encryption.ICipher">
+             <summary>
+                 An object capable of Encrypting data or Decrypting data that has been previously encrypted with the same algorithm.
+             </summary>
+             <example>
+                 The following code
+                 <code>
+                     ICipher cipher = ...;
+                     byte[] data = ...;
+                     byte[] encrypted = cipher.Encrypt(data);
+            
+                     Console.WriteLine(cipher.Decrypt(encrypted).Equals(data));
+                 </code>
+                 will print the value true.
+             </example>
+        </member>
+        <member name="M:ORA.API.Encryption.ICipher.Encrypt(System.Byte[])">
+            <summary>
+                Encrypts the given data following a specific algorithm.
+            </summary>
+            <param name="data">The data to encrypt</param>
+            <returns>The encrypted data</returns>
+        </member>
+        <member name="M:ORA.API.Encryption.ICipher.Decrypt(System.Byte[])">
+            <summary>
+                Decrypts the given data if it has previously been encrypted using the same algorithm.
+            </summary>
+            <param name="data">The data to decrypt</param>
+            <returns>The Decrypted data</returns>
+        </member>
+        <member name="T:ORA.API.Http.HttpClient">
+            <summary>
+            A class to send HTTP request and receive HTTP response from endpoints of a base url.
+            </summary>
+        </member>
+        <member name="T:ORA.API.Http.HttpRequest">
+            <summary>
+            A HttpRequest is composed of two parts : a body and some headers
+            </summary>
+        </member>
+        <member name="M:ORA.API.Http.HttpRequest.#ctor">
+            <summary>
+            Initializes a new HttpRequest.
+            </summary>
+        </member>
+        <member name="M:ORA.API.Http.HttpRequest.#ctor(System.String)">
+            <summary>
+            Initializes a new HttpRequest.
+            </summary>
+            <param name="body">the body of the new HttpRequest. </param>
+        </member>
+        <member name="M:ORA.API.Http.HttpRequest.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Initializes a new HttpRequest.
+            </summary>
+            <param name="body">the body of the new HttpRequest. </param>
+            <param name="headers">the headers of the new HttpRequest.</param>
+        </member>
+        <member name="M:ORA.API.Http.HttpRequest.ToString">
+            <summary>
+            Method to transform a HttpRequest in a long string
+            </summary>
+            <returns>the wanted string</returns>
+        </member>
+        <member name="T:ORA.API.Http.HttpResponse">
+            <summary>
+            A HttpResponse has three parts : a body, a return code and some headers.
+            </summary>
+        </member>
+        <member name="M:ORA.API.Http.HttpResponse.#ctor(System.String,System.Int32,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Initializes a new HttpResponse.
+            </summary>
+            <param name="body">the body of the new HttpResponse. </param>
+            <param name="code">the code of the new HttpResponse.</param>
+            <param name="headers">the headers of the new HttpResponse.</param>
+        </member>
+        <member name="M:ORA.API.Http.HttpResponse.ToString">
+            <summary>
+            Method to transform a HttpResponse in a long string
+            </summary>
+            <returns>the wanted string</returns>
+        </member>
+        <member name="T:ORA.API.Identity">
+            <summary>
+            An identity represents a user
+            </summary>
+        </member>
+        <member name="F:ORA.API.Identity._publicKey">
+            <summary>
+            An identity has 2 attributes : a public key and a private key which are two different bytearray.
+            The first
+            the second is confidential and personal.
+            </summary>
+        </member>
+        <member name="P:ORA.API.Identity.PublicKey">
+            <summary>
+            Those 2 keys have both a getter.
+            </summary>
+        </member>
+        <member name="M:ORA.API.Identity.#ctor(System.Byte[],System.Byte[])">
+            <summary>
+            Initializes a new identity
+            </summary>
+            <param name="publicKey">the public key of the new identity</param>
+            <param name="privateKey">the private key of the new identity</param>
+        </member>
+        <member name="T:ORA.API.Loggers.ILogger">
+            <summary>
+            An ILogger represents a logger object that is capable of logging things into console and in a log file.
+            </summary>
+        </member>
+        <member name="T:ORA.API.Managers.IAuthManager">
+            <summary>
+                An interface representing the management of the the Authentication and the Authorization.
+            </summary>
+        </member>
+        <member name="M:ORA.API.Managers.IAuthManager.Authenticate">
+            <summary>
+                Authenticate the user with the tracker
+            </summary>
+            <returns>The auth token</returns>
+        </member>
+        <member name="M:ORA.API.Managers.IAuthManager.GetToken">
+            <summary>
+                Returns the current auth token
+            </summary>
+            <returns>The auth token</returns>
+        </member>
+        <member name="M:ORA.API.Managers.IAuthManager.RefreshToken">
+            <summary>
+                Refreshes the current auth token
+            </summary>
+            <returns>The auth token</returns>
+        </member>
+        <member name="M:ORA.API.Managers.IAuthManager.IsAuthenticated">
+            <summary>
+                Returns whether the application is authenticated or not
+            </summary>
+            <returns>Whether the application is authenticated or not</returns>
+        </member>
+        <member name="T:ORA.API.Managers.IClusterManager">
+            <summary>
+                An interface representing the management of the Clusters through many methods such as CreateCluster, GetCluster and DeleteCluster.
+            </summary>
+        </member>
+        <member name="M:ORA.API.Managers.IClusterManager.CreateCluster(System.String)">
+            <summary>
+                Create a cluster with the specified name
+            </summary>
+            <param name="name">The name of the cluster</param>
+            <returns>The created cluster</returns>
+        </member>
+        <member name="M:ORA.API.Managers.IClusterManager.GetCluster(System.String)">
+            <summary>
+               Get the cluster with the specified identifier.
+            </summary>
+            <param name="identifier">The identifier of the cluster wanted</param>
+            <returns>The cluster which has the specified identifier</returns>
+        </member>
+        <member name="M:ORA.API.Managers.IClusterManager.DeleteCluster(System.String)">
+            <summary>
+                Delete the cluster with the specified identifier.
+            </summary>
+            <param name="identifier">The identifier of the cluster wanted</param>
+            <returns>True if the deletion has succeeded or false otherwise.</returns>
+        </member>
+        <member name="T:ORA.API.Managers.IIdentityManager">
+            <summary>
+                An interface representing the management of the Identities through many methods such as GetIdentity and GenerateIdentity.
+            </summary>
+        </member>
+        <member name="M:ORA.API.Managers.IIdentityManager.GetIdentity">
+            <summary>
+               Get the identity of the current user.
+            </summary>
+            <returns>The identity wanted</returns>
+        </member>
+        <member name="M:ORA.API.Managers.IIdentityManager.GenerateIdentity(System.String)">
+            <summary>
+                Generate a new identity with the name specified.
+            </summary>
+            <param name="name">The name of the new identity. </param>
+            <returns>The created identity</returns>
+        </member>
+        <member name="T:ORA.API.Member">
+            <summary>
+            A member represents a user in a cluster, with an identifier pointing to his identity and a display name.
+            </summary>
+        </member>
+        <member name="F:ORA.API.Member._identifier">
+            <summary>
+            A member has two attributes : a name and an identifier.
+            </summary>
+        </member>
+        <member name="P:ORA.API.Member.Name">
+            <summary>
+            These two attibutes have both a getter.
+            </summary>
+        </member>
+        <member name="M:ORA.API.Member.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new member.
+            </summary>
+            <param name="identifier">the identifier of the new member</param>
+            <param name="name">the name of the new member</param>
+        </member>
+        <member name="T:ORA.API.Node">
+            <summary>
+            A node is a device used by a member which provides the files and the directories to share.
+            </summary>
+        </member>
+        <member name="F:ORA.API.Node._name">
+            <summary>
+            A node has two attributes : a name and an identifier.
+            </summary>
+        </member>
+        <member name="P:ORA.API.Node.Name">
+            <summary>
+            Those two attributes have both a getter.
+            </summary>
+        </member>
+        <member name="M:ORA.API.Node.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new node.
+            </summary>
+            <param name="name">the name of the new node</param>
+            <param name="identifier">the identifier of the new node</param>
+        </member>
+    </members>
+</doc>

@@ -1,5 +1,8 @@
 ﻿namespace ORA.API.Http
 {
+    /// <summary>
+    /// A class to send HTTP request and receive HTTP response from endpoints of a base url.
+    /// </summary>
     public abstract class HttpClient
     {
         protected string _baseUrl;
