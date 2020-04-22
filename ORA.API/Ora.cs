@@ -36,6 +36,8 @@ namespace ORA.API
 
         public static ICompressor GetCompressor() => Get().Compressor();
 
+        public static IAuthManager GetAuthManager() => Get().AuthManager();
+
         public abstract ILogger Logger();
 
         public abstract HttpClient HttpClient();
@@ -50,5 +52,6 @@ namespace ORA.API
 
         public abstract ICompressor Compressor();
 
+        public abstract IAuthManager AuthManager();
     }
 }

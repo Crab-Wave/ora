@@ -27,15 +27,18 @@ namespace ORA.Core
 
         private readonly ICompressor _compressor;
 
+        private readonly IAuthManager _authManager;
+
         private OraCore()
         {
             this._logger = new SimpleLogger("OraCore");
             this._httpClient = new UnirestHttpClient();
             this._httpClient.BaseUrl = "https://tracker.ora.crabwave.com";
-            this._cipher = new RsaCipher(4096);
+            this._cipher = new RsaCipher();
             this._identityManager = new IdentityManager();
             this._clusterManager = new ClusterManager();
             this._compressor = new ZipLibCompressor();
+            this._authManager = new AuthManager();
         }
 
         public static void Initialize() => SetInstance(new OraCore());
@@ -54,5 +57,7 @@ namespace ORA.Core
             throw new NotImplementedException("NodeManager not implemented");
 
         public override ICompressor Compressor() => this._compressor;
+
+        public override IAuthManager AuthManager() => this._authManager;
     }
 }

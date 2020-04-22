@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using FluentValidation;
 using ORA.Application.CLI.Objects;
 
@@ -8,7 +8,7 @@ namespace ORA.Application.CLI.Validators
     {
         public MemberIdentifierValidator()
         {
-            this.RuleFor(model => model.Identifier).Custom((s, context) =>
+            this.RuleFor(model => model.MemberIdentifier).Custom((s, context) =>
             {
                 if (String.IsNullOrWhiteSpace(s))
                 {

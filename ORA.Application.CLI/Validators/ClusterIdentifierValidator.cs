@@ -8,7 +8,7 @@ namespace ORA.Application.CLI.Validators
     {
         public ClusterIdentifierValidator()
         {
-            this.RuleFor(model => model.Identifier).Custom((s, context) =>
+            this.RuleFor(model => model.ClusterIdentifier).Custom((s, context) =>
             {
                 if (String.IsNullOrWhiteSpace(s))
                 {
