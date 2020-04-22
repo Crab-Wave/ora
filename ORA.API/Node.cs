@@ -18,7 +18,7 @@
         public string Identifier => this._identifier;
 
         /// <summary>
-        /// Initialise a new node.
+        /// Initializes a new node.
         /// </summary>
         /// <param name="name">the name of the new node</param>
         /// <param name="identifier">the identifier of the new node</param>

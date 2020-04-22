@@ -18,7 +18,7 @@ namespace ORA.API
         public string Identifier => this._identifier;
 
         /// <summary>
-        /// Initialise a new member.
+        /// Initializes a new member.
         /// </summary>
         /// <param name="identifier">the identifier of the new member</param>
         /// <param name="name">the name of the new member</param>

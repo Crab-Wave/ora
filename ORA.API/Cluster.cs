@@ -21,7 +21,7 @@ namespace ORA.API
         public string Identifier => this._identifier;
 
         /// <summary>
-        ///Initialise a new cluster
+        ///Initializes a new cluster
         /// </summary>
         /// <param name="name">the name of the new cluster </param>
         /// <param name="identifier">the identifier of the new cluster</param>
