@@ -7,6 +7,7 @@ namespace ORA.Core.Tests
         static CoreInitializationFixture()
         {
             OraCore.Initialize();
+            Ora.GetAuthManager().Authenticate();
         }
     }
 }

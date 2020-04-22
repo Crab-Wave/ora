@@ -18,10 +18,10 @@ namespace ORA.Core.Managers
 
         public Cluster CreateCluster(string name)
         {
-            HttpResponse
-                response = Ora.GetHttpClient()
-                    .Post("/clusters?name=" + name,
-                        new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
+            HttpResponse response = Ora.GetHttpClient().Post("/clusters?name=" + name,
+                new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
+            Console.WriteLine(response.Code);
+            Console.WriteLine(response.Body);
             int code = response.Code;
             if (code == 200)
             {
@@ -42,8 +42,7 @@ namespace ORA.Core.Managers
             if (this._clusters.ContainsKey(identifier))
                 return this._clusters[identifier];
 
-            HttpResponse
-                response = Ora.GetHttpClient().Get("/clusters/" + identifier);
+            HttpResponse response = Ora.GetHttpClient().Get("/clusters/" + identifier);
             int code = response.Code;
             if (code == 200)
             {

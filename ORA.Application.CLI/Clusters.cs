@@ -28,11 +28,11 @@ namespace ORA.Application.CLI
         public void Delete([Operand(Description = "Cluster identifier")]
             ClusterIdentifierModel identifier)
         {
-            bool sucess = Ora.GetClusterManager().DeleteCluster(identifier.Identifier);
+            bool sucess = Ora.GetClusterManager().DeleteCluster(identifier.ClusterIdentifier);
             if (!sucess)
-                Console.WriteLine($"Could not delete cluster with identifier {identifier.Identifier}");
+                Console.WriteLine($"Could not delete cluster with identifier {identifier.ClusterIdentifier}");
             else
-                Console.WriteLine($"Successfully deleted cluster with identifier {identifier.Identifier}");
+                Console.WriteLine($"Successfully deleted cluster with identifier {identifier.ClusterIdentifier}");
         }
     }
 }

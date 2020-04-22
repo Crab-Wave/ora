@@ -18,7 +18,8 @@ namespace ORA.Core
         public override List<Member> GetMembers()
         {
             HttpResponse
-                response = Ora.GetHttpClient().Get("/clusters/" + this.Identifier);
+                response = Ora.GetHttpClient().Get("/clusters/" + this.Identifier,
+                    new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
             int code = response.Code;
             if (code == 200)
                 return JObject.Parse(response.Body)["members"].Value<Member[]>().ToList();
@@ -30,7 +31,8 @@ namespace ORA.Core
         public override Member GetMember(string identifier)
         {
             HttpResponse
-                response = Ora.GetHttpClient().Get("/clusters/" + this.Identifier + "/members/" + identifier);
+                response = Ora.GetHttpClient().Get("/clusters/" + this.Identifier + "/members/" + identifier,
+                    new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
             int code = response.Code;
             if (code == 200)
                 return JObject.Parse(response.Body).Value<Member>();
@@ -44,7 +46,7 @@ namespace ORA.Core
         {
             HttpResponse response = Ora.GetHttpClient().Delete(
                 "/clusters/" + this.Identifier + "/members/" + identifier,
-                new HttpRequest().Set("Authorization", Ora.GetAuthManager().GetToken()));
+                new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
             int code = response.Code;
             if (code == 200)
                 return true;
