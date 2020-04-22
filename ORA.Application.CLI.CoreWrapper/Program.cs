@@ -15,6 +15,7 @@ namespace ORA.Application.CLI.CoreWrapper
             }
             catch (Exception e)
             {
+                Ora.GetLogger().ShouldPrint(true);
                 Ora.GetLogger().Error(e);
                 Console.WriteLine("An Error has occured :(");
             }

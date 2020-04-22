@@ -7,7 +7,7 @@ namespace ORA.Application.CLI.Objects
     [Validator(typeof(ClusterIdentifierValidator))]
     public class ClusterIdentifierModel : IArgumentModel
     {
-        public string Identifier
+        public string ClusterIdentifier
         {
             get;
             set;

@@ -11,7 +11,6 @@ namespace ORA.Core.Managers
     // TODO
     public class IdentityManager : IIdentityManager
     {
-        public const int KeysSize = 4096;
 
         private Identity _identity;
 
@@ -26,8 +25,8 @@ namespace ORA.Core.Managers
             {
                 try
                 {
-                    byte[] publicKey = File.ReadAllBytes(path + ".pub");
-                    byte[] privateKey = File.ReadAllBytes(path);
+                    byte[] publicKey = Convert.FromBase64String(File.ReadAllText(path + ".pub"));
+                    byte[] privateKey = Convert.FromBase64String(File.ReadAllText(path));
                     this._identity = new Identity(publicKey, privateKey);
                 }
                 catch (Exception e)
@@ -43,9 +42,9 @@ namespace ORA.Core.Managers
 
         private Identity _generateIdentity(string path)
         {
-            var rsaCipher = new RsaCipher(KeysSize);
-            File.WriteAllBytes(path + ".pub", rsaCipher.GetPublicKey());
-            File.WriteAllBytes(path, rsaCipher.GetPrivateKey());
+            var rsaCipher = new RsaCipher();
+            File.WriteAllText(path + ".pub", Convert.ToBase64String(rsaCipher.GetPublicKey()));
+            File.WriteAllText(path, Convert.ToBase64String(rsaCipher.GetPrivateKey()));
             return new Identity(rsaCipher.GetPublicKey(), rsaCipher.GetPrivateKey());
         }
 

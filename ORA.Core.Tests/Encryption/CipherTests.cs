@@ -19,8 +19,7 @@ namespace ORA.Core.Tests.Encryption
 
             if (!(c is RsaCipher))
                 return;
-            ICipher cipher = new RsaCipher(((RsaCipher) c).KeySize, ((RsaCipher) c).GetPublicKey(),
-                ((RsaCipher) c).GetPrivateKey());
+            ICipher cipher = new RsaCipher(((RsaCipher) c).GetPublicKey(), ((RsaCipher) c).GetPrivateKey());
             cipher.Decrypt(c.Encrypt(message)).Should().Equal(message);
         }
     }
