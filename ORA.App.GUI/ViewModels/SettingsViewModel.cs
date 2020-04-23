@@ -2,13 +2,11 @@ using ReactiveUI;
 
 namespace ORA.App.GUI.ViewModels
 {
-    public class SettingsViewModel : ViewModelBase, IRoutableViewModel
+    public class SettingsViewModel : ViewModelBase
     {
-        // Reference to IScreen that owns the routable view model.
-        public IScreen HostScreen { get; }
+        public SettingsViewModel()
+        {
 
-        public string UrlPathSegment { get; } = "/settings";
-
-        public SettingsViewModel(IScreen screen) => HostScreen = screen;
+        }
     }
 }

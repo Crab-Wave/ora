@@ -8,11 +8,10 @@ using ORA.App.GUI.ViewModels;
 
 namespace ORA.App.GUI.Views
 {
-    public class SettingsView : ReactiveUserControl<SettingsViewModel>
+    public class SettingsView : UserControl
     {
         public SettingsView()
         {
-            this.WhenActivated(disposables => { });
             InitializeComponent();
         }
 

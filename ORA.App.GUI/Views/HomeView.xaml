@@ -7,6 +7,7 @@
   <DockPanel>
     <Button DockPanel.Dock="Bottom"
             Command="{Binding $parent[Window].DataContext.AddCluster}">Add cluster</Button>
+    <Button Command="{Binding $parent[Window].DataContext.NavigateToSettings}">Settings</Button>
     <ItemsControl Items="{Binding Clusters}">
       <ItemsControl.ItemTemplate>
         <DataTemplate>
