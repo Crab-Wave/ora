@@ -1,14 +1,14 @@
-using System;
+﻿using System;
 using FluentValidation;
 using ORA.Application.CLI.Objects;
 
 namespace ORA.Application.CLI.Validators
 {
-    public class ClusterIdentifierValidator : AbstractValidator<ClusterIdentifierModel>
+    public class MemberIdentifierValidator : AbstractValidator<MemberIdentifierModel>
     {
-        public ClusterIdentifierValidator()
+        public MemberIdentifierValidator()
         {
-            this.RuleFor(model => model.ClusterIdentifier).Custom((s, context) =>
+            this.RuleFor(model => model.MemberIdentifier).Custom((s, context) =>
             {
                 if (String.IsNullOrWhiteSpace(s))
                 {
