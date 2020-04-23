@@ -48,7 +48,7 @@ namespace ORA.App.GUI.ViewModels
 
             Observable.Merge(
                 vm.Ok,
-                vm.Cancel.Select(_ => (Cluster)null))
+                vm.Cancel.Select(_ => (Cluster) null))
                 .Take(1)
                 .Subscribe(model =>
                 {

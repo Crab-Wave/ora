@@ -19,7 +19,7 @@ namespace ORA.App.GUI
 
             if (type != null)
             {
-                return (Control)Activator.CreateInstance(type);
+                return (Control) Activator.CreateInstance(type);
             }
             else
             {
