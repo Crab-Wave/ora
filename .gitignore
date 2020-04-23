@@ -438,3 +438,6 @@ $RECYCLE.BIN/
 
 # Cake
 tools
+
+# Keys
+*.pub
