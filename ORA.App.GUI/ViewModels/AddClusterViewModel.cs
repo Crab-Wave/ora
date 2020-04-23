@@ -25,7 +25,7 @@ namespace ORA.App.GUI.ViewModels
             );
 
             Ok = ReactiveCommand.Create(
-                () => Ora.GetClusterManager().CreateCluster(name),
+                () => Ora.GetClusterManager().CreateCluster(name, "displayName"),
                 okEnabled);
             Cancel = ReactiveCommand.Create(() => { });
         }
