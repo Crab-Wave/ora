@@ -1,4 +1,7 @@
-﻿namespace ORA.API
+﻿using System;
+using System.Linq;
+
+namespace ORA.API
 {
     /// <summary>
     /// An identity represents a user
@@ -32,5 +35,11 @@
             this._publicKey = publicKey;
             this._privateKey = privateKey;
         }
+
+        /// <summary>
+        /// The identifier representing this identity
+        /// </summary>
+        /// <returns>The identifier representing this identity</returns>
+        public string GetIdentifier() => new Guid(this.PublicKey.Take(16).ToArray()).ToString();
     }
 }

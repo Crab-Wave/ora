@@ -16,14 +16,20 @@ namespace ORA.API.Managers
         Cluster CreateCluster(string name, string userDisplayName);
 
         /// <summary>
-        ///    Get the cluster with the specified identifier.
+        ///    Get the list of all the clusters
+        /// </summary>
+        /// <returns>The list of all the clusters</returns>
+        List<Cluster> GetClusters();
+
+        /// <summary>
+        ///    Get the cluster with the specified identifier
         /// </summary>
         /// <param name="cluster">The identifier of the cluster</param>
         /// <returns>The cluster which has the specified identifier</returns>
         Cluster GetCluster(string cluster);
 
         /// <summary>
-        ///     Delete the cluster with the specified identifier.
+        ///     Delete the cluster with the specified identifier
         /// </summary>
         /// <param name="cluster">The identifier of the cluster</param>
         /// <returns>True if the deletion has succeeded or false otherwise.</returns>

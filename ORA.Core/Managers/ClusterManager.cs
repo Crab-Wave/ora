@@ -21,19 +21,36 @@ namespace ORA.Core.Managers
         {
             HttpResponse response = Ora.GetHttpClient().Post("/clusters?name=" + name + "&username=" + userDisplayName,
                 new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
-            Console.WriteLine(response.Code);
-            Console.WriteLine(response.Body);
             int code = response.Code;
             if (code == 200)
             {
                 string identifier = JObject.Parse(response.Body)["id"].Value<string>();
-                Cluster cluster = new Cluster(name, identifier);
+                Cluster cluster = new Cluster(name, identifier, Ora.GetIdentityManager().GetIdentity().GetIdentifier());
                 this._clusters.Add(identifier, cluster);
                 Ora.GetLogger().Info($"Created cluster {name} with identifier {identifier}");
                 return cluster;
             }
 
             Exception exception = new Exception($"Couldn't create cluster {name}");
+            Ora.GetLogger().Error(exception);
+            throw exception;
+        }
+
+        public List<Cluster> GetClusters()
+        {
+            HttpResponse response = Ora.GetHttpClient().Get("/clusters");
+            int code = response.Code;
+            if (code == 200)
+            {
+                List<Cluster> clusters = new List<Cluster>();
+                foreach (var cluster in JArray.Parse(response.Body))
+                    clusters.Add(new Cluster(cluster["name"].Value<string>(), cluster["id"].Value<string>(),
+                        cluster["owner"].Value<string>()));
+
+                return clusters;
+            }
+
+            Exception exception = new Exception($"Couldn't get all clusters");
             Ora.GetLogger().Error(exception);
             throw exception;
         }
@@ -47,8 +64,9 @@ namespace ORA.Core.Managers
             int code = response.Code;
             if (code == 200)
             {
-                string name = JObject.Parse(response.Body)["name"].Value<string>();
-                Cluster cluster = new Cluster(name, identifier);
+                JToken json = JObject.Parse(response.Body);
+                Cluster cluster = new Cluster(json["name"].Value<string>(), json["id"].Value<string>(),
+                    json["owner"].Value<string>());
                 this._clusters.Add(identifier, cluster);
                 return cluster;
             }
