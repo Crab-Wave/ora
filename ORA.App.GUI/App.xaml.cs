@@ -15,6 +15,8 @@ namespace ORA.App.GUI
 
         public override void OnFrameworkInitializationCompleted()
         {
+            base.OnFrameworkInitializationCompleted();
+
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.MainWindow = new MainWindow
@@ -22,8 +24,6 @@ namespace ORA.App.GUI
                     DataContext = new MainWindowViewModel(),
                 };
             }
-
-            base.OnFrameworkInitializationCompleted();
         }
     }
 }

@@ -6,17 +6,8 @@ using Avalonia.ReactiveUI;
 
 namespace ORA.App.GUI.ViewModels
 {
-    public class ViewModelBase : ReactiveObject, IActivatableViewModel
+    public class ViewModelBase : ReactiveObject
     {
-        public ViewModelActivator Activator { get; } = new ViewModelActivator();
-
-        public ViewModelBase() => this.WhenActivated(
-            (CompositeDisposable disposables) =>
-            {
-                Disposable
-                    .Create(() => { })
-                    .DisposeWith(disposables);
-            }
-        );
+        public ViewModelBase() { }
     }
 }

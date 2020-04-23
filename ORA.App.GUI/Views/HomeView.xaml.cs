@@ -2,28 +2,29 @@ using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Avalonia.ReactiveUI;
-using System.Reactive.Disposables;
-using ReactiveUI;
+using Avalonia.Interactivity;
 
 using ORA.App.GUI.ViewModels;
 
 namespace ORA.App.GUI.Views
 {
-    public class HomeView : ReactiveUserControl<HomeViewModel>
+    public class HomeView : UserControl
     {
         public HomeView()
         {
             InitializeComponent();
-            this.WhenActivated(disposables => {
-                // this.OneWayBind(ViewModel, x => x.UrlPathSegment)
-                //     .DisposeWith(disposables);
-            });
         }
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+        }
+
+        private void OnButtonClick(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Hey");
+            var window = new MainWindow();
+            window.Show();
         }
     }
 }

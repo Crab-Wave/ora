@@ -1,26 +1,9 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:views="clr-namespace:ORA.App.GUI.Views"
-        xmlns:rxui="http://reactiveui.net"
         x:Class="ORA.App.GUI.Views.MainWindow"
         Icon="/Assets/crabwave-logo.ico"
         Width="800" Height="600"
-        Title="ORA">
-
-    <!-- <RoutedViewHost /> -->
-    <Grid>
-        <views:HomeView x:Name="Test"/>
-        <views:SettingsView/>
-    </Grid>
-    <!-- <Grid>
-    <rxui:RoutedViewHost
-        Grid.Row="0"
-        x:Name="RoutedViewHost"
-        HorizontalContentAlignment="Stretch"
-        VerticalContentAlignment="Stretch" />
-    </Grid> -->
-    <!-- <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext> -->
-
+        Title="ORA"
+        Content="{Binding Content}">
 </Window>

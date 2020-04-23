@@ -1,15 +1,14 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using ORA.App.GUI.ViewModels;
 
 namespace ORA.App.GUI.Views
 {
-    public class MainWindow : Window
+    public class AddClusterView : UserControl
     {
-        public MainWindow()
+        public AddClusterView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()
