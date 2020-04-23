@@ -5,9 +5,15 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ORA.App.GUI.Views.HomeView">
   <DockPanel>
+    <StackPanel DockPanel.Dock="Top"
+                Orientation="Horizontal">
+      <TextBlock>Home</TextBlock>
+      <Button Command="{Binding $parent[Window].DataContext.NavigateToSettings}">Settings</Button>
+    </StackPanel>
+
     <Button DockPanel.Dock="Bottom"
             Command="{Binding $parent[Window].DataContext.AddCluster}">Add cluster</Button>
-    <Button Command="{Binding $parent[Window].DataContext.NavigateToSettings}">Settings</Button>
+
     <ItemsControl Items="{Binding Clusters}">
       <ItemsControl.ItemTemplate>
         <DataTemplate>
