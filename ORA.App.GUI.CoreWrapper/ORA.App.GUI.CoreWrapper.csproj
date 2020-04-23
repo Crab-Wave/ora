@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ORA.App.GUI\ORA.App.GUI.csproj" />
-    <ProjectReference Include="..\ORA.Core\ORA.Core.csproj" />
+    <ProjectReference Include="..\ORA.Core.IPC\ORA.Core.IPC.csproj" />
   </ItemGroup>
 
 </Project>
