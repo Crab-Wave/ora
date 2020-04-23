@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace ORA.App.GUI.Views
 {
-    public class AddClusterView : UserControl
+    public class AddClusterItemView : UserControl
     {
-        public AddClusterView()
+        public AddClusterItemView()
         {
             InitializeComponent();
         }

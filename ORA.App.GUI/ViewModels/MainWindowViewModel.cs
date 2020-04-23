@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ReactiveUI;
 
 using ORA.API;
+using ORA.App.GUI.Models;
 
 namespace ORA.App.GUI.ViewModels
 {
@@ -19,16 +20,9 @@ namespace ORA.App.GUI.ViewModels
         public HomeViewModel Home { get; }
         public SettingsViewModel Settings { get; }
 
-        public IEnumerable<Cluster> GetClusters() => new[]
-        {
-            Ora.GetClusterManager().GetCluster("70e69ee5-920b-4a6d-888d-fec75dea738a"),
-            Ora.GetClusterManager().GetCluster("71fc8375-dfbe-4f10-b379-cf0590866463"),
-            Ora.GetClusterManager().GetCluster("74b4ab16-98a7-4d20-a84b-3ef72320cee5")
-        };
-
         public MainWindowViewModel()
         {
-            Content = Home = new HomeViewModel(this.GetClusters());
+            Content = Home = new HomeViewModel(new ClusterItem[] { });
             Settings = new SettingsViewModel();
         }
 
@@ -42,13 +36,13 @@ namespace ORA.App.GUI.ViewModels
             Content = Settings;
         }
 
-        public void AddCluster()
+        public void AddClusterItem()
         {
-            var vm = new AddClusterViewModel();
+            var vm = new AddClusterItemViewModel();
 
             Observable.Merge(
                 vm.Ok,
-                vm.Cancel.Select(_ => (Cluster) null))
+                vm.Cancel.Select(_ => (ClusterItem) null))
                 .Take(1)
                 .Subscribe(model =>
                 {
