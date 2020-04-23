@@ -4,6 +4,7 @@ using ORA.Application.CLI.Validators;
 
 namespace ORA.Application.CLI.Objects
 {
+    [Validator(typeof(MemberIdentifierValidator))]
     public class MemberIdentifierModel : IArgumentModel
     {
         public string MemberIdentifier
