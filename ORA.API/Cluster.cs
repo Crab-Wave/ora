@@ -16,7 +16,7 @@
         public string Identifier { get; }
 
         /// <summary>
-        ///     The cluster owner
+        ///     The identifier of the cluster owner
         /// </summary>
         public string Owner { get; }
 
@@ -24,9 +24,9 @@
         /// <summary>
         /// Initializes a new cluster
         /// </summary>
-        /// <param name="name">the name of the new cluster </param>
-        /// <param name="identifier">the identifier of the new cluster</param>
-        /// <param name="owner">the identifier of the cluster owner</param>
+        /// <param name="name">The name of the new cluster </param>
+        /// <param name="identifier">The identifier of the new cluster</param>
+        /// <param name="owner">The identifier of the cluster owner</param>
         public Cluster(string name, string identifier, string owner)
         {
             this.Name = name;
