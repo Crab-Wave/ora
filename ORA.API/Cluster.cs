@@ -16,14 +16,24 @@
         public string Identifier { get; }
 
         /// <summary>
+        ///     The cluster owner
+        /// </summary>
+        public string Owner { get; }
+
+
+        /// <summary>
         /// Initializes a new cluster
         /// </summary>
         /// <param name="name">the name of the new cluster </param>
         /// <param name="identifier">the identifier of the new cluster</param>
-        public Cluster(string name, string identifier)
+        /// <param name="owner">the identifier of the cluster owner</param>
+        public Cluster(string name, string identifier, string owner)
         {
             this.Name = name;
             this.Identifier = identifier;
+            this.Owner = owner;
         }
+
+        public override string ToString() => $"Cluster[name={this.Name}, id={this.Identifier}, owner={this.Owner}]";
     }
 }

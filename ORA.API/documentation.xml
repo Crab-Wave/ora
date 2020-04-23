@@ -19,12 +19,18 @@
                 The cluster identifier
             </summary>
         </member>
-        <member name="M:ORA.API.Cluster.#ctor(System.String,System.String)">
+        <member name="P:ORA.API.Cluster.Owner">
+            <summary>
+                The cluster owner
+            </summary>
+        </member>
+        <member name="M:ORA.API.Cluster.#ctor(System.String,System.String,System.String)">
             <summary>
             Initializes a new cluster
             </summary>
             <param name="name">the name of the new cluster </param>
             <param name="identifier">the identifier of the new cluster</param>
+            <param name="owner">the identifier of the cluster owner</param>
         </member>
         <member name="T:ORA.API.Compression.ICompressor">
              <summary>
@@ -171,6 +177,12 @@
             <param name="publicKey">the public key of the new identity</param>
             <param name="privateKey">the private key of the new identity</param>
         </member>
+        <member name="M:ORA.API.Identity.GetIdentifier">
+            <summary>
+            The identifier representing this identity
+            </summary>
+            <returns>The identifier representing this identity</returns>
+        </member>
         <member name="T:ORA.API.Loggers.ILogger">
             <summary>
             An ILogger represents a logger object that is capable of logging things into console and in a log file.
@@ -218,16 +230,22 @@
             <param name="userDisplayName">The display name of the user creating the cluster</param>
             <returns>The created cluster</returns>
         </member>
+        <member name="M:ORA.API.Managers.IClusterManager.GetClusters">
+            <summary>
+               Get the list of all the clusters
+            </summary>
+            <returns>The list of all the clusters</returns>
+        </member>
         <member name="M:ORA.API.Managers.IClusterManager.GetCluster(System.String)">
             <summary>
-               Get the cluster with the specified identifier.
+               Get the cluster with the specified identifier
             </summary>
             <param name="cluster">The identifier of the cluster</param>
             <returns>The cluster which has the specified identifier</returns>
         </member>
         <member name="M:ORA.API.Managers.IClusterManager.DeleteCluster(System.String)">
             <summary>
-                Delete the cluster with the specified identifier.
+                Delete the cluster with the specified identifier
             </summary>
             <param name="cluster">The identifier of the cluster</param>
             <returns>True if the deletion has succeeded or false otherwise.</returns>

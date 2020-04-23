@@ -11,6 +11,10 @@ namespace ORA.Application.CLI.CoreWrapper
         public static void Main(string[] args)
         {
             OraCoreIpc.Initialize();
+            foreach (Cluster cluster in Ora.GetClusterManager().GetClusters())
+            {
+                Console.WriteLine(cluster);
+            }
             try
             {
                 ORA.Application.CLI.Program.Main(args);
