@@ -24,7 +24,7 @@ namespace ORA.API
 
         public static ILogger GetLogger() => Get().Logger();
 
-        public static HttpClient GetHttpClient() => Get().HttpClient();
+        public static IHttpClient GetHttpClient() => Get().HttpClient();
 
         public static ICipher GetCipher() => Get().Cipher();
 
@@ -40,7 +40,7 @@ namespace ORA.API
 
         public abstract ILogger Logger();
 
-        public abstract HttpClient HttpClient();
+        public abstract IHttpClient HttpClient();
 
         public abstract ICipher Cipher();
 

@@ -3,31 +3,27 @@
     /// <summary>
     /// A node is a device used by a member which provides the files and the directories to share.
     /// </summary>
-    public abstract class Node
+    public class Node
     {
         /// <summary>
-        /// A node has two attributes : a name and an identifier.
+        ///     The node name
         /// </summary>
-        private string _name;
-
-        private string _identifier;
+        public string Name { get; }
 
         /// <summary>
-        /// Those two attributes have both a getter.
+        ///     The node identifier
         /// </summary>
-        public string Name => this._name;
-
-        public string Identifier => this._identifier;
+        public string Identifier { get; }
 
         /// <summary>
         /// Initializes a new node.
         /// </summary>
         /// <param name="name">the name of the new node</param>
         /// <param name="identifier">the identifier of the new node</param>
-        protected Node(string name, string identifier)
+        public Node(string name, string identifier)
         {
-            this._name = name;
-            this._identifier = identifier;
+            this.Name = name;
+            this.Identifier = identifier;
         }
     }
 }

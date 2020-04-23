@@ -10,7 +10,7 @@ namespace ORA.Core.Tests.Http
         [Fact]
         public void GetRequestTests()
         {
-            var testee = new UnirestHttpClient();
+            IHttpClient testee = new UnirestHttpClient();
             var httpResponse = testee.Get("http://httpbin.org/get");
 
             httpResponse.Should().NotBeNull();
