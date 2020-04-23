@@ -12,13 +12,14 @@
     </StackPanel>
 
     <Button DockPanel.Dock="Bottom"
-            Command="{Binding $parent[Window].DataContext.AddCluster}">Add cluster</Button>
+            Command="{Binding $parent[Window].DataContext.AddClusterItem}">Add cluster</Button>
 
+    <TextBlock>Clusters:</TextBlock>
     <ItemsControl Items="{Binding Clusters}">
       <ItemsControl.ItemTemplate>
         <DataTemplate>
-          <CheckBox Margin="4"
-                    Content="{Binding Identifier}"/>
+          <TextBlock Margin="4"
+                     Text="{Binding Information}"/>
         </DataTemplate>
       </ItemsControl.ItemTemplate>
     </ItemsControl>
