@@ -17,6 +17,13 @@ namespace ORA.Application.CLI
             set;
         }
 
+        [SubCommand]
+        public Identities Identities
+        {
+            get;
+            set;
+        }
+
         [Command(Name = "url", Description = "Change the tracker URL", Usage = "url [url]")]
         public void Url([Operand(Description = "Tracker URL")] string url)
         {

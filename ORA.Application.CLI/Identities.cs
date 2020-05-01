@@ -13,7 +13,7 @@ namespace ORA.Application.CLI
         public void Get()
         {
             byte[] publicKey = Ora.GetIdentityManager().GetIdentity().PublicKey;
-            Console.WriteLine($"Your public key is {publicKey}");
+            Console.WriteLine($"Your public key is {Convert.ToBase64String(publicKey)}");
         }
 
         [Command(Description = "Generate a new identity ", Name = "generate", Usage = "generate")]
@@ -21,7 +21,7 @@ namespace ORA.Application.CLI
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             Ora.GetIdentityManager().GenerateIdentity(path);
-            Console.WriteLine("An identity has been generate");
+            Console.WriteLine("Your identity has been regenerated");
         }
     }
 }
