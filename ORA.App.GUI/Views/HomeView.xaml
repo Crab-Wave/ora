@@ -18,8 +18,8 @@
     <ItemsControl Items="{Binding Clusters}">
       <ItemsControl.ItemTemplate>
         <DataTemplate>
-          <TextBlock Margin="4"
-                     Text="{Binding Information}"/>
+          <Button Margin="4"
+                     Content="{Binding Information}" Command="{Binding Remove}"/>
         </DataTemplate>
       </ItemsControl.ItemTemplate>
     </ItemsControl>

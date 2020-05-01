@@ -21,16 +21,16 @@
         </member>
         <member name="P:ORA.API.Cluster.Owner">
             <summary>
-                The cluster owner
+                The identifier of the cluster owner
             </summary>
         </member>
         <member name="M:ORA.API.Cluster.#ctor(System.String,System.String,System.String)">
             <summary>
             Initializes a new cluster
             </summary>
-            <param name="name">the name of the new cluster </param>
-            <param name="identifier">the identifier of the new cluster</param>
-            <param name="owner">the identifier of the cluster owner</param>
+            <param name="name">The name of the new cluster </param>
+            <param name="identifier">The identifier of the new cluster</param>
+            <param name="owner">The identifier of the cluster owner</param>
         </member>
         <member name="T:ORA.API.Compression.ICompressor">
              <summary>

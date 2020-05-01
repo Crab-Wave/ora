@@ -24,10 +24,12 @@ namespace ORA.API
         /// </summary>
         /// <param name="identifier">the identifier of the new member</param>
         /// <param name="name">the name of the new member</param>
-        protected Member(string identifier, string name)
+        public Member(string identifier, string name)
         {
             this._identifier = identifier;
             this._name = name;
         }
+
+        public override string ToString() => $"Member[name={this.Name}, id={this.Identifier}]";
     }
 }

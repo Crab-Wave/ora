@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reactive.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using ReactiveUI;
-
 using ORA.API;
 using ORA.App.GUI.Models;
 
@@ -11,18 +11,20 @@ namespace ORA.App.GUI.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private ViewModelBase content;
+
         public ViewModelBase Content
         {
             get => content;
-            private set => this.RaiseAndSetIfChanged(ref content, value);
+            set => this.RaiseAndSetIfChanged(ref content, value);
         }
 
-        public HomeViewModel Home { get; }
+        public HomeViewModel Home { get; set; }
         public SettingsViewModel Settings { get; }
 
         public MainWindowViewModel()
         {
-            Content = Home = new HomeViewModel(new ClusterItem[] { });
+            Content = Home =
+                new HomeViewModel(Ora.GetClusterManager().GetClusters().Select(cluster => new ClusterItem(this, cluster)));
             Settings = new SettingsViewModel();
         }
 
@@ -41,8 +43,8 @@ namespace ORA.App.GUI.ViewModels
             var vm = new AddClusterItemViewModel();
 
             Observable.Merge(
-                vm.Ok,
-                vm.Cancel.Select(_ => (ClusterItem) null))
+                    vm.Ok,
+                    vm.Cancel.Select(_ => (ClusterItem) null))
                 .Take(1)
                 .Subscribe(model =>
                 {

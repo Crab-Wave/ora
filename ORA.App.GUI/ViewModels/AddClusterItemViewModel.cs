@@ -18,6 +18,8 @@ namespace ORA.App.GUI.ViewModels
         public ReactiveCommand<Unit, ClusterItem> Ok { get; }
         public ReactiveCommand<Unit, Unit> Cancel { get; }
 
+        public MainWindowViewModel MainWindowViewModel { get; set; }
+
         public AddClusterItemViewModel()
         {
             var okEnabled = this.WhenAnyValue(
@@ -26,7 +28,7 @@ namespace ORA.App.GUI.ViewModels
             );
 
             Ok = ReactiveCommand.Create(
-                () => new ClusterItem(Ora.GetClusterManager().CreateCluster(name, "displayName")),
+                () => new ClusterItem(MainWindowViewModel, Ora.GetClusterManager().CreateCluster(name, "displayName")),
                 okEnabled);
             Cancel = ReactiveCommand.Create(() => { });
         }
