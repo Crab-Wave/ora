@@ -22,6 +22,8 @@ namespace ORA.API
 
         public static Ora Get() => _instance;
 
+        public static string GetProgramDirectory() => Get().ProgramDirectory();
+
         public static ILogger GetLogger() => Get().Logger();
 
         public static IHttpClient GetHttpClient() => Get().HttpClient();
@@ -37,6 +39,8 @@ namespace ORA.API
         public static ICompressor GetCompressor() => Get().Compressor();
 
         public static IAuthManager GetAuthManager() => Get().AuthManager();
+
+        public abstract string ProgramDirectory();
 
         public abstract ILogger Logger();
 

@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using CommandDotNet;
 using ORA.API;
+using File = System.IO.File;
 
 namespace ORA.Application.CLI
 {

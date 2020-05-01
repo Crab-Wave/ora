@@ -6,6 +6,7 @@ using ORA.API.Encryption;
 using ORA.API.Http;
 using ORA.API.Loggers;
 using ORA.API.Managers;
+using ORA.API.Utils;
 using ORA.Core.IPC.Compression;
 using ORA.Core.IPC.Encryption;
 using ORA.Core.IPC.Http;
@@ -16,6 +17,7 @@ namespace ORA.Core.IPC
 {
     public class OraCoreIpc : Ora
     {
+        private readonly IpcServiceClient<StringProvider> _programDirectory;
         private readonly ILogger _logger;
         private readonly ICipher _cipher;
         private readonly ICompressor _compressor;
@@ -24,8 +26,10 @@ namespace ORA.Core.IPC
         private readonly IIdentityManager _identityManager;
         private readonly IClusterManager _clusterManager;
 
-        public OraCoreIpc()
+        private OraCoreIpc()
         {
+            this._programDirectory = new IpcServiceClientBuilder<StringProvider>().UseNamedPipe("ora-program-directory")
+                .Build();
             this._logger = new IpcLogger(new IpcServiceClientBuilder<ILogger>().UseNamedPipe("ora-logger").Build());
             this._cipher = new IpcCipher(new IpcServiceClientBuilder<ICipher>().UseNamedPipe("ora-cipher").Build());
             this._compressor =
@@ -42,6 +46,9 @@ namespace ORA.Core.IPC
         }
 
         public static void Initialize() => SetInstance(new OraCoreIpc());
+
+        public override string ProgramDirectory() =>
+            this._programDirectory.InvokeAsync(provider => provider.Provide()).Result;
 
         public override ILogger Logger() => this._logger;
 

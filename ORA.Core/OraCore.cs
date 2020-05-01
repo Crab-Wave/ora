@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using ORA.API;
 using ORA.API.Compression;
 using ORA.API.Encryption;
@@ -10,11 +11,14 @@ using ORA.Core.Encryption;
 using ORA.Core.Http;
 using ORA.Core.Loggers;
 using ORA.Core.Managers;
+using File = ORA.API.File;
 
 namespace ORA.Core
 {
     public class OraCore : Ora
     {
+        private readonly string _programDirectory;
+
         private readonly ILogger _logger;
 
         private readonly ICipher _cipher;
@@ -31,6 +35,8 @@ namespace ORA.Core
 
         private OraCore()
         {
+            this._programDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+                                     Path.DirectorySeparatorChar + "ora";
             this._logger = new SimpleLogger("OraCore");
             this._cipher = new RsaCipher();
             this._compressor = new ZipLibCompressor();
@@ -42,6 +48,8 @@ namespace ORA.Core
         }
 
         public static void Initialize() => SetInstance(new OraCore());
+
+        public override string ProgramDirectory() => this._programDirectory;
 
         public override ILogger Logger() => this._logger;
 

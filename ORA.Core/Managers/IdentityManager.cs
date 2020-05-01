@@ -5,6 +5,7 @@ using System.Text;
 using ORA.API;
 using ORA.API.Managers;
 using ORA.Core.Encryption;
+using File = System.IO.File;
 
 namespace ORA.Core.Managers
 {

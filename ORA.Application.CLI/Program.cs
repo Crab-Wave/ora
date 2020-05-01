@@ -4,6 +4,7 @@ using CommandDotNet;
 using CommandDotNet.FluentValidation;
 using CommandDotNet.Help;
 using ORA.API;
+using File = System.IO.File;
 
 namespace ORA.Application.CLI
 {

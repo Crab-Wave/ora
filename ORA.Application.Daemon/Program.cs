@@ -1,4 +1,5 @@
-﻿using JKang.IpcServiceFramework;
+﻿using System;
+using JKang.IpcServiceFramework;
 using Microsoft.Extensions.DependencyInjection;
 using ORA.API;
 using ORA.API.Compression;
@@ -6,6 +7,7 @@ using ORA.API.Encryption;
 using ORA.API.Http;
 using ORA.API.Loggers;
 using ORA.API.Managers;
+using ORA.API.Utils;
 using ORA.Core;
 using ORA.Core.Compression;
 using ORA.Core.Encryption;
@@ -25,6 +27,7 @@ namespace ORA.Application.Daemon
 
             IServiceCollection services = ConfigureServices(new ServiceCollection());
             new IpcServiceHostBuilder(services.BuildServiceProvider())
+                .AddNamedPipeEndpoint<StringProvider>("program-directory", "ora-program-directory")
                 .AddNamedPipeEndpoint<ILogger>("logger", "ora-logger")
                 .AddNamedPipeEndpoint<ICipher>("cipher", "ora-cipher")
                 .AddNamedPipeEndpoint<ICompressor>("compressor", "ora-compressor")
@@ -38,6 +41,7 @@ namespace ORA.Application.Daemon
 
         private static IServiceCollection ConfigureServices(IServiceCollection services) =>
             services
+                .AddIpc(builder => builder.AddNamedPipe().AddService<StringProvider, StringProvider>(provider => new ProgramDirectoryProvider()))
                 .AddIpc(builder => builder.AddNamedPipe().AddService<ILogger, SimpleLogger>(provider => (SimpleLogger) Ora.GetLogger()))
                 .AddIpc(builder => builder.AddNamedPipe().AddService<ICipher, RsaCipher>(provider => (RsaCipher) Ora.GetCipher()))
                 .AddIpc(builder => builder.AddNamedPipe().AddService<ICompressor, ZipLibCompressor>(provider => (ZipLibCompressor) Ora.GetCompressor()))
@@ -45,5 +49,10 @@ namespace ORA.Application.Daemon
                 .AddIpc(builder => builder.AddNamedPipe().AddService<IAuthManager, AuthManager>(provider => (AuthManager) Ora.GetAuthManager()))
                 .AddIpc(builder => builder.AddNamedPipe().AddService<IIdentityManager, IdentityManager>(provider => (IdentityManager) Ora.GetIdentityManager()))
                 .AddIpc(builder => builder.AddNamedPipe().AddService<IClusterManager, ClusterManager>(provider => (ClusterManager) Ora.GetClusterManager()));
+    }
+
+    internal class ProgramDirectoryProvider : StringProvider
+    {
+        public string Provide() => Ora.GetProgramDirectory();
     }
 }

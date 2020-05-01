@@ -11,6 +11,7 @@ namespace ORA.Application.CLI.CoreWrapper
         public static void Main(string[] args)
         {
             OraCoreIpc.Initialize();
+            Console.WriteLine(Ora.GetProgramDirectory());
             try
             {
                 ORA.Application.CLI.Program.Main(args);
