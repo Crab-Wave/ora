@@ -15,11 +15,10 @@ namespace ORA.Application.CLI
             set;
         }
 
-        [Command(Description = "Create a Cluster", Name = "create", Usage = "cluster create <name>")]
-        public void Create([Operand(Description = "Cluster name")]
-            ClusterNameModel name)
+        [Command(Description = "Create a Cluster", Name = "create", Usage = "cluster create <name> <username>")]
+        public void Create([Operand(Description = "Cluster name")] ClusterNameModel name, [Operand(Description = "Username")] UserNameModel username)
         {
-            Cluster cluster = Ora.GetClusterManager().CreateCluster(name.Name, "dummy"); // TODO
+            Cluster cluster = Ora.GetClusterManager().CreateCluster(name.Name, username.UserName);
             Console.WriteLine($"Cluster {cluster.Name} created with identifier {cluster.Identifier}");
         }
 
