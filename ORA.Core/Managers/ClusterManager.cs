@@ -93,11 +93,11 @@ namespace ORA.Core.Managers
 
         public List<Member> GetMembers(string cluster)
         {
-            HttpResponse response = Ora.GetHttpClient().Get("/clusters/" + cluster,
+            HttpResponse response = Ora.GetHttpClient().Get("/clusters/" + cluster + "/members",
                 new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
             int code = response.Code;
             if (code == 200)
-                return JObject.Parse(response.Body)["members"].Value<Member[]>().ToList();
+                return JObject.Parse(response.Body)["members"].Children().Select(token => new Member(token["id"].Value<string>(), token["name"].Value<string>())).ToList();
             Exception exception = new Exception($"Couldn't find member in this cluster");
             Ora.GetLogger().Error(exception);
             throw exception;
