@@ -22,4 +22,10 @@
   <ItemGroup>
     <ProjectReference Include="..\ORA.API\ORA.API.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Views\MemberView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
 </Project>

@@ -18,8 +18,11 @@
     <ItemsControl Items="{Binding Clusters}">
       <ItemsControl.ItemTemplate>
         <DataTemplate>
-          <Button Margin="4"
-                     Content="{Binding Information}" Command="{Binding Remove}"/>
+            <Grid>
+                <Button Margin="4"
+                        Content="{Binding Information}" Command="{Binding Remove}"/>
+                <Button Command="{Binding $parent[Window].DataContext.NavigateToMembers}">Members</Button>
+            </Grid>
         </DataTemplate>
       </ItemsControl.ItemTemplate>
     </ItemsControl>
