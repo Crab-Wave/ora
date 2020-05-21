@@ -3,7 +3,7 @@ using CommandDotNet;
 using ORA.API;
 using ORA.Application.CLI.Objects;
 
-namespace ORA.Application.CLI
+namespace ORA.Application.CLI.Commands
 {
     [Command(Description = "Cluster management command", Name = "cluster")]
     public class Clusters
