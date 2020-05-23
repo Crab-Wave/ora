@@ -12,7 +12,7 @@ namespace ORA.App.GUI.Views
     {
         public HomeView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void InitializeComponent()

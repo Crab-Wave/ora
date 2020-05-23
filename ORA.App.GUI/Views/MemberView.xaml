@@ -5,9 +5,40 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ORA.App.GUI.Views.MemberView">
     <DockPanel>
-        <Button DockPanel.Dock="Bottom"
-                Command="{Binding $parent[Window].DataContext.NavigateToHome}">Home</Button>
-        <TextBlock>Members:</TextBlock>
+        <Border DockPanel.Dock="Top"
+        Background="Gray"
+        Padding="5">
+            <StackPanel
+                Orientation="Horizontal">
+                <TextBlock
+                    Text="ORA"
+                    Margin="5"
+                    Width="350" Height="22"
+                    Foreground="Black" Background="Gray"
+                    FontSize="16"
+                    TextAlignment="Left"
+                  ></TextBlock>
+                <TextBlock
+                    Text="Member"
+                    Margin="5"
+                    Width="360" Height="22"
+                    Foreground="Black" Background="Gray"
+                    FontSize="16"
+                    TextAlignment="Left"
+                  ></TextBlock>
+            </StackPanel>
+        </Border>
+        <Button DockPanel.Dock="Bottom" Content="Home"
+                Command="{Binding $parent[Window].DataContext.NavigateToHome}"></Button>
+        <Border
+          DockPanel.Dock="Left"
+          Background="WhiteSmoke"
+          Padding="5">
+            <TextBlock
+                Text="Members:"
+                Height="30">
+            </TextBlock>
+        </Border>
         <ItemsControl Items="{Binding Members}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>

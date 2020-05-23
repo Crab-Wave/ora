@@ -8,7 +8,7 @@ namespace ORA.App.GUI.Views
     {
         public AddClusterItemView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void InitializeComponent()

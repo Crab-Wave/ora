@@ -23,9 +23,8 @@ namespace ORA.App.GUI.Models
 
         public void Remove()
         {
-            Ora.GetClusterManager().RemoveMember(this.cluster.Identifier,this.member.Identifier);
-            this.MainWindowViewModel.Content = this.MainWindowViewModel.Members =
-                new MemberViewModel(Ora.GetClusterManager().GetMembers(this.cluster.Identifier).Select(c => new MemberItem(this.MainWindowViewModel,this.cluster, c)));
+            Ora.GetClusterManager().RemoveMember(this.cluster.Identifier, this.member.Identifier);
+            this.MainWindowViewModel.Content = this.MainWindowViewModel.Members = new MemberViewModel(Ora.GetClusterManager().GetMembers(this.cluster.Identifier).Select(c => new MemberItem(this.MainWindowViewModel, this.cluster, c)));
         }
     }
 }

@@ -5,23 +5,67 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ORA.App.GUI.Views.HomeView">
   <DockPanel>
-    <StackPanel DockPanel.Dock="Top"
-                Orientation="Horizontal">
-      <TextBlock>Home</TextBlock>
-      <Button Command="{Binding $parent[Window].DataContext.NavigateToSettings}">Settings</Button>
-    </StackPanel>
-
+      <Border DockPanel.Dock="Top"
+        Background="Gray"
+        Padding="5">
+          <StackPanel
+              Orientation="Horizontal">
+              <TextBlock
+                  Text="ORA"
+                  Margin="5"
+                  Width="350" Height="22"
+                  Foreground="Black" Background="Gray"
+                  FontSize="16"
+                  TextAlignment="Left"
+                  ></TextBlock>
+              <TextBlock
+                  Text="Home"
+                  Margin="5"
+                  Width="360" Height="22"
+                  Foreground="Black" Background="Gray"
+                  FontSize="16"
+                  TextAlignment="Left"
+                  ></TextBlock>
+              <TextBlock
+                  Margin="5"
+                  Width="20" Height="20"
+                  Foreground="Black" Background="White"
+                  FontSize="13"
+                  Text="H"
+                  TextAlignment="Center"
+                  ></TextBlock>
+              <Button
+                  Width="23" Height="23"
+                  Content="S"
+                  Margin="5"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Top"
+                  Foreground="Black" Background="White"
+                  BorderBrush="Black"
+                  BorderThickness="1"
+                  FontSize="12"
+                  Command="{Binding $parent[Window].DataContext.NavigateToSettings}"></Button>
+          </StackPanel>
+      </Border>
     <Button DockPanel.Dock="Bottom"
             Command="{Binding $parent[Window].DataContext.AddClusterItem}">Add cluster</Button>
-
-    <TextBlock>Clusters:</TextBlock>
+      <Border
+          DockPanel.Dock="Left"
+          Background="WhiteSmoke"
+          Padding="5">
+          <TextBlock
+              Text="Clusters:"
+              Height="30">
+          </TextBlock>
+      </Border>
     <ItemsControl Items="{Binding Clusters}">
       <ItemsControl.ItemTemplate>
         <DataTemplate>
             <Grid>
                 <Button Margin="4"
                         Content="{Binding Information}" Command="{Binding Remove}"/>
-                <Button Command="{Binding $parent[Window].DataContext.NavigateToMembers}">Members</Button>
+                <Button Content="Members"
+                    Command="{Binding $parent[Window].DataContext.NavigateToMembers}"></Button>
             </Grid>
         </DataTemplate>
       </ItemsControl.ItemTemplate>

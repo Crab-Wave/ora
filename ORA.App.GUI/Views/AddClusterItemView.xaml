@@ -5,8 +5,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ORA.App.GUI.Views.AddClusterItemView">
   <DockPanel>
-    <Button DockPanel.Dock="Bottom" Command="{Binding Cancel}">Cancel</Button>
-    <Button DockPanel.Dock="Bottom" Command="{Binding Ok}">OK</Button>
+    <Button DockPanel.Dock="Bottom" Content="Cancel" Command="{Binding Cancel}"></Button>
+    <Button DockPanel.Dock="Bottom" Content="OK" Command="{Binding Ok}"></Button>
     <TextBox Text="{Binding Name}"
              Watermark="Enter your TODO"/>
   </DockPanel>

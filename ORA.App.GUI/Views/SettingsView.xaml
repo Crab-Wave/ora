@@ -5,20 +5,65 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ORA.App.GUI.Views.SettingsView">
   <DockPanel>
-    <StackPanel DockPanel.Dock="Top"
-                Orientation="Horizontal">
-      <Button Command="{Binding $parent[Window].DataContext.NavigateToHome}">Home</Button>
-      <TextBlock>Settings</TextBlock>
-    </StackPanel>
-
+      <Border DockPanel.Dock="Top"
+          Background="Gray"
+          Padding="5">
+          <StackPanel
+              Orientation="Horizontal">
+              <TextBlock
+                  Text="ORA"
+                  Margin="5"
+                  Width="350" Height="22"
+                  Foreground="Black" Background="Gray"
+                  FontSize="16"
+                  TextAlignment="Left"
+                  ></TextBlock>
+              <TextBlock
+                  Text="Home"
+                  Margin="5"
+                  Width="360" Height="22"
+                  Foreground="Black" Background="Gray"
+                  FontSize="16"
+                  TextAlignment="Left"
+                  ></TextBlock>
+              <Button
+                  Width="23" Height="23"
+                  Content="H"
+                  Margin="5"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Top"
+                  Foreground="Black" Background="White"
+                  BorderBrush="Black"
+                  BorderThickness="1"
+                  FontSize="12"
+                  Command="{Binding $parent[Window].DataContext.NavigateToHome}"></Button>
+              <TextBlock
+                  Margin="5"
+                  Width="21" Height="21"
+                  Foreground="Black" Background="White"
+                  FontSize="13"
+                  Text="S"
+                  TextAlignment="Center"
+                  ></TextBlock>
+          </StackPanel>
+      </Border>
     <StackPanel DockPanel.Dock="Top"
                 Orientation="Horizontal"
-                Height="30">
-      <TextBlock>Base url: </TextBlock>
+                Height="30"
+                Width="800"
+                Spacing="30">
+        <TextBlock
+            Width="170"></TextBlock>
+        <TextBlock
+            Margin="5"
+            Text="Base url:"></TextBlock>
       <TextBox DockPanel.Dock="Top"
+              Margin="1"
               Text="{Binding BaseUrl}"
               Width="200" />
-      <Button Command="{Binding SetBaseUrl}">Set base url</Button>
+      <Button 
+          Content="Set base url"
+          Command="{Binding SetBaseUrl}"></Button>
     </StackPanel>
   </DockPanel>
 </UserControl>
