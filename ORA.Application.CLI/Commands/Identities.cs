@@ -4,24 +4,24 @@ using CommandDotNet.Help;
 using ORA.API;
 using ORA.Application.CLI.Objects;
 
-namespace ORA.Application.CLI
+namespace ORA.Application.CLI.Commands
 {
     [Command(Description = "Identities management command", Name = "identities")]
     public class Identities
     {
-        [Command(Description = "Get the public key ", Name = "get", Usage = "get")]
+        [Command(Description = "Returns the public key of the identity", Name = "get", Usage = "get")]
         public void Get()
         {
             byte[] publicKey = Ora.GetIdentityManager().GetIdentity().PublicKey;
-            Console.WriteLine($"Your public key is {Convert.ToBase64String(publicKey)}");
+            Console.WriteLine($"Current identity public key: {Convert.ToBase64String(publicKey)}");
         }
 
-        [Command(Description = "Generate a new identity ", Name = "generate", Usage = "generate")]
+        [Command(Description = "Generate a new identity", Name = "new", Usage = "new")]
         public void Generate()
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             Ora.GetIdentityManager().GenerateIdentity(path);
-            Console.WriteLine("Your identity has been regenerated");
+            Console.WriteLine("New identity successfully generated");
         }
     }
 }
