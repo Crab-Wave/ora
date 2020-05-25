@@ -47,8 +47,6 @@
                   Command="{Binding $parent[Window].DataContext.NavigateToSettings}"></Button>
           </StackPanel>
       </Border>
-    <Button DockPanel.Dock="Bottom"
-            Command="{Binding $parent[Window].DataContext.AddClusterItem}">Add cluster</Button>
       <Border
           DockPanel.Dock="Left"
           Background="WhiteSmoke"
@@ -58,15 +56,28 @@
               Height="30">
           </TextBlock>
       </Border>
+      <Border
+          DockPanel.Dock="Top"
+          Height="30"
+          Margin="10">
+          <Button
+            HorizontalAlignment="Right"
+            Width="30"
+            Height="30"
+            Content="+"
+            Command="{Binding $parent[Window].DataContext.AddClusterItem}"/>
+      </Border>
     <ItemsControl Items="{Binding Clusters}">
       <ItemsControl.ItemTemplate>
         <DataTemplate>
-            <Grid>
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="5">
                 <Button Margin="4"
-                        Content="{Binding Information}" Command="{Binding Remove}"/>
-                <Button Content="Members"
-                    Command="{Binding $parent[Window].DataContext.NavigateToMembers}"></Button>
-            </Grid>
+                    Content="{Binding Information}" Command="{Binding $parent[Window].DataContext.NavigateToCluster}"/>
+                <Button Margin="4"
+                    Command="{Binding Remove}"></Button>
+            </StackPanel> 
         </DataTemplate>
       </ItemsControl.ItemTemplate>
     </ItemsControl>

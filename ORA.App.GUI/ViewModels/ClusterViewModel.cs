@@ -8,11 +8,11 @@ using ORA.App.GUI.Models;
 
 namespace ORA.App.GUI.ViewModels
 {
-    public class MemberViewModel : ViewModelBase
+    public class ClusterViewModel : ViewModelBase
     {
         public ObservableCollection<MemberItem> Members { get; }
 
-        public MemberViewModel(IEnumerable<MemberItem> members)
+        public ClusterViewModel(IEnumerable<MemberItem> members)
         {
             this.Members = new ObservableCollection<MemberItem>(members);
         }

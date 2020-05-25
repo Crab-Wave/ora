@@ -5,6 +5,29 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ORA.App.GUI.Views.AddClusterItemView">
   <DockPanel>
+      <Border DockPanel.Dock="Top"
+        Background="Gray"
+        Padding="5">
+          <StackPanel
+              Orientation="Horizontal">
+              <TextBlock
+                  Text="ORA"
+                  Margin="5"
+                  Width="350" Height="22"
+                  Foreground="Black" Background="Gray"
+                  FontSize="16"
+                  TextAlignment="Left"
+                  ></TextBlock>
+              <TextBlock
+                  Text="Add A Cluster"
+                  Margin="5"
+                  Width="360" Height="22"
+                  Foreground="Black" Background="Gray"
+                  FontSize="16"
+                  TextAlignment="Left"
+                  ></TextBlock>
+               </StackPanel>
+      </Border>
     <Button DockPanel.Dock="Bottom" Content="Cancel" Command="{Binding Cancel}"></Button>
     <Button DockPanel.Dock="Bottom" Content="OK" Command="{Binding Ok}"></Button>
     <TextBox Text="{Binding Name}"

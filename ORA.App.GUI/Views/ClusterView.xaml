@@ -19,25 +19,57 @@
                     TextAlignment="Left"
                   ></TextBlock>
                 <TextBlock
-                    Text="Member"
+                    Text="{Binding Information}"
                     Margin="5"
                     Width="360" Height="22"
                     Foreground="Black" Background="Gray"
                     FontSize="16"
                     TextAlignment="Left"
                   ></TextBlock>
+                <Button
+                 Width="23" Height="23"
+                 Content="H"
+                 Margin="5"
+                 HorizontalContentAlignment="Center"
+                 VerticalContentAlignment="Top"
+                 Foreground="Black" Background="White"
+                 BorderBrush="Black"
+                 BorderThickness="1"
+                 FontSize="12"
+                 Command="{Binding $parent[Window].DataContext.NavigateToHome}"></Button>
+                <Button
+                    Width="23" Height="23"
+                    Content="S"
+                    Margin="5"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Top"
+                    Foreground="Black" Background="White"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+                    FontSize="12"
+                    Command="{Binding $parent[Window].DataContext.NavigateToSettings}"></Button>
             </StackPanel>
         </Border>
-        <Button DockPanel.Dock="Bottom" Content="Home"
-                Command="{Binding $parent[Window].DataContext.NavigateToHome}"></Button>
         <Border
           DockPanel.Dock="Left"
           Background="WhiteSmoke"
           Padding="5">
-            <TextBlock
-                Text="Members:"
-                Height="30">
-            </TextBlock>
+            <StackPanel>
+                <TextBlock
+                    VerticalAlignment="Top"
+                    Text="Members:"
+                    Height="30">
+                </TextBlock>
+                <ItemsControl Items="{Binding Members}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Text="{Binding member.Name}"
+                            ></TextBlock>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
         </Border>
         <ItemsControl Items="{Binding Members}">
             <ItemsControl.ItemTemplate>

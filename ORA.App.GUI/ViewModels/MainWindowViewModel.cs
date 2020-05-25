@@ -21,8 +21,7 @@ namespace ORA.App.GUI.ViewModels
         public HomeViewModel Home { get; set; }
         public SettingsViewModel Settings { get; }
 
-        public MemberViewModel Members { get; set; }
-
+        public ClusterViewModel Cluster { get; set; }
         public MainWindowViewModel()
         {
             this.Content = this.Home =
@@ -40,9 +39,9 @@ namespace ORA.App.GUI.ViewModels
             this.Content = this.Settings;
         }
 
-        public void NavigateToMembers()
+        public void NavigateToCluster()
         {
-            this.Content = this.Members;
+            this.Content = this.Cluster;
         }
 
         public void AddClusterItem()
