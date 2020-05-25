@@ -44,6 +44,10 @@ namespace ORA.App.GUI.ViewModels
             this.Content = this.Cluster;
         }
 
+        public void AddMemberItem()
+        {
+
+        }
         public void AddClusterItem()
         {
             var vm = new AddClusterItemViewModel();

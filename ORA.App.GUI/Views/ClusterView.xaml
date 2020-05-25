@@ -27,16 +27,16 @@
                     TextAlignment="Left"
                   ></TextBlock>
                 <Button
-                 Width="23" Height="23"
-                 Content="H"
-                 Margin="5"
-                 HorizontalContentAlignment="Center"
-                 VerticalContentAlignment="Top"
-                 Foreground="Black" Background="White"
-                 BorderBrush="Black"
-                 BorderThickness="1"
-                 FontSize="12"
-                 Command="{Binding $parent[Window].DataContext.NavigateToHome}"></Button>
+                    Width="23" Height="23"
+                    Content="H"
+                    Margin="5"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Top"
+                    Foreground="Black" Background="White"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+                    FontSize="12"
+                    Command="{Binding $parent[Window].DataContext.NavigateToHome}"></Button>
                 <Button
                     Width="23" Height="23"
                     Content="S"
@@ -55,7 +55,11 @@
           Background="WhiteSmoke"
           Padding="5">
             <StackPanel>
+                <Button
+                    Content="Invite Member"
+                    Command="{Binding $parent[Window].DataContext.AddMemberItem}"></Button>
                 <TextBlock
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Text="Members:"
                     Height="30">
@@ -63,9 +67,8 @@
                 <ItemsControl Items="{Binding Members}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock
-                                Text="{Binding member.Name}"
-                            ></TextBlock>
+                            <Button Margin="4"
+                            Content="{Binding Information}" Command="{Binding Remove}"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -74,8 +77,7 @@
         <ItemsControl Items="{Binding Members}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Margin="4"
-                            Content="{Binding Information}" Command="{Binding Remove}"/>
+                    
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
