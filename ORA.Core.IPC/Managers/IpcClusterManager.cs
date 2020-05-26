@@ -31,6 +31,12 @@ namespace ORA.Core.IPC.Managers
         public Member GetMember(string cluster, string member) =>
             this._client.InvokeAsync(manager => manager.GetMember(cluster, member)).Result;
 
+        public bool InviteMember(string cluster, string user) =>
+            this._client.InvokeAsync(manager => manager.InviteMember(cluster, user)).Result;
+
+        public bool JoinCluster(string cluster, string displayName) =>
+            this._client.InvokeAsync(manager => manager.JoinCluster(cluster, displayName)).Result;
+
         public bool RemoveMember(string cluster, string member) =>
             this._client.InvokeAsync(manager => manager.RemoveMember(cluster, member)).Result;
     }
