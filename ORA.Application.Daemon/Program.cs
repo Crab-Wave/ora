@@ -39,8 +39,8 @@ namespace ORA.Application.Daemon
             synchronizeTimer.Elapsed += (sender, eventArgs) =>
             {
                 foreach (Cluster cluster in Ora.GetClusterManager().GetClusters())
-                foreach (string file in Ora.GetFileManager().GetFiles(cluster))
-                    Ora.GetFileManager().GetFile(cluster, file);
+                    foreach (string file in Ora.GetFileManager().GetFiles(cluster))
+                        Ora.GetFileManager().GetFile(cluster, file);
             };
             synchronizeTimer.Interval = 1000 * 60;
             synchronizeTimer.Enabled = true;

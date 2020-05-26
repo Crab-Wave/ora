@@ -25,7 +25,8 @@ namespace ORA.Core.Managers
 
         public void StartListening()
         {
-            if (this.TcpListener != null) return;
+            if (this.TcpListener != null)
+                return;
             this.TcpListener = new TcpListener(5000);
             this.TcpListener.Start();
             new Thread(this.Run).Start();
@@ -33,7 +34,8 @@ namespace ORA.Core.Managers
 
         public void Stop()
         {
-            if (this.TcpListener == null) return;
+            if (this.TcpListener == null)
+                return;
             this.TcpListener.Stop();
             this.TcpListener = null;
         }
