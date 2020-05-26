@@ -33,23 +33,59 @@ namespace ORA.Core
 
         private readonly IClusterManager _clusterManager;
 
+        private readonly NetworkManager _networkManager;
+
+        private readonly IFileManager _fileManager;
+
         private OraCore()
         {
             this._programDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                                      Path.DirectorySeparatorChar + "ora";
+            if (!System.IO.Directory.Exists(this._programDirectory))
+                System.IO.Directory.CreateDirectory(this._programDirectory);
             this._logger = new SimpleLogger("OraCore");
             this._cipher = new RsaCipher();
             this._compressor = new ZipLibCompressor();
             this._httpClient = new UnirestHttpClient();
-            this._httpClient.SetBaseUrl("https://tracker.ora.crabwave.com");
+            string trackerPath = Path.Combine(this._programDirectory, "ora-tracker");
+            if (System.IO.File.Exists(trackerPath))
+            {
+                string text = System.IO.File.ReadAllText(trackerPath).Trim();
+                Uri uriResult;
+                bool result = Uri.TryCreate(text, UriKind.Absolute, out uriResult)
+                              && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+                if (result)
+                    this._httpClient.SetBaseUrl(text);
+                else
+                    this._httpClient.SetBaseUrl("https://tracker.ora.crabwave.com");
+            }
+            else
+            {
+                System.IO.File.Create(trackerPath).Close();
+                System.IO.File.WriteAllText(trackerPath, "https://tracker.ora.crabwave.com");
+                this._httpClient.SetBaseUrl("https://tracker.ora.crabwave.com");
+            }
+
             this._authManager = new AuthManager();
-            this._identityManager = new IdentityManager();
+            this._identityManager = new IdentityManager(this._programDirectory);
             this._clusterManager = new ClusterManager();
+            this._networkManager = new NetworkManager();
+            this._networkManager.StartListening();
+            this._fileManager = new FileManager(this._programDirectory);
         }
 
         public static void Initialize() => SetInstance(new OraCore());
 
         public override string ProgramDirectory() => this._programDirectory;
+
+        public override string Directory(params string[] path)
+        {
+            string[] paths = new string[path.Length + 1];
+            paths[0] = this._programDirectory;
+            for (int i = 0; i < path.Length; i++)
+                paths[i + 1] = path[i];
+            return Path.Combine(paths);
+        }
 
         public override ILogger Logger() => this._logger;
 
@@ -61,11 +97,12 @@ namespace ORA.Core
 
         public override IClusterManager ClusterManager() => this._clusterManager;
 
-        public override INodeManager NodeManager() =>
-            throw new NotImplementedException("NodeManager not implemented");
-
         public override ICompressor Compressor() => this._compressor;
 
         public override IAuthManager AuthManager() => this._authManager;
+
+        public override INetworkManager NetworkManager() => this._networkManager;
+
+        public override IFileManager FileManager() => this._fileManager;
     }
 }

@@ -39,7 +39,7 @@ namespace ORA.Application.CLI
                 {
                     File.WriteAllText(
                         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                            "ora-tracker.txt"), "https://tracker.ora.crabwave.com");
+                            "ora-tracker"), "https://tracker.ora.crabwave.com");
                     Console.WriteLine("URL has been sucessfully reset to https://tracker.ora.crabwave.com");
                 }
                 else if (!result)
@@ -48,7 +48,7 @@ namespace ORA.Application.CLI
                 {
                     File.WriteAllText(
                         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                            "ora-tracker.txt"), url);
+                            "ora-tracker"), url);
                     Console.WriteLine($"URL has been sucessfully changed to {url}");
                 }
             }

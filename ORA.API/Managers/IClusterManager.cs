@@ -51,6 +51,22 @@ namespace ORA.API.Managers
         public Member GetMember(string cluster, string member);
 
         /// <summary>
+        ///     Invite the user with the specified identifier to the specified cluster
+        /// </summary>
+        /// <param name="cluster">The identifier of the cluster</param>
+        /// <param name="user">The user identifier</param>
+        /// /// <returns>true if the user was invited, false otherwise</returns>
+        public bool InviteMember(string cluster, string user);
+
+        /// <summary>
+        ///     Join the specified cluster if we're invited to
+        /// </summary>
+        /// <param name="cluster">The identifier of the cluster</param>
+        /// <param name="displayName">The display name</param>
+        /// <returns>true if we joined the cluster, false otherwise</returns>
+        public bool JoinCluster(string cluster, string displayName);
+
+        /// <summary>
         ///     Remove the member with the specified identifier from the specified cluster
         /// </summary>
         /// <param name="cluster">The identifier of the cluster</param>

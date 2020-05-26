@@ -15,13 +15,9 @@ namespace ORA.Core.Managers
 
         private Identity _identity;
 
-        public IdentityManager()
+        public IdentityManager(string directory)
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-
-            path = Path.Combine(path, "identity.ora");
+            string path = Path.Combine(directory, "identity.ora");
             if (File.Exists(path) && File.Exists(path = ".pub"))
             {
                 try

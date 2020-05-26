@@ -44,8 +44,12 @@ namespace ORA.Core.Managers
             {
                 List<Cluster> clusters = new List<Cluster>();
                 foreach (var cluster in JArray.Parse(response.Body))
-                    clusters.Add(new Cluster(cluster["name"].Value<string>(), cluster["id"].Value<string>(),
-                        cluster["owner"].Value<string>()));
+                {
+                    Cluster c = new Cluster(cluster["name"].Value<string>(), cluster["id"].Value<string>(),
+                        cluster["owner"].Value<string>());
+                    this._clusters.Add(c.Identifier, c);
+                    clusters.Add(c);
+                }
 
                 return clusters;
             }
@@ -97,7 +101,8 @@ namespace ORA.Core.Managers
                 new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
             int code = response.Code;
             if (code == 200)
-                return JObject.Parse(response.Body)["members"].Children().Select(token => new Member(token["id"].Value<string>(), token["name"].Value<string>())).ToList();
+                return JObject.Parse(response.Body)["members"].Children().Select(token =>
+                    new Member(token["id"].Value<string>(), token["name"].Value<string>())).ToList();
             Exception exception = new Exception($"Couldn't find member in this cluster");
             Ora.GetLogger().Error(exception);
             throw exception;
@@ -115,6 +120,30 @@ namespace ORA.Core.Managers
             Exception exception = new Exception($"Couldn't find member with identifier {member}");
             Ora.GetLogger().Error(exception);
             throw exception;
+        }
+
+        public bool InviteMember(string cluster, string user)
+        {
+            HttpResponse response = Ora.GetHttpClient().Post(
+                "/clusters/" + cluster + "/members?id=" + user,
+                new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
+            int code = response.Code;
+            if (code == 200)
+                return true;
+            Ora.GetLogger().Error($"Couldn't invite member with identifier {user}");
+            return false;
+        }
+
+        public bool JoinCluster(string cluster, string displayName)
+        {
+            HttpResponse response = Ora.GetHttpClient().Post(
+                "/clusters/" + cluster + "/join?username=" + displayName,
+                new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
+            int code = response.Code;
+            if (code == 200)
+                return true;
+            Ora.GetLogger().Error($"Couldn't join cluster with identifier {cluster}");
+            return false;
         }
 
         public bool RemoveMember(string cluster, string member)

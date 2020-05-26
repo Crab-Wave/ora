@@ -40,7 +40,10 @@ namespace ORA.Core.Managers
                 this._token = Encoding.UTF8.GetString(rsaCipher.Decrypt(Convert.FromBase64String(response.Body)));
             }
             else
+            {
                 Ora.GetLogger().Error(new Exception("Couldn't refresh user token"));
+                this.Authenticate();
+            }
 
             return this._token;
         }

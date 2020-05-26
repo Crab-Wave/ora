@@ -24,6 +24,8 @@ namespace ORA.API
 
         public static string GetProgramDirectory() => Get().ProgramDirectory();
 
+        public static string GetDirectory(params string[] path) => Get().Directory(path);
+
         public static ILogger GetLogger() => Get().Logger();
 
         public static IHttpClient GetHttpClient() => Get().HttpClient();
@@ -34,13 +36,17 @@ namespace ORA.API
 
         public static IClusterManager GetClusterManager() => Get().ClusterManager();
 
-        public static INodeManager GetNodeManager() => Get().NodeManager();
-
         public static ICompressor GetCompressor() => Get().Compressor();
 
         public static IAuthManager GetAuthManager() => Get().AuthManager();
 
+        public static INetworkManager GetNetworkManager() => Get().NetworkManager();
+
+        public static IFileManager GetFileManager() => Get().FileManager();
+
         public abstract string ProgramDirectory();
+
+        public abstract string Directory(params string[] path);
 
         public abstract ILogger Logger();
 
@@ -52,10 +58,12 @@ namespace ORA.API
 
         public abstract IClusterManager ClusterManager();
 
-        public abstract INodeManager NodeManager();
-
         public abstract ICompressor Compressor();
 
         public abstract IAuthManager AuthManager();
+
+        public abstract INetworkManager NetworkManager();
+
+        public abstract IFileManager FileManager();
     }
 }

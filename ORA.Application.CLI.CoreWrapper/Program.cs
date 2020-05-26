@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using ORA.API;
 using ORA.API.Loggers;
 using ORA.Core;
@@ -11,7 +12,6 @@ namespace ORA.Application.CLI.CoreWrapper
         public static void Main(string[] args)
         {
             OraCoreIpc.Initialize();
-            Console.WriteLine(Ora.GetProgramDirectory());
             try
             {
                 ORA.Application.CLI.Program.Main(args);
