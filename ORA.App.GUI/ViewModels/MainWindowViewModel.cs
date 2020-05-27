@@ -53,7 +53,8 @@ namespace ORA.App.GUI.ViewModels
             var vm = new AddClusterViewModel(this.Settings.Username);
 
             Observable.Merge(
-                    vm.Ok,
+                    vm.Create,
+                    vm.Join,
                     vm.Cancel.Select(_ => (ClusterItem) null))
                 .Take(1)
                 .Subscribe(model =>

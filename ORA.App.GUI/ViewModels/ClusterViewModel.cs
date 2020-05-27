@@ -25,15 +25,5 @@ namespace ORA.App.GUI.ViewModels
                 Ora.GetFileManager().GetFiles(this.Cluster)
                     .Select(hash => new FileItem(this, Ora.GetFileManager().GetFile(cluster, hash))));
         }
-
-        public void AddMemberItem()
-        {
-
-        }
-
-        public void AddFileItem()
-        {
-
-        }
     }
 }

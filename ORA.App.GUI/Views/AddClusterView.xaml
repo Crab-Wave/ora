@@ -42,12 +42,33 @@
       DockPanel.Dock="Bottom"
       Content="Cancel"
       Command="{Binding Cancel}" />
-    <Button
-      DockPanel.Dock="Bottom"
-      Content="OK"
-      Command="{Binding Ok}" />
-    <TextBox
-      Text="{Binding Name}"
-      Watermark="Enter cluster name" />
+
+    <StackPanel
+      DockPanel.Dock="Top">
+      <StackPanel
+        Orientation="Horizontal">
+        <TextBox
+          Text="{Binding Name}"
+          Watermark="Enter cluster name"
+          Width="200" />
+        <Button
+          Content="Create"
+          Command="{Binding Create}"
+          Width="60" />
+      </StackPanel>
+
+      <StackPanel
+        Orientation="Horizontal">
+        <TextBox
+          Text="{Binding Id}"
+          Watermark="Enter cluster id"
+          Width="200" />
+        <Button
+          Content="Join"
+          Command="{Binding Join}"
+          Width="60" />
+      </StackPanel>
+    </StackPanel>
+
   </DockPanel>
 </UserControl>

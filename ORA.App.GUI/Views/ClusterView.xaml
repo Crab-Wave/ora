@@ -107,6 +107,23 @@
         Command="{Binding $parent[Window].DataContext.AddFileItem}"/>
     </Border>
 
-    <TextBlock Text="SAlut"/>
+    <ListBox Items="{Binding Files}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <Border
+            CornerRadius="10"
+            Padding="2"
+            Margin="4">
+            <Button>
+              <StackPanel>
+                <TextBlock Text="{Binding File.Path}" />
+                <TextBlock Text="{Binding File.Hash}" />
+                <TextBlock Text="{Binding File.Size}" />
+              </StackPanel>
+            </Button>
+          </Border>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
   </DockPanel>
 </UserControl>

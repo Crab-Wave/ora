@@ -54,6 +54,9 @@
       <TextBox
         Text="{Binding ClusterPath}"
         Watermark="Enter file path in cluster" />
+      <!-- <Button
+        Content="Browse" /> -->
+        <!-- Command="{}" /> -->
     </StackPanel>
   </DockPanel>
 </UserControl>
