@@ -20,8 +20,8 @@ namespace ORA.App.GUI.ViewModels
 
         public HomeViewModel Home { get; set; }
         public SettingsViewModel Settings { get; }
-
         public ClusterViewModel Cluster { get; set; }
+
         public MainWindowViewModel()
         {
             this.Content = this.Home =
