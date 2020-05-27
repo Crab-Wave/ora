@@ -82,17 +82,18 @@
             <DataTemplate>
               <Button
                 Margin="4"
-                Content="{Binding Information}" Command="{Binding Remove}"/>
+                Content="{Binding Member.Name}"/>
             </DataTemplate>
           </ItemsControl.ItemTemplate>
         </ItemsControl>
       </StackPanel>
     </Border>
-    <ItemsControl Items="{Binding Members}">
+
+    <!-- <ItemsControl Items="{Binding Members}">
       <ItemsControl.ItemTemplate>
         <DataTemplate>
         </DataTemplate>
       </ItemsControl.ItemTemplate>
-    </ItemsControl>
+    </ItemsControl> -->
   </DockPanel>
 </UserControl>

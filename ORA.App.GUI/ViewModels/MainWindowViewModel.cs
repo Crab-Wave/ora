@@ -30,7 +30,6 @@ namespace ORA.App.GUI.ViewModels
                     Ora.GetIdentityManager().GetIdentity().GetIdentifier()
                 ).Select(cluster => new ClusterItem(this, cluster)));
             this.Settings = new SettingsViewModel();
-            this.Cluster = new ClusterViewModel(null);
         }
 
         public void NavigateToHome()

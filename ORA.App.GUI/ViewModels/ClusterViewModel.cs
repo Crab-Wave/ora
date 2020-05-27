@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Avalonia;
@@ -17,7 +18,9 @@ namespace ORA.App.GUI.ViewModels
         public ClusterViewModel(Cluster cluster)
         {
             this.Cluster = cluster;
-            // this.Members = new ObservableCollection<MemberItem>(members);
+            this.Members = new ObservableCollection<MemberItem>(
+                Ora.GetClusterManager().GetMembers(this.Cluster.Identifier)
+                    .Select(member => new MemberItem(this, member)));
         }
     }
 }

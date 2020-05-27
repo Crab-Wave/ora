@@ -1,28 +1,28 @@
 using System.Linq;
+using System.Collections.Generic;
+
 using ORA.API;
 using ORA.App.GUI.ViewModels;
-using System.Collections.Generic;
 
 namespace ORA.App.GUI.Models
 {
     public class ClusterItem
     {
-        public Cluster Cluster { get; set; }
-        public string Information { get => $"{this.Cluster.Name} {this.Cluster.Identifier}"; }
+        public Cluster Cluster { get; }
 
-        private MainWindowViewModel MainWindowViewModel;
+        private MainWindowViewModel mainWindowViewModel;
 
         public ClusterItem(MainWindowViewModel mainWindowViewModel, Cluster cluster)
         {
+            this.mainWindowViewModel = mainWindowViewModel;
             this.Cluster = cluster;
-            this.MainWindowViewModel = mainWindowViewModel;
         }
 
         public void Remove()
         {
             Ora.GetClusterManager().DeleteCluster(this.Cluster.Identifier);
-            this.MainWindowViewModel.Content = this.MainWindowViewModel.Home =
-                new HomeViewModel(Ora.GetClusterManager().GetClusters().Select(c => new ClusterItem(this.MainWindowViewModel, c)));
+            this.mainWindowViewModel.Content = this.mainWindowViewModel.Home =
+                new HomeViewModel(Ora.GetClusterManager().GetClusters().Select(c => new ClusterItem(this.mainWindowViewModel, c)));
         }
     }
 }
