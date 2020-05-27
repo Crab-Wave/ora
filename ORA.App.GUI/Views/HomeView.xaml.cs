@@ -19,12 +19,5 @@ namespace ORA.App.GUI.Views
         {
             AvaloniaXamlLoader.Load(this);
         }
-
-        private void OnButtonClick(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine("Hey");
-            var window = new MainWindow();
-            window.Show();
-        }
     }
 }
