@@ -3,83 +3,127 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="ORA.App.GUI.Views.MemberView">
-    <DockPanel>
-        <Border DockPanel.Dock="Top"
-        Background="Gray"
-        Padding="5">
-            <StackPanel
-                Orientation="Horizontal">
-                <TextBlock
-                    Text="ORA"
-                    Margin="5"
-                    Width="350" Height="22"
-                    Foreground="Black" Background="Gray"
-                    FontSize="16"
-                    TextAlignment="Left"
-                  ></TextBlock>
-                <TextBlock
-                    Text="{Binding Information}"
-                    Margin="5"
-                    Width="360" Height="22"
-                    Foreground="Black" Background="Gray"
-                    FontSize="16"
-                    TextAlignment="Left"
-                  ></TextBlock>
-                <Button
-                    Width="23" Height="23"
-                    Content="H"
-                    Margin="5"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Top"
-                    Foreground="Black" Background="White"
-                    BorderBrush="Black"
-                    BorderThickness="1"
-                    FontSize="12"
-                    Command="{Binding $parent[Window].DataContext.NavigateToHome}"></Button>
-                <Button
-                    Width="23" Height="23"
-                    Content="S"
-                    Margin="5"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Top"
-                    Foreground="Black" Background="White"
-                    BorderBrush="Black"
-                    BorderThickness="1"
-                    FontSize="12"
-                    Command="{Binding $parent[Window].DataContext.NavigateToSettings}"></Button>
-            </StackPanel>
-        </Border>
-        <Border
-          DockPanel.Dock="Left"
-          Background="WhiteSmoke"
-          Padding="5">
-            <StackPanel>
-                <Button
-                    Content="Invite Member"
-                    Command="{Binding $parent[Window].DataContext.AddMemberItem}"></Button>
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Text="Members:"
-                    Height="30">
-                </TextBlock>
-                <ItemsControl Items="{Binding Members}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Button Margin="4"
-                            Content="{Binding Information}" Command="{Binding Remove}"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-        </Border>
-        <ItemsControl Items="{Binding Members}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
+             x:Class="ORA.App.GUI.Views.ClusterView">
+  <DockPanel>
+    <Border
+      DockPanel.Dock="Top"
+      Background="Gray"
+      Padding="5">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="45*" />
+          <ColumnDefinition Width="40*" />
+          <ColumnDefinition Width="30*" />
+          <ColumnDefinition Width="70" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBlock
+          Text="ORA"
+          Margin="5"
+          Height="22"
+          Foreground="Black" Background="Gray"
+          FontSize="16"
+          TextAlignment="Left"
+          Grid.Column="0" />
+        <TextBlock
+          Text="{Binding Cluster.Name}"
+          Margin="5"
+          Height="22"
+          Foreground="Black" Background="Gray"
+          FontSize="16"
+          TextAlignment="Center"
+          Grid.Column="1" />
+        <StackPanel
+          Orientation="Horizontal"
+          Grid.Column="3">
+          <Button
+            Width="23" Height="23"
+            Content="H"
+            Margin="5"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Top"
+            Foreground="Black" Background="White"
+            BorderBrush="Black"
+            BorderThickness="1"
+            FontSize="12"
+            Command="{Binding $parent[Window].DataContext.NavigateToHome}" />
+          <Button
+            Width="23" Height="23"
+            Content="S"
+            Margin="5"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Top"
+            Foreground="Black" Background="White"
+            BorderBrush="Black"
+            BorderThickness="1"
+            FontSize="12"
+            Command="{Binding $parent[Window].DataContext.NavigateToSettings}" />
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <Border
+      DockPanel.Dock="Left"
+      Background="WhiteSmoke"
+      Padding="5">
+      <DockPanel>
+        <TextBlock
+          HorizontalAlignment="Center"
+          VerticalAlignment="Bottom"
+          Text="Members:"
+          Height="30"
+          DockPanel.Dock="Top" />
+
+        <Button
+          Content="Invite Member"
+          Command="{Binding $parent[Window].DataContext.InviteMember}"
+          DockPanel.Dock="Top"
+          Height="30" />
+
+        <ItemsControl
+          Items="{Binding Members}"
+          DockPanel.Dock="Top">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Button
+                Content="{Binding Member.Name}"/>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
         </ItemsControl>
-    </DockPanel>
+      </DockPanel>
+    </Border>
+
+    <Border
+      DockPanel.Dock="Top"
+      Height="30"
+      Margin="10">
+      <Button
+        HorizontalAlignment="Right"
+        Width="30"
+        Height="30"
+        Content="+"
+        Command="{Binding $parent[Window].DataContext.AddFileItem}"/>
+    </Border>
+
+    <ListBox Items="{Binding Files}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <Border
+            CornerRadius="10"
+            Padding="2"
+            Margin="4">
+            <Button>
+              <StackPanel>
+                <TextBlock Text="{Binding File.Path}" />
+                <TextBlock Text="{Binding File.Hash}" />
+                <TextBlock Text="{Binding File.Size}" />
+              </StackPanel>
+            </Button>
+          </Border>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+  </DockPanel>
 </UserControl>

@@ -6,25 +6,20 @@ namespace ORA.App.GUI.Models
 {
     public class MemberItem
     {
-        private Cluster cluster;
+        public Member Member { get; }
 
-        public Member member { get; set; }
+        private ClusterViewModel clusterViewModel;
 
-        public string MemberInformation { get => $"{this.member.Name} {this.member.Identifier}"; }
-
-        private MainWindowViewModel MainWindowViewModel;
-
-        public MemberItem(MainWindowViewModel mainWindowViewModel, Cluster cluster, Member member)
+        public MemberItem(ClusterViewModel clusterViewModel, Member member)
         {
-            this.cluster = cluster;
-            this.member = member;
-            this.MainWindowViewModel = mainWindowViewModel;
+            this.clusterViewModel = clusterViewModel;
+            this.Member = member;
         }
 
         public void MemberRemove()
         {
-            Ora.GetClusterManager().RemoveMember(this.cluster.Identifier, this.member.Identifier);
-            this.MainWindowViewModel.Content = this.MainWindowViewModel.Cluster = new ClusterViewModel(Ora.GetClusterManager().GetMembers(this.cluster.Identifier).Select(c => new MemberItem(this.MainWindowViewModel, this.cluster, c)));
+            // Ora.GetClusterManager().RemoveMember(this.cluster.Identifier, this.member.Identifier);
+            // this.MainWindowViewModel.Content = this.MainWindowViewModel.Cluster = new ClusterViewModel(Ora.GetClusterManager().GetMembers(this.cluster.Identifier).Select(c => new MemberItem(this.MainWindowViewModel, this.cluster, c)));
         }
     }
 }

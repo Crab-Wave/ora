@@ -5,6 +5,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Interactivity;
 
 using ORA.App.GUI.ViewModels;
+using ORA.App.GUI.Models;
 
 namespace ORA.App.GUI.Views
 {
@@ -20,11 +21,10 @@ namespace ORA.App.GUI.Views
             AvaloniaXamlLoader.Load(this);
         }
 
-        private void OnButtonClick(object sender, RoutedEventArgs e)
+        public void SelectCluster(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Hey");
-            var window = new MainWindow();
-            window.Show();
+            (this.DataContext as HomeViewModel).SelectedCluster = (
+                ((sender as ContentControl).Content as StackPanel).DataContext as ClusterItem).Cluster.Identifier;
         }
     }
 }

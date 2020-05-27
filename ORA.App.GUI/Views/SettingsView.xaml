@@ -5,65 +5,112 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ORA.App.GUI.Views.SettingsView">
   <DockPanel>
-      <Border DockPanel.Dock="Top"
-          Background="Gray"
-          Padding="5">
-          <StackPanel
-              Orientation="Horizontal">
-              <TextBlock
-                  Text="ORA"
-                  Margin="5"
-                  Width="350" Height="22"
-                  Foreground="Black" Background="Gray"
-                  FontSize="16"
-                  TextAlignment="Left"
-                  ></TextBlock>
-              <TextBlock
-                  Text="Home"
-                  Margin="5"
-                  Width="360" Height="22"
-                  Foreground="Black" Background="Gray"
-                  FontSize="16"
-                  TextAlignment="Left"
-                  ></TextBlock>
-              <Button
-                  Width="23" Height="23"
-                  Content="H"
-                  Margin="5"
-                  HorizontalContentAlignment="Center"
-                  VerticalContentAlignment="Top"
-                  Foreground="Black" Background="White"
-                  BorderBrush="Black"
-                  BorderThickness="1"
-                  FontSize="12"
-                  Command="{Binding $parent[Window].DataContext.NavigateToHome}"></Button>
-              <TextBlock
-                  Margin="5"
-                  Width="21" Height="21"
-                  Foreground="Black" Background="White"
-                  FontSize="13"
-                  Text="S"
-                  TextAlignment="Center"
-                  ></TextBlock>
-          </StackPanel>
-      </Border>
-    <StackPanel DockPanel.Dock="Top"
-                Orientation="Horizontal"
-                Height="30"
-                Width="800"
-                Spacing="30">
+    <Border
+      DockPanel.Dock="Top"
+      Background="Gray"
+      Padding="5">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="45*" />
+          <ColumnDefinition Width="40*" />
+          <ColumnDefinition Width="30*" />
+          <ColumnDefinition Width="70" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
         <TextBlock
-            Width="170"></TextBlock>
+          Text="ORA"
+          Margin="5"
+          Height="22"
+          Foreground="Black" Background="Gray"
+          FontSize="16"
+          TextAlignment="Left"
+          Grid.Column="0" />
         <TextBlock
+          Text="Settings"
+          Margin="5"
+          Height="22"
+          Foreground="Black" Background="Gray"
+          FontSize="16"
+          TextAlignment="Center"
+          Grid.Column="1" />
+        <StackPanel
+          Orientation="Horizontal"
+          Grid.Column="3">
+          <Button
+            Width="23" Height="23"
+            Content="H"
             Margin="5"
-            Text="Base url:"></TextBlock>
-      <TextBox DockPanel.Dock="Top"
-              Margin="1"
-              Text="{Binding BaseUrl}"
-              Width="200" />
-      <Button 
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Top"
+            Foreground="Black" Background="White"
+            BorderBrush="Black"
+            BorderThickness="1"
+            FontSize="12"
+            Command="{Binding $parent[Window].DataContext.NavigateToHome}" />
+          <TextBlock
+            Margin="5"
+            Width="20" Height="20"
+            Foreground="Black" Background="White"
+            FontSize="13"
+            Text="S"
+            TextAlignment="Center" />
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <Border Padding="10">
+      <Grid DockPanel.Dock="Top">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="100" />
+          <ColumnDefinition Width="20" />
+          <ColumnDefinition Width="300" />
+          <ColumnDefinition Width="20" />
+          <ColumnDefinition Width="100" />
+          <ColumnDefinition Width="50*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="30"/>
+          <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+          Margin="5"
+          Text="Base url:"
+          Grid.Column="0"
+          Grid.Row="0" />
+        <TextBox
+          DockPanel.Dock="Top"
+          Margin="1"
+          Text="{Binding BaseUrl}"
+          Width="300"
+          Grid.Column="2"
+          Grid.Row="0" />
+        <Button
           Content="Set base url"
-          Command="{Binding SetBaseUrl}"></Button>
-    </StackPanel>
+          Command="{Binding SetBaseUrl}"
+          Grid.Column="4"
+          Grid.Row="0" />
+
+        <TextBlock
+          Margin="5"
+          Text="Username:"
+          Grid.Column="0"
+          Grid.Row="1" />
+        <TextBox
+          DockPanel.Dock="Top"
+          Margin="1"
+          Text="{Binding UsernameInput}"
+          Width="300"
+          Grid.Column="2"
+          Grid.Row="1" />
+        <Button
+          Content="Set Username"
+          Command="{Binding SetUsername}"
+          Grid.Column="4"
+          Grid.Row="1" />
+      </Grid>
+    </Border>
   </DockPanel>
 </UserControl>

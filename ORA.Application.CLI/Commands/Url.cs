@@ -23,18 +23,24 @@ namespace ORA.Application.CLI.Commands
                               Ora.Get().IsOraTracker(url);
                 if (url.ToLower().Equals("reset"))
                 {
+                    Ora.GetAuthManager().Disconnect();
                     string trackerPath = Ora.GetDirectory("ora-tracker");
                     System.IO.File.WriteAllText(trackerPath, "https://tracker.ora.crabwave.com");
                     Ora.GetHttpClient().SetBaseUrl("https://tracker.ora.crabwave.com");
+                    Ora.GetAuthManager().Authenticate();
+                    Ora.GetNodeManager().Initialize();
                     Console.WriteLine("Tracker URL has been sucessfully reset to https://tracker.ora.crabwave.com");
                 }
                 else if (!result)
                     Console.WriteLine($"{url} is not a valid URL");
                 else
                 {
+                    Ora.GetAuthManager().Disconnect();
                     string trackerPath = Ora.GetDirectory("ora-tracker");
                     System.IO.File.WriteAllText(trackerPath, url);
                     Ora.GetHttpClient().SetBaseUrl(url);
+                    Ora.GetAuthManager().Authenticate();
+                    Ora.GetNodeManager().Initialize();
                     Console.WriteLine($"Tracker URL has been sucessfully changed to {url}");
                 }
             }
