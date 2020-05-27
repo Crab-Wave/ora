@@ -91,6 +91,7 @@ namespace ORA.Core.IPC
         public override bool IsOraTracker(string url)
         {
             string baseUrl = this._httpClient.GetBaseUrl();
+            this._httpClient.SetBaseUrl("");
             string random = new Random().Next().ToString();
             HttpResponse response = this._httpClient.Post(url + "/ping", new HttpRequest(random));
             this._httpClient.SetBaseUrl(baseUrl);
