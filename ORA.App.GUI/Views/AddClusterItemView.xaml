@@ -19,7 +19,7 @@
                   TextAlignment="Left"
                   ></TextBlock>
               <TextBlock
-                  Text="Add A Cluster"
+                  Text="Add cluster"
                   Margin="5"
                   Width="360" Height="22"
                   Foreground="Black" Background="Gray"
@@ -31,6 +31,6 @@
     <Button DockPanel.Dock="Bottom" Content="Cancel" Command="{Binding Cancel}"></Button>
     <Button DockPanel.Dock="Bottom" Content="OK" Command="{Binding Ok}"></Button>
     <TextBox Text="{Binding Name}"
-             Watermark="Enter your TODO"/>
+             Watermark="Enter cluster name"/>
   </DockPanel>
 </UserControl>
