@@ -157,5 +157,41 @@ namespace ORA.Core.Managers
             Ora.GetLogger().Error($"Couldn't find member with identifier {member}");
             return false;
         }
+
+        public bool AddAdmin(string cluster, string member)
+        {
+            HttpResponse response = Ora.GetHttpClient().Post(
+                "/clusters/" + cluster + "/admins?id=" + member,
+                new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
+            int code = response.Code;
+            if (code == 200)
+                return true;
+            Ora.GetLogger().Error($"Couldn't add member with identifier {member} as an admin");
+            return false;
+        }
+
+        public bool RemoveAdmin(string cluster, string member)
+        {
+            HttpResponse response = Ora.GetHttpClient().Delete(
+                "/clusters/" + cluster + "/admins?id=" + member,
+                new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
+            int code = response.Code;
+            if (code == 200)
+                return true;
+            Ora.GetLogger().Error($"Couldn't remmove member with identifier {member} as an admin");
+            return false;
+        }
+
+        public List<string> GetAdmins(string cluster)
+        {
+            HttpResponse response = Ora.GetHttpClient().Get("/clusters/" + cluster + "/admins",
+                new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
+            int code = response.Code;
+            if (code == 200)
+                return JArray.Parse(response.Body).Children().Select(token => token.Value<string>()).ToList();
+            Exception exception = new Exception($"Couldn't find member in this cluster");
+            Ora.GetLogger().Error(exception);
+            throw exception;
+        }
     }
 }

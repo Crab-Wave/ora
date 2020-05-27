@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.NetworkInformation;
 using System.Timers;
 using JKang.IpcServiceFramework;
@@ -23,14 +24,8 @@ namespace ORA.Application.Daemon
             Ora.GetAuthManager().Authenticate();
             Ora.GetNodeManager().Initialize();
 
-            NetworkChange.NetworkAvailabilityChanged +=
-                (sender, eventArgs) =>
-                    Ora.GetHttpClient().Post("/refreship",
-                        new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
-            NetworkChange.NetworkAddressChanged +=
-                (sender, eventArgs) =>
-                    Ora.GetHttpClient().Post("/refreship",
-                        new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
+            NetworkChange.NetworkAvailabilityChanged += (sender, eventArgs) => Ora.GetNodeManager().RefreshIp();
+            NetworkChange.NetworkAddressChanged += (sender, eventArgs) => Ora.GetNodeManager().RefreshIp();
 
             var refreshTokenTimer = new Timer();
             refreshTokenTimer.Elapsed += (sender, eventArgs) => Ora.GetAuthManager().RefreshToken();
@@ -41,19 +36,15 @@ namespace ORA.Application.Daemon
             synchronizeTimer.Elapsed += (sender, eventArgs) =>
             {
                 foreach (Cluster cluster in Ora.GetClusterManager().GetClusters())
-                    foreach (string file in Ora.GetFileManager().GetFiles(cluster))
-                        Ora.GetFileManager().GetFile(cluster, file);
+                    if (Ora.GetClusterManager().GetMembers(cluster.Identifier).Any(member =>
+                        member.Identifier == Ora.GetIdentityManager().GetIdentity().GetIdentifier()))
+                        foreach (string file in Ora.GetFileManager().GetFiles(cluster))
+                            Ora.GetFileManager().GetFile(cluster, file);
             };
             synchronizeTimer.Interval = 1000 * 60;
             synchronizeTimer.Enabled = true;
 
             AppDomain.CurrentDomain.ProcessExit += (sender, eventArgs) => Ora.GetAuthManager().Disconnect();
-
-            Cluster cluster = Ora.GetClusterManager().CreateCluster("Cluster Random", "Adamaq01");
-            File file = Ora.GetFileManager()
-                .CreateFile(cluster, @"C:\Users\Adamaq01\AppData\Roaming\ora\ora-tracker", "salut.txt");
-            Ora.GetFileManager().RemoveFile(cluster, file);
-            Ora.GetClusterManager().DeleteCluster(cluster.Identifier);
 
             IServiceCollection services = ConfigureServices(new ServiceCollection());
             new IpcServiceHostBuilder(services.BuildServiceProvider())

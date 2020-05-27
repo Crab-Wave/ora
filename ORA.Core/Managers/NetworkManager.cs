@@ -69,14 +69,14 @@ namespace ORA.Core.Managers
             Type type = this.Packets[packetId];
             Packet packet = (Packet) type.GetConstructor(new Type[0]).Invoke(null);
 
-            MemoryStream memoryStream = new MemoryStream();
+            byte[] dataLengthBytes = new byte[4];
+            networkStream.Read(dataLengthBytes);
+            int dataLength = BitConverter.ToInt32(dataLengthBytes);
 
-            int i;
-            byte[] bytes = new byte[256];
-            while ((i = networkStream.Read(bytes, 0, bytes.Length)) != 0)
-                memoryStream.Write(bytes);
+            byte[] data = new byte[dataLength];
+            networkStream.Read(data);
 
-            packet.Deserialize(memoryStream.ToArray());
+            packet.Deserialize(data);
 
             return packet;
         }
@@ -85,7 +85,9 @@ namespace ORA.Core.Managers
         {
             byte[] data = packet.Serialize();
             networkStream.Write(BitConverter.GetBytes(packet.Id));
+            networkStream.Write(BitConverter.GetBytes(data.Length));
             networkStream.Write(data);
+            networkStream.Flush();
         }
 
         public Packet SendPacket(string host, int port, Packet packet)

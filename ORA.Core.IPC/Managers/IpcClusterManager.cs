@@ -39,5 +39,14 @@ namespace ORA.Core.IPC.Managers
 
         public bool RemoveMember(string cluster, string member) =>
             this._client.InvokeAsync(manager => manager.RemoveMember(cluster, member)).Result;
+
+        public bool AddAdmin(string cluster, string member) =>
+            this._client.InvokeAsync(manager => manager.AddAdmin(cluster, member)).Result;
+
+        public bool RemoveAdmin(string cluster, string member) =>
+            this._client.InvokeAsync(manager => manager.RemoveAdmin(cluster, member)).Result;
+
+        public List<string> GetAdmins(string cluster) =>
+            this._client.InvokeAsync(manager => manager.GetAdmins(cluster)).Result;
     }
 }

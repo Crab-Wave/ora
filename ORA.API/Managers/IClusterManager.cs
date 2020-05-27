@@ -39,7 +39,7 @@ namespace ORA.API.Managers
         ///     Get the list of the members of the specified cluster
         /// </summary>
         /// <param name="cluster">The identifier of the cluster</param>
-        /// <returns>The list of the members of the current cluster </returns>
+        /// <returns>The list of the members of the current cluster</returns>
         public List<Member> GetMembers(string cluster);
 
         /// <summary>
@@ -73,5 +73,28 @@ namespace ORA.API.Managers
         /// <param name="member">The member identifier</param>
         /// <returns>True if the member has been removed or false otherwise</returns>
         public bool RemoveMember(string cluster, string member);
+
+        /// <summary>
+        ///     Add the member with the specified identifier as an admin of the specified cluster
+        /// </summary>
+        /// <param name="cluster">The identifier of the cluster</param>
+        /// <param name="member">The member identifier</param>
+        /// /// <returns>true if the user is admin, false otherwise</returns>
+        public bool AddAdmin(string cluster, string member);
+
+        /// <summary>
+        ///     Remove the member with the specified identifier from the specified cluster admins list
+        /// </summary>
+        /// <param name="cluster">The identifier of the cluster</param>
+        /// <param name="member">The member identifier</param>
+        /// <returns>True if the member has been removed of the admins, false otherwise</returns>
+        public bool RemoveAdmin(string cluster, string member);
+
+        /// <summary>
+        ///     Get the list of the admin members of the specified cluster
+        /// </summary>
+        /// <param name="cluster">The identifier of the cluster</param>
+        /// <returns>The list of the admin members of the specified cluster</returns>
+        public List<string> GetAdmins(string cluster);
     }
 }
