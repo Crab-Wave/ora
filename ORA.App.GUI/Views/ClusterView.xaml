@@ -78,7 +78,7 @@
 
         <Button
           Content="Invite Member"
-          Command="{Binding $parent[Window].DataContext.AddMemberItem}"
+          Command="{Binding $parent[Window].DataContext.InviteMember}"
           DockPanel.Dock="Top"
           Height="30" />
 

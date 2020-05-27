@@ -70,6 +70,22 @@ namespace ORA.App.GUI.ViewModels
             this.Content = vm;
         }
 
+        public void InviteMember()
+        {
+            var vm = new AddMemberViewModel(this.Cluster.Cluster.Identifier);
+
+            Observable.Merge(
+                    vm.Invite,
+                    vm.Cancel.Select(_ => false))
+                .Take(1)
+                .Subscribe(model =>
+                {
+                    this.Content = this.Cluster;
+                });
+
+            this.Content = vm;
+        }
+
         public void AddFileItem()
         {
             var vm = new AddFileViewModel();

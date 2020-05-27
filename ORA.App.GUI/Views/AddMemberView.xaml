@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ORA.App.GUI.Views.AddMemberView">
+  <DockPanel>
+    <Border
+      DockPanel.Dock="Top"
+      Background="Gray"
+      Padding="5">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="45*" />
+          <ColumnDefinition Width="40*" />
+          <ColumnDefinition Width="30*" />
+          <ColumnDefinition Width="70" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBlock
+          Text="ORA"
+          Margin="5"
+          Height="22"
+          Foreground="Black" Background="Gray"
+          FontSize="16"
+          TextAlignment="Left"
+          Grid.Column="0" />
+        <TextBlock
+          Text="Invite member"
+          Margin="5"
+          Height="22"
+          Foreground="Black" Background="Gray"
+          FontSize="16"
+          TextAlignment="Center"
+          Grid.Column="1" />
+      </Grid>
+    </Border>
+
+    <Button
+      DockPanel.Dock="Bottom"
+      Content="Cancel"
+      Command="{Binding Cancel}" />
+    <Button
+      DockPanel.Dock="Bottom"
+      Content="Invite"
+      Command="{Binding Invite}" />
+    <TextBox
+      Text="{Binding Identifier}"
+      Watermark="Enter user identifier" />
+
+  </DockPanel>
+</UserControl>

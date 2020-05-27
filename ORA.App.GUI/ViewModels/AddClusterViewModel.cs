@@ -15,7 +15,6 @@ namespace ORA.App.GUI.ViewModels
             set => this.RaiseAndSetIfChanged(ref this.name, value);
         }
 
-
         private string id;
         public string Id
         {
