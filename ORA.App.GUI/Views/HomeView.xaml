@@ -44,7 +44,7 @@
             Foreground="Black" Background="White"
             FontSize="13"
             Text="H"
-            TextAlignment="Left" />
+            TextAlignment="Center" />
           <Button
             Width="23" Height="23"
             Content="S"
