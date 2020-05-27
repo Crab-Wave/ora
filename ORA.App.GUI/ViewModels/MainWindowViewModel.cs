@@ -50,7 +50,7 @@ namespace ORA.App.GUI.ViewModels
 
         public void AddClusterItem()
         {
-            var vm = new AddClusterItemViewModel();
+            var vm = new AddClusterViewModel(this.Settings.Username);
 
             Observable.Merge(
                     vm.Ok,

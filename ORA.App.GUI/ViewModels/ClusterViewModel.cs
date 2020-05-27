@@ -22,5 +22,15 @@ namespace ORA.App.GUI.ViewModels
                 Ora.GetClusterManager().GetMembers(this.Cluster.Identifier)
                     .Select(member => new MemberItem(this, member)));
         }
+
+        public void AddMemberItem()
+        {
+
+        }
+
+        public void AddFileItem()
+        {
+
+        }
     }
 }

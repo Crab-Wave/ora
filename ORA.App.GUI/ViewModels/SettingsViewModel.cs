@@ -6,15 +6,26 @@ namespace ORA.App.GUI.ViewModels
     public class SettingsViewModel : ViewModelBase
     {
         private string baseUrl;
+        private string username;
+        private string usernameInput;
+
         public string BaseUrl
         {
             get => this.baseUrl;
             set => this.RaiseAndSetIfChanged(ref this.baseUrl, value);
         }
+        public string UsernameInput
+        {
+            get => this.usernameInput;
+            set => this.RaiseAndSetIfChanged(ref this.usernameInput, value);
+        }
+
+        public string Username { get => this.username; }
 
         public SettingsViewModel()
         {
             this.baseUrl = Ora.GetHttpClient().GetBaseUrl();
+            this.username = this.usernameInput = "ora-user";
         }
 
         public void SetBaseUrl()
@@ -28,6 +39,11 @@ namespace ORA.App.GUI.ViewModels
             {
                 this.baseUrl = "INVALID URL";
             }
+        }
+
+        public void SetUsername()
+        {
+            this.username = this.usernameInput;
         }
     }
 }

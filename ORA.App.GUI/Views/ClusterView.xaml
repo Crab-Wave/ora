@@ -68,32 +68,45 @@
       DockPanel.Dock="Left"
       Background="WhiteSmoke"
       Padding="5">
-      <StackPanel>
-        <Button
-          Content="Invite Member"
-          Command="{Binding $parent[Window].DataContext.AddMemberItem}"/>
+      <DockPanel>
         <TextBlock
           HorizontalAlignment="Center"
-          VerticalAlignment="Top"
+          VerticalAlignment="Bottom"
           Text="Members:"
+          Height="30"
+          DockPanel.Dock="Top" />
+
+        <Button
+          Content="Invite Member"
+          Command="{Binding $parent[Window].DataContext.AddMemberItem}"
+          DockPanel.Dock="Top"
           Height="30" />
-        <ItemsControl Items="{Binding Members}">
+
+        <ItemsControl
+          Items="{Binding Members}"
+          DockPanel.Dock="Top">
           <ItemsControl.ItemTemplate>
             <DataTemplate>
               <Button
-                Margin="4"
                 Content="{Binding Member.Name}"/>
             </DataTemplate>
           </ItemsControl.ItemTemplate>
         </ItemsControl>
-      </StackPanel>
+      </DockPanel>
     </Border>
 
-    <!-- <ItemsControl Items="{Binding Members}">
-      <ItemsControl.ItemTemplate>
-        <DataTemplate>
-        </DataTemplate>
-      </ItemsControl.ItemTemplate>
-    </ItemsControl> -->
+    <Border
+      DockPanel.Dock="Top"
+      Height="30"
+      Margin="10">
+      <Button
+        HorizontalAlignment="Right"
+        Width="30"
+        Height="30"
+        Content="+"
+        Command="{Binding $parent[Window].DataContext.AddClusterItem}"/>
+    </Border>
+
+    <TextBlock Text="SAlut"/>
   </DockPanel>
 </UserControl>

@@ -6,7 +6,7 @@ using ORA.App.GUI.Models;
 
 namespace ORA.App.GUI.ViewModels
 {
-    internal class AddClusterItemViewModel : ViewModelBase
+    internal class AddClusterViewModel : ViewModelBase
     {
         private string name;
         public string Name
@@ -20,7 +20,7 @@ namespace ORA.App.GUI.ViewModels
 
         public MainWindowViewModel MainWindowViewModel { get; set; }
 
-        public AddClusterItemViewModel()
+        public AddClusterViewModel(string username)
         {
             var okEnabled = this.WhenAnyValue(
                 x => x.Name,
@@ -28,7 +28,7 @@ namespace ORA.App.GUI.ViewModels
             );
 
             this.Ok = ReactiveCommand.Create(
-                () => new ClusterItem(this.MainWindowViewModel, Ora.GetClusterManager().CreateCluster(this.name, "displayName")),
+                () => new ClusterItem(this.MainWindowViewModel, Ora.GetClusterManager().CreateCluster(this.name, username)),
                 okEnabled);
             this.Cancel = ReactiveCommand.Create(() => { });
         }
