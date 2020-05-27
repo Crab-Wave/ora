@@ -10,11 +10,14 @@ namespace ORA.App.GUI.ViewModels
 {
     public class ClusterViewModel : ViewModelBase
     {
+        public Cluster Cluster { get; }
         public ObservableCollection<MemberItem> Members { get; }
 
-        public ClusterViewModel(IEnumerable<MemberItem> members)
+
+        public ClusterViewModel(Cluster cluster)
         {
-            this.Members = new ObservableCollection<MemberItem>(members);
+            this.Cluster = cluster;
+            // this.Members = new ObservableCollection<MemberItem>(members);
         }
     }
 }

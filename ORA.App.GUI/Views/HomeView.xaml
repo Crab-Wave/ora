@@ -14,7 +14,7 @@
           <ColumnDefinition Width="45*" />
           <ColumnDefinition Width="40*" />
           <ColumnDefinition Width="30*" />
-          <ColumnDefinition Width="60" />
+          <ColumnDefinition Width="70" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
           <RowDefinition Height="40"/>
@@ -80,6 +80,7 @@
             Padding="2"
             Margin="4">
             <Button
+              Click="SelectCluster"
               Command="{Binding $parent[Window].DataContext.NavigateToCluster}">
               <StackPanel>
                 <TextBlock Text="{Binding Cluster.Name}" />

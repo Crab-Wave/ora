@@ -19,8 +19,15 @@ namespace ORA.App.GUI.ViewModels
 
         public void SetBaseUrl()
         {
-            Ora.GetHttpClient().SetBaseUrl(this.BaseUrl);
-            Ora.GetAuthManager().Authenticate();
+            if (Ora.Get().IsOraTracker(this.baseUrl))
+            {
+                Ora.GetHttpClient().SetBaseUrl(this.baseUrl);
+                Ora.GetAuthManager().Authenticate();
+            }
+            else
+            {
+                this.baseUrl = "INVALID URL";
+            }
         }
     }
 }

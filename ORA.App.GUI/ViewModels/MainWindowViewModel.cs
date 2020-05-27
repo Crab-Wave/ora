@@ -3,6 +3,7 @@ using System.Reactive.Linq;
 using System.Collections.Generic;
 using System.Linq;
 using ReactiveUI;
+using Avalonia.Interactivity;
 using ORA.API;
 using ORA.App.GUI.Models;
 
@@ -29,6 +30,7 @@ namespace ORA.App.GUI.ViewModels
                     Ora.GetIdentityManager().GetIdentity().GetIdentifier()
                 ).Select(cluster => new ClusterItem(this, cluster)));
             this.Settings = new SettingsViewModel();
+            this.Cluster = new ClusterViewModel(null);
         }
 
         public void NavigateToHome()
@@ -43,13 +45,10 @@ namespace ORA.App.GUI.ViewModels
 
         public void NavigateToCluster()
         {
+            this.Cluster = new ClusterViewModel(Ora.GetClusterManager().GetCluster(this.Home.SelectedCluster));
             this.Content = this.Cluster;
         }
 
-        public void AddMemberItem()
-        {
-
-        }
         public void AddClusterItem()
         {
             var vm = new AddClusterItemViewModel();
