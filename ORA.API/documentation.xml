@@ -265,6 +265,22 @@
             <param name="member">The member identifier</param>
             <returns>The member in the specified cluster with the specified identifier</returns>
         </member>
+        <member name="M:ORA.API.Managers.IClusterManager.InviteMember(System.String,System.String)">
+            <summary>
+                Invite the user with the specified identifier to the specified cluster
+            </summary>
+            <param name="cluster">The identifier of the cluster</param>
+            <param name="user">The user identifier</param>
+            /// <returns>true if the user was invited, false otherwise</returns>
+        </member>
+        <member name="M:ORA.API.Managers.IClusterManager.JoinCluster(System.String,System.String)">
+            <summary>
+                Join the specified cluster if we're invited to
+            </summary>
+            <param name="cluster">The identifier of the cluster</param>
+            <param name="displayName">The display name</param>
+            <returns>true if we joined the cluster, false otherwise</returns>
+        </member>
         <member name="M:ORA.API.Managers.IClusterManager.RemoveMember(System.String,System.String)">
             <summary>
                 Remove the member with the specified identifier from the specified cluster
@@ -312,28 +328,6 @@
             </summary>
             <param name="identifier">the identifier of the new member</param>
             <param name="name">the name of the new member</param>
-        </member>
-        <member name="T:ORA.API.Node">
-            <summary>
-            A node is a device used by a member which provides the files and the directories to share.
-            </summary>
-        </member>
-        <member name="P:ORA.API.Node.Name">
-            <summary>
-                The node name
-            </summary>
-        </member>
-        <member name="P:ORA.API.Node.Identifier">
-            <summary>
-                The node identifier
-            </summary>
-        </member>
-        <member name="M:ORA.API.Node.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new node.
-            </summary>
-            <param name="name">the name of the new node</param>
-            <param name="identifier">the identifier of the new node</param>
         </member>
     </members>
 </doc>

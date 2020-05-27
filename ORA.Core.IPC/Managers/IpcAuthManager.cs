@@ -19,5 +19,7 @@ namespace ORA.Core.IPC.Managers
         public string RefreshToken() => this._client.InvokeAsync(manager => manager.RefreshToken()).Result;
 
         public bool IsAuthenticated() => this._client.InvokeAsync(manager => manager.IsAuthenticated()).Result;
+
+        public void Disconnect() => this._client.InvokeAsync(manager => manager.Disconnect()).Wait();
     }
 }

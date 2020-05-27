@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using ORA.API;
 using ORA.API.Loggers;
 using ORA.Core;

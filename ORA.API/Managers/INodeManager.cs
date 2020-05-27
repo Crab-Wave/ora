@@ -2,10 +2,10 @@
 {
     public interface INodeManager
     {
-        Node CreateNode(string name);
+        void Initialize();
 
-        Node GetNode(string identifier);
+        string GetIp();
 
-        bool DeleteNode(string identifier);
+        void RefreshIp();
     }
 }
