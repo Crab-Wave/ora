@@ -47,7 +47,10 @@ namespace ORA.Core.Managers
                 {
                     Cluster c = new Cluster(cluster["name"].Value<string>(), cluster["id"].Value<string>(),
                         cluster["owner"].Value<string>());
-                    this._clusters.Add(c.Identifier, c);
+                    if (!this._clusters.ContainsKey(c.Identifier))
+                        this._clusters.Add(c.Identifier, c);
+                    else
+                        this._clusters[c.Identifier] = c;
                     clusters.Add(c);
                 }
 
