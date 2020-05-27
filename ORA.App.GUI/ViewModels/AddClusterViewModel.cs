@@ -45,7 +45,8 @@ namespace ORA.App.GUI.ViewModels
                 createEnabled);
 
             this.Join = ReactiveCommand.Create(
-                () => {
+                () =>
+                {
                     bool isJoined = Ora.GetClusterManager().JoinCluster(this.id, username);
                     return new ClusterItem(this.MainWindowViewModel, isJoined ? Ora.GetClusterManager().GetCluster(this.id) : null);
                 },

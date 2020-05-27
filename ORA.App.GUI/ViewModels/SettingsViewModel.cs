@@ -25,7 +25,9 @@ namespace ORA.App.GUI.ViewModels
         public SettingsViewModel()
         {
             this.baseUrl = Ora.GetHttpClient().GetBaseUrl();
-            this.username = this.usernameInput = "ora-user";
+            if (!System.IO.File.Exists(Ora.GetDirectory("username")))
+                System.IO.File.WriteAllText(Ora.GetDirectory("username"), "ora-user");
+            this.username = this.usernameInput = System.IO.File.ReadAllText(Ora.GetDirectory("username"));
         }
 
         public void SetBaseUrl()
@@ -44,6 +46,7 @@ namespace ORA.App.GUI.ViewModels
         public void SetUsername()
         {
             this.username = this.usernameInput;
+            System.IO.File.WriteAllText(Ora.GetDirectory("username"), this.username);
         }
     }
 }

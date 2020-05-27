@@ -37,7 +37,8 @@ namespace ORA.App.GUI.ViewModels
             );
 
             this.Ok = ReactiveCommand.Create(
-                () => {
+                () =>
+                {
                     Console.WriteLine("Yo");
                     var file = Ora.GetFileManager().CreateFile(
                         this.ClusterViewModel.Cluster, this.realPath, this.clusterPath);
