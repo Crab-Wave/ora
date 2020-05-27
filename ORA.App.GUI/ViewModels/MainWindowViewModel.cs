@@ -29,7 +29,7 @@ namespace ORA.App.GUI.ViewModels
                 new HomeViewModel(Ora.GetClusterManager().GetClustersOfUser(
                     Ora.GetIdentityManager().GetIdentity().GetIdentifier()
                 ).Select(cluster => new ClusterItem(this, cluster)));
-            this.Settings = new SettingsViewModel();
+            this.Settings = new SettingsViewModel(this);
         }
 
         public void NavigateToHome()
