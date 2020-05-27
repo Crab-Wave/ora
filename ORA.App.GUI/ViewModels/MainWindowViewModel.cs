@@ -68,5 +68,26 @@ namespace ORA.App.GUI.ViewModels
 
             this.Content = vm;
         }
+
+        public void AddFileItem()
+        {
+            var vm = new AddFileViewModel();
+
+            Observable.Merge(
+                    vm.Ok,
+                    vm.Cancel.Select(_ => (FileItem) null))
+                .Take(1)
+                .Subscribe(model =>
+                {
+                    if (model != null)
+                    {
+                        this.Cluster.Files.Add(model);
+                    }
+
+                    this.Content = this.Cluster;
+                });
+
+            this.Content = vm;
+        }
     }
 }

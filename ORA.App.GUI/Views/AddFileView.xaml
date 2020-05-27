@@ -9,24 +9,35 @@
       DockPanel.Dock="Top"
       Background="Gray"
       Padding="5">
-      <StackPanel
-        Orientation="Horizontal">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="45*" />
+          <ColumnDefinition Width="40*" />
+          <ColumnDefinition Width="30*" />
+          <ColumnDefinition Width="70" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
         <TextBlock
           Text="ORA"
           Margin="5"
-          Width="350" Height="22"
+          Height="22"
           Foreground="Black" Background="Gray"
           FontSize="16"
-          TextAlignment="Left" />
+          TextAlignment="Left"
+          Grid.Column="0" />
         <TextBlock
-            Text="Add cluster"
-            Margin="5"
-            Width="360" Height="22"
-            Foreground="Black" Background="Gray"
-            FontSize="16"
-            TextAlignment="Left" />
-      </StackPanel>
+          Text="Add file"
+          Margin="5"
+          Height="22"
+          Foreground="Black" Background="Gray"
+          FontSize="16"
+          TextAlignment="Center"
+          Grid.Column="1" />
+      </Grid>
     </Border>
+
     <Button
       DockPanel.Dock="Bottom"
       Content="Cancel"
@@ -35,8 +46,14 @@
       DockPanel.Dock="Bottom"
       Content="OK"
       Command="{Binding Ok}" />
-    <TextBox
-      Text="{Binding Name}"
-      Watermark="Enter file path"/>
+    <StackPanel
+      DockPanel.Dock="Bottom">
+      <TextBox
+        Text="{Binding RealPath}"
+        Watermark="Enter file path" />
+      <TextBox
+        Text="{Binding ClusterPath}"
+        Watermark="Enter file path in cluster" />
+    </StackPanel>
   </DockPanel>
 </UserControl>

@@ -13,7 +13,7 @@ namespace ORA.App.GUI.ViewModels
     {
         public Cluster Cluster { get; }
         public ObservableCollection<MemberItem> Members { get; }
-
+        public ObservableCollection<FileItem> Files { get; }
 
         public ClusterViewModel(Cluster cluster)
         {
@@ -21,6 +21,9 @@ namespace ORA.App.GUI.ViewModels
             this.Members = new ObservableCollection<MemberItem>(
                 Ora.GetClusterManager().GetMembers(this.Cluster.Identifier)
                     .Select(member => new MemberItem(this, member)));
+            this.Files = new ObservableCollection<FileItem>(
+                Ora.GetFileManager().GetFiles(this.Cluster)
+                    .Select(hash => new FileItem(this, Ora.GetFileManager().GetFile(cluster, hash))));
         }
 
         public void AddMemberItem()

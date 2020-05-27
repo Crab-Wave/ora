@@ -8,27 +8,40 @@ namespace ORA.App.GUI.ViewModels
 {
     internal class AddFileViewModel : ViewModelBase
     {
-        private string name;
-        public string Name
+        private string realPath;
+        private string clusterPath;
+
+        public string RealPath
         {
-            get => this.name;
-            set => this.RaiseAndSetIfChanged(ref this.name, value);
+            get => this.realPath;
+            set => this.RaiseAndSetIfChanged(ref this.realPath, value);
         }
 
-        public ReactiveCommand<Unit, ClusterItem> Ok { get; }
+        public string ClusterPath
+        {
+            get => this.clusterPath;
+            set => this.RaiseAndSetIfChanged(ref this.clusterPath, value);
+        }
+
+        public ReactiveCommand<Unit, FileItem> Ok { get; }
         public ReactiveCommand<Unit, Unit> Cancel { get; }
 
-        public MainWindowViewModel MainWindowViewModel { get; set; }
+        public ClusterViewModel ClusterViewModel { get; set; }
 
         public AddFileViewModel()
         {
             var okEnabled = this.WhenAnyValue(
-                x => x.Name,
+                x => x.RealPath,
                 x => !String.IsNullOrWhiteSpace(x)
             );
+            // .WhenAnyValue(
+            //     x => x.ClusterPath,
+            //     x => !String.IsNullOrWhiteSpace(x)
+            // );
 
             this.Ok = ReactiveCommand.Create(
-                () => new ClusterItem(this.MainWindowViewModel, Ora.GetClusterManager().CreateCluster(this.name, "displayName")),
+                () => new FileItem(this.ClusterViewModel, Ora.GetFileManager().CreateFile(
+                    this.ClusterViewModel.Cluster, this.realPath, this.clusterPath)),
                 okEnabled);
             this.Cancel = ReactiveCommand.Create(() => { });
         }
