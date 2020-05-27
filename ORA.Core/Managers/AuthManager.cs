@@ -33,7 +33,7 @@ namespace ORA.Core.Managers
         {
             Identity identity = Ora.GetIdentityManager().GetIdentity();
             HttpResponse response = Ora.GetHttpClient()
-                .Post("/refreshtoken", new HttpRequest().Set("Authorization", this.GetToken()));
+                .Post("/refreshtoken", new HttpRequest().Set("Authorization", "Bearer " + this.GetToken()));
             if (response.Code == 200)
             {
                 RsaCipher rsaCipher = new RsaCipher(identity.PublicKey, identity.PrivateKey);
@@ -49,5 +49,9 @@ namespace ORA.Core.Managers
         }
 
         public bool IsAuthenticated() => this._token != null;
+
+        public void Disconnect() =>
+            Ora.GetHttpClient().Delete("/disconnect",
+                new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
     }
 }

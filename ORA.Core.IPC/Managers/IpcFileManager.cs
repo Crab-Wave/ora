@@ -13,6 +13,8 @@ namespace ORA.Core.IPC.Managers
             this._client = client;
         }
 
+        public File[] GetOwnedFiles() => this._client.InvokeAsync(manager => manager.GetOwnedFiles()).Result;
+
         public File CreateFile(Cluster cluster, string realPath, string clusterPath) => this._client
             .InvokeAsync(manager => manager.CreateFile(cluster, realPath, clusterPath)).Result;
 

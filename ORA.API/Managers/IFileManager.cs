@@ -4,6 +4,8 @@ namespace ORA.API.Managers
 {
     public interface IFileManager
     {
+        File[] GetOwnedFiles();
+
         File CreateFile(Cluster cluster, string realPath, string clusterPath);
 
         bool RemoveFile(Cluster cluster, File file) => this.RemoveFile(cluster, file.Hash);

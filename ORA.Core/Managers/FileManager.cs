@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ORA.API;
 using ORA.API.Http;
@@ -34,6 +35,8 @@ namespace ORA.Core.Managers
                 this._files[file.Cluster].Add(file.Hash, file);
             });
         }
+
+        public File[] GetOwnedFiles() => this._files.Values.SelectMany(files => files.Values).ToArray();
 
         public File CreateFile(Cluster cluster, string realPath, string clusterPath)
         {
@@ -154,6 +157,10 @@ namespace ORA.Core.Managers
             File file = new File(cluster.Identifier, json["path"].Value<string>(), hash, json["size"].Value<long>());
 
             this.WriteFile(file, filePacket.Content);
+
+            Ora.GetHttpClient().Post($"/clusters/{cluster}/files/owned",
+                new HttpRequest($"[\"{file.Hash}\"]").Set("Authorization",
+                    "Bearer " + Ora.GetAuthManager().GetToken()));
 
             return file;
         }

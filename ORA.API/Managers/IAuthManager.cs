@@ -28,5 +28,7 @@
         /// </summary>
         /// <returns>Whether the application is authenticated or not</returns>
         public bool IsAuthenticated();
+
+        public void Disconnect();
     }
 }

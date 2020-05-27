@@ -44,6 +44,8 @@ namespace ORA.API
 
         public static IFileManager GetFileManager() => Get().FileManager();
 
+        public static INodeManager GetNodeManager() => Get().NodeManager();
+
         public abstract string ProgramDirectory();
 
         public abstract string Directory(params string[] path);
@@ -65,5 +67,7 @@ namespace ORA.API
         public abstract INetworkManager NetworkManager();
 
         public abstract IFileManager FileManager();
+
+        public abstract INodeManager NodeManager();
     }
 }

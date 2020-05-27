@@ -22,7 +22,7 @@ namespace ORA.Application.CLI.Commands
                               && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
                 if (url.ToLower().Equals("reset"))
                 {
-                    File.WriteAllText(
+                    System.IO.File.WriteAllText(
                         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                             "ora-tracker.txt"), "https://tracker.ora.crabwave.com");
                     Console.WriteLine("Tracker URL has been sucessfully reset to https://tracker.ora.crabwave.com");
@@ -31,7 +31,7 @@ namespace ORA.Application.CLI.Commands
                     Console.WriteLine($"{url} is not a valid URL");
                 else
                 {
-                    File.WriteAllText(
+                    System.IO.File.WriteAllText(
                         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                             "ora-tracker.txt"), url);
                     Console.WriteLine($"Tracker URL has been sucessfully changed to {url}");

@@ -1,4 +1,5 @@
-﻿using System.Net.NetworkInformation;
+﻿using System;
+using System.Net.NetworkInformation;
 using System.Timers;
 using JKang.IpcServiceFramework;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,7 @@ namespace ORA.Application.Daemon
             OraCore.Initialize();
             Ora.GetLogger().ShouldPrint(true);
             Ora.GetAuthManager().Authenticate();
+            Ora.GetNodeManager().Initialize();
 
             NetworkChange.NetworkAvailabilityChanged +=
                 (sender, eventArgs) =>
@@ -45,6 +47,14 @@ namespace ORA.Application.Daemon
             synchronizeTimer.Interval = 1000 * 60;
             synchronizeTimer.Enabled = true;
 
+            AppDomain.CurrentDomain.ProcessExit += (sender, eventArgs) => Ora.GetAuthManager().Disconnect();
+
+            Cluster cluster = Ora.GetClusterManager().CreateCluster("Cluster Random", "Adamaq01");
+            File file = Ora.GetFileManager()
+                .CreateFile(cluster, @"C:\Users\Adamaq01\AppData\Roaming\ora\ora-tracker", "salut.txt");
+            Ora.GetFileManager().RemoveFile(cluster, file);
+            Ora.GetClusterManager().DeleteCluster(cluster.Identifier);
+
             IServiceCollection services = ConfigureServices(new ServiceCollection());
             new IpcServiceHostBuilder(services.BuildServiceProvider())
                 .AddNamedPipeEndpoint<StringProvider>("program-directory", "ora-program-directory")
@@ -58,6 +68,7 @@ namespace ORA.Application.Daemon
                 .AddNamedPipeEndpoint<IClusterManager>("cluster", "ora-cluster")
                 .AddNamedPipeEndpoint<INetworkManager>("network", "ora-network")
                 .AddNamedPipeEndpoint<IFileManager>("file", "ora-file")
+                .AddNamedPipeEndpoint<INodeManager>("node", "ora-node")
                 .Build()
                 .Run();
         }
@@ -90,7 +101,10 @@ namespace ORA.Application.Daemon
                         .AddService<INetworkManager, INetworkManager>(provider => Ora.GetNetworkManager()))
                 .AddIpc(builder =>
                     builder.AddNamedPipe()
-                        .AddService<IFileManager, IFileManager>(provider => Ora.GetFileManager()));
+                        .AddService<IFileManager, IFileManager>(provider => Ora.GetFileManager()))
+                .AddIpc(builder =>
+                    builder.AddNamedPipe()
+                        .AddService<INodeManager, INodeManager>(provider => Ora.GetNodeManager()));
     }
 
     internal class ProgramDirectoryProvider : StringProvider

@@ -29,6 +29,7 @@ namespace ORA.Core.IPC
         private readonly IClusterManager _clusterManager;
         private readonly INetworkManager _networkManager;
         private readonly IFileManager _fileManager;
+        private readonly INodeManager _nodeManager;
 
         private OraCoreIpc()
         {
@@ -55,6 +56,8 @@ namespace ORA.Core.IPC
             this._fileManager =
                 new IpcFileManager(
                     new IpcServiceClientBuilder<IFileManager>().UseNamedPipe("ora-file").Build());
+            this._nodeManager =
+                new IpcNodeManager(new IpcServiceClientBuilder<INodeManager>().UseNamedPipe("ora-node").Build());
         }
 
         public static void Initialize() => SetInstance(new OraCoreIpc());
@@ -82,5 +85,7 @@ namespace ORA.Core.IPC
         public override INetworkManager NetworkManager() => this._networkManager;
 
         public override IFileManager FileManager() => this._fileManager;
+
+        public override INodeManager NodeManager() => this._nodeManager;
     }
 }

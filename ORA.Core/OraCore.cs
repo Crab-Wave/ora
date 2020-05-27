@@ -37,6 +37,8 @@ namespace ORA.Core
 
         private readonly IFileManager _fileManager;
 
+        private readonly INodeManager _nodeManager;
+
         private OraCore()
         {
             this._programDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
@@ -72,6 +74,7 @@ namespace ORA.Core
             this._networkManager = new NetworkManager();
             this._networkManager.StartListening();
             this._fileManager = new FileManager(this._programDirectory);
+            this._nodeManager = new NodeManager();
         }
 
         public static void Initialize() => SetInstance(new OraCore());
@@ -104,5 +107,7 @@ namespace ORA.Core
         public override INetworkManager NetworkManager() => this._networkManager;
 
         public override IFileManager FileManager() => this._fileManager;
+
+        public override INodeManager NodeManager() => this._nodeManager;
     }
 }
