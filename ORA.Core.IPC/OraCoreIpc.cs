@@ -87,5 +87,16 @@ namespace ORA.Core.IPC
         public override IFileManager FileManager() => this._fileManager;
 
         public override INodeManager NodeManager() => this._nodeManager;
+
+        public override bool IsOraTracker(string url)
+        {
+            string baseUrl = this._httpClient.GetBaseUrl();
+            string random = new Random().Next().ToString();
+            HttpResponse response = this._httpClient.Post(url + "/ping", new HttpRequest(random));
+            this._httpClient.SetBaseUrl(baseUrl);
+            if (response.Code == 200)
+                return response.Body == random;
+            return false;
+        }
     }
 }

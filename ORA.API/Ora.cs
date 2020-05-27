@@ -69,5 +69,7 @@ namespace ORA.API
         public abstract IFileManager FileManager();
 
         public abstract INodeManager NodeManager();
+
+        public abstract bool IsOraTracker(string url);
     }
 }
