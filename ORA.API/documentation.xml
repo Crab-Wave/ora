@@ -236,6 +236,12 @@
             </summary>
             <returns>The list of all the clusters</returns>
         </member>
+        <member name="M:ORA.API.Managers.IClusterManager.GetClustersOfUser(System.String)">
+            <summary>
+               Get the list of all the clusters where the specified user is present
+            </summary>
+            <returns>The list of all the clusters where the specified user is present</returns>
+        </member>
         <member name="M:ORA.API.Managers.IClusterManager.GetCluster(System.String)">
             <summary>
                Get the cluster with the specified identifier
@@ -255,7 +261,7 @@
                 Get the list of the members of the specified cluster
             </summary>
             <param name="cluster">The identifier of the cluster</param>
-            <returns>The list of the members of the current cluster </returns>
+            <returns>The list of the members of the current cluster</returns>
         </member>
         <member name="M:ORA.API.Managers.IClusterManager.GetMember(System.String,System.String)">
             <summary>
@@ -288,6 +294,29 @@
             <param name="cluster">The identifier of the cluster</param>
             <param name="member">The member identifier</param>
             <returns>True if the member has been removed or false otherwise</returns>
+        </member>
+        <member name="M:ORA.API.Managers.IClusterManager.AddAdmin(System.String,System.String)">
+            <summary>
+                Add the member with the specified identifier as an admin of the specified cluster
+            </summary>
+            <param name="cluster">The identifier of the cluster</param>
+            <param name="member">The member identifier</param>
+            /// <returns>true if the user is admin, false otherwise</returns>
+        </member>
+        <member name="M:ORA.API.Managers.IClusterManager.RemoveAdmin(System.String,System.String)">
+            <summary>
+                Remove the member with the specified identifier from the specified cluster admins list
+            </summary>
+            <param name="cluster">The identifier of the cluster</param>
+            <param name="member">The member identifier</param>
+            <returns>True if the member has been removed of the admins, false otherwise</returns>
+        </member>
+        <member name="M:ORA.API.Managers.IClusterManager.GetAdmins(System.String)">
+            <summary>
+                Get the list of the admin members of the specified cluster
+            </summary>
+            <param name="cluster">The identifier of the cluster</param>
+            <returns>The list of the admin members of the specified cluster</returns>
         </member>
         <member name="T:ORA.API.Managers.IIdentityManager">
             <summary>
