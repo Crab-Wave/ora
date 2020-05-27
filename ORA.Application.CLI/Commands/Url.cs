@@ -19,21 +19,22 @@ namespace ORA.Application.CLI.Commands
                 Uri uriResult;
 
                 bool result = Uri.TryCreate(url, UriKind.Absolute, out uriResult)
-                              && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+                              && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps) &&
+                              Ora.Get().IsOraTracker(url);
                 if (url.ToLower().Equals("reset"))
                 {
-                    System.IO.File.WriteAllText(
-                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                            "ora-tracker.txt"), "https://tracker.ora.crabwave.com");
+                    string trackerPath = Ora.GetDirectory("ora-tracker");
+                    System.IO.File.WriteAllText(trackerPath, "https://tracker.ora.crabwave.com");
+                    Ora.GetHttpClient().SetBaseUrl("https://tracker.ora.crabwave.com");
                     Console.WriteLine("Tracker URL has been sucessfully reset to https://tracker.ora.crabwave.com");
                 }
                 else if (!result)
                     Console.WriteLine($"{url} is not a valid URL");
                 else
                 {
-                    System.IO.File.WriteAllText(
-                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                            "ora-tracker.txt"), url);
+                    string trackerPath = Ora.GetDirectory("ora-tracker");
+                    System.IO.File.WriteAllText(trackerPath, url);
+                    Ora.GetHttpClient().SetBaseUrl(url);
                     Console.WriteLine($"Tracker URL has been sucessfully changed to {url}");
                 }
             }
