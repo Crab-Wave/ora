@@ -65,7 +65,7 @@
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="100" />
           <ColumnDefinition Width="20" />
-          <ColumnDefinition Width="100" />
+          <ColumnDefinition Width="300" />
           <ColumnDefinition Width="20" />
           <ColumnDefinition Width="100" />
           <ColumnDefinition Width="50*" />
@@ -84,7 +84,7 @@
           DockPanel.Dock="Top"
           Margin="1"
           Text="{Binding BaseUrl}"
-          Width="200"
+          Width="300"
           Grid.Column="2"
           Grid.Row="0" />
         <Button
@@ -102,7 +102,7 @@
           DockPanel.Dock="Top"
           Margin="1"
           Text="{Binding UsernameInput}"
-          Width="200"
+          Width="300"
           Grid.Column="2"
           Grid.Row="1" />
         <Button
