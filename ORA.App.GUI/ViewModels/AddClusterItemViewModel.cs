@@ -1,18 +1,18 @@
 using System.Reactive;
 using ReactiveUI;
-
+using System;
 using ORA.API;
 using ORA.App.GUI.Models;
 
 namespace ORA.App.GUI.ViewModels
 {
-    class AddClusterItemViewModel : ViewModelBase
+    internal class AddClusterItemViewModel : ViewModelBase
     {
         private string name;
         public string Name
         {
-            get => name;
-            set => this.RaiseAndSetIfChanged(ref name, value);
+            get => this.name;
+            set => this.RaiseAndSetIfChanged(ref this.name, value);
         }
 
         public ReactiveCommand<Unit, ClusterItem> Ok { get; }
@@ -24,13 +24,13 @@ namespace ORA.App.GUI.ViewModels
         {
             var okEnabled = this.WhenAnyValue(
                 x => x.Name,
-                x => !string.IsNullOrWhiteSpace(x)
+                x => !String.IsNullOrWhiteSpace(x)
             );
 
-            Ok = ReactiveCommand.Create(
-                () => new ClusterItem(MainWindowViewModel, Ora.GetClusterManager().CreateCluster(name, "displayName")),
+            this.Ok = ReactiveCommand.Create(
+                () => new ClusterItem(this.MainWindowViewModel, Ora.GetClusterManager().CreateCluster(this.name, "displayName")),
                 okEnabled);
-            Cancel = ReactiveCommand.Create(() => { });
+            this.Cancel = ReactiveCommand.Create(() => { });
         }
     }
 }

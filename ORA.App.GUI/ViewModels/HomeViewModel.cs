@@ -14,7 +14,7 @@ namespace ORA.App.GUI.ViewModels
 
         public HomeViewModel(IEnumerable<ClusterItem> clusters)
         {
-            Clusters = new ObservableCollection<ClusterItem>(clusters);
+            this.Clusters = new ObservableCollection<ClusterItem>(clusters);
         }
     }
 }

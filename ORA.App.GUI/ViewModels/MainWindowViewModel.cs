@@ -14,30 +14,40 @@ namespace ORA.App.GUI.ViewModels
 
         public ViewModelBase Content
         {
-            get => content;
-            set => this.RaiseAndSetIfChanged(ref content, value);
+            get => this.content;
+            set => this.RaiseAndSetIfChanged(ref this.content, value);
         }
 
         public HomeViewModel Home { get; set; }
         public SettingsViewModel Settings { get; }
 
+        public ClusterViewModel Cluster { get; set; }
         public MainWindowViewModel()
         {
-            Content = Home =
+            this.Content = this.Home =
                 new HomeViewModel(Ora.GetClusterManager().GetClusters().Select(cluster => new ClusterItem(this, cluster)));
-            Settings = new SettingsViewModel();
+            this.Settings = new SettingsViewModel();
         }
 
         public void NavigateToHome()
         {
-            Content = Home;
+            this.Content = this.Home;
         }
 
         public void NavigateToSettings()
         {
-            Content = Settings;
+            this.Content = this.Settings;
         }
 
+        public void NavigateToCluster()
+        {
+            this.Content = this.Cluster;
+        }
+
+        public void AddMemberItem()
+        {
+
+        }
         public void AddClusterItem()
         {
             var vm = new AddClusterItemViewModel();
@@ -50,13 +60,13 @@ namespace ORA.App.GUI.ViewModels
                 {
                     if (model != null)
                     {
-                        Home.Clusters.Add(model);
+                        this.Home.Clusters.Add(model);
                     }
 
-                    Content = Home;
+                    this.Content = this.Home;
                 });
 
-            Content = vm;
+            this.Content = vm;
         }
     }
 }

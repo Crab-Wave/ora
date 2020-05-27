@@ -1,6 +1,7 @@
 using System.Linq;
 using ORA.API;
 using ORA.App.GUI.ViewModels;
+using System.Collections.Generic;
 
 namespace ORA.App.GUI.Models
 {
@@ -24,4 +25,5 @@ namespace ORA.App.GUI.Models
                 new HomeViewModel(Ora.GetClusterManager().GetClusters().Select(c => new ClusterItem(this.MainWindowViewModel, c)));
         }
     }
+
 }

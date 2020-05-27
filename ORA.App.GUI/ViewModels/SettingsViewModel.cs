@@ -8,8 +8,8 @@ namespace ORA.App.GUI.ViewModels
         private string baseUrl;
         public string BaseUrl
         {
-            get => baseUrl;
-            set => this.RaiseAndSetIfChanged(ref baseUrl, value);
+            get => this.baseUrl;
+            set => this.RaiseAndSetIfChanged(ref this.baseUrl, value);
         }
 
         public SettingsViewModel()

@@ -1,12 +1,12 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
 namespace ORA.App.GUI.Views
 {
-    public class AddClusterItemView : UserControl
+    public class MemberView : UserControl
     {
-        public AddClusterItemView()
+        public MemberView()
         {
             this.InitializeComponent();
         }

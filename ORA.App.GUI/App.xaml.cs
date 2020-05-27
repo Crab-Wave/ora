@@ -17,7 +17,7 @@ namespace ORA.App.GUI
         {
             base.OnFrameworkInitializationCompleted();
 
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            if (this.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.MainWindow = new MainWindow
                 {

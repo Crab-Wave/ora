@@ -1,0 +1,85 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ORA.App.GUI.Views.MemberView">
+    <DockPanel>
+        <Border DockPanel.Dock="Top"
+        Background="Gray"
+        Padding="5">
+            <StackPanel
+                Orientation="Horizontal">
+                <TextBlock
+                    Text="ORA"
+                    Margin="5"
+                    Width="350" Height="22"
+                    Foreground="Black" Background="Gray"
+                    FontSize="16"
+                    TextAlignment="Left"
+                  ></TextBlock>
+                <TextBlock
+                    Text="{Binding Information}"
+                    Margin="5"
+                    Width="360" Height="22"
+                    Foreground="Black" Background="Gray"
+                    FontSize="16"
+                    TextAlignment="Left"
+                  ></TextBlock>
+                <Button
+                    Width="23" Height="23"
+                    Content="H"
+                    Margin="5"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Top"
+                    Foreground="Black" Background="White"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+                    FontSize="12"
+                    Command="{Binding $parent[Window].DataContext.NavigateToHome}"></Button>
+                <Button
+                    Width="23" Height="23"
+                    Content="S"
+                    Margin="5"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Top"
+                    Foreground="Black" Background="White"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+                    FontSize="12"
+                    Command="{Binding $parent[Window].DataContext.NavigateToSettings}"></Button>
+            </StackPanel>
+        </Border>
+        <Border
+          DockPanel.Dock="Left"
+          Background="WhiteSmoke"
+          Padding="5">
+            <StackPanel>
+                <Button
+                    Content="Invite Member"
+                    Command="{Binding $parent[Window].DataContext.AddMemberItem}"></Button>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Text="Members:"
+                    Height="30">
+                </TextBlock>
+                <ItemsControl Items="{Binding Members}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Margin="4"
+                            Content="{Binding Information}" Command="{Binding Remove}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
+        <ItemsControl Items="{Binding Members}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </DockPanel>
+</UserControl>
