@@ -56,7 +56,7 @@ namespace ORA.Core
                 Uri uriResult;
                 bool result = Uri.TryCreate(text, UriKind.Absolute, out uriResult)
                               && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
-                if (result)
+                if (result && this.IsOraTracker(text))
                     this._httpClient.SetBaseUrl(text);
                 else
                     this._httpClient.SetBaseUrl("https://tracker.ora.crabwave.com");
@@ -109,5 +109,14 @@ namespace ORA.Core
         public override IFileManager FileManager() => this._fileManager;
 
         public override INodeManager NodeManager() => this._nodeManager;
+
+        public override bool IsOraTracker(string url)
+        {
+            string random = new Random().Next().ToString();
+            HttpResponse response = new UnirestHttpClient().Post(url + "/ping", new HttpRequest(random));
+            if (response.Code == 200)
+                return response.Body == random;
+            return false;
+        }
     }
 }
