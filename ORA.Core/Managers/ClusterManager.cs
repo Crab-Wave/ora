@@ -63,7 +63,7 @@ namespace ORA.Core.Managers
         }
 
         public List<Cluster> GetClustersOfUser(string user) => this.GetClusters().Where(cluster =>
-            this.GetMembers(cluster.Identifier).Any(member => member.Identifier == user)).ToList();
+            this.IsMember(cluster.Identifier, user)).ToList();
 
         public Cluster GetCluster(string identifier)
         {
@@ -112,6 +112,17 @@ namespace ORA.Core.Managers
             Exception exception = new Exception($"Couldn't find member in this cluster");
             Ora.GetLogger().Error(exception);
             throw exception;
+        }
+
+        private bool IsMember(string cluster, string user)
+        {
+            HttpResponse response = Ora.GetHttpClient().Get("/clusters/" + cluster + "/members",
+                new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
+            int code = response.Code;
+            if (code == 200)
+                return JObject.Parse(response.Body)["members"].Children().Any(token =>
+                    token["id"].Value<string>() == user);
+            return false;
         }
 
         public Member GetMember(string cluster, string member)
