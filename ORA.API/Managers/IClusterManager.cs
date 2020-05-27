@@ -21,6 +21,13 @@ namespace ORA.API.Managers
         /// <returns>The list of all the clusters</returns>
         List<Cluster> GetClusters();
 
+
+        /// <summary>
+        ///    Get the list of all the clusters where the specified user is present
+        /// </summary>
+        /// <returns>The list of all the clusters where the specified user is present</returns>
+        List<Cluster> GetClustersOfUser(string user);
+
         /// <summary>
         ///    Get the cluster with the specified identifier
         /// </summary>

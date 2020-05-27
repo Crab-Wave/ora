@@ -19,6 +19,9 @@ namespace ORA.Core.IPC.Managers
 
         public List<Cluster> GetClusters() => this._client.InvokeAsync(manager => manager.GetClusters()).Result;
 
+        public List<Cluster> GetClustersOfUser(string user) =>
+            this._client.InvokeAsync(manager => manager.GetClustersOfUser(user)).Result;
+
         public Cluster GetCluster(string cluster) =>
             this._client.InvokeAsync(manager => manager.GetCluster(cluster)).Result;
 

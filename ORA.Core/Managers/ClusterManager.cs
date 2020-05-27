@@ -62,6 +62,9 @@ namespace ORA.Core.Managers
             throw exception;
         }
 
+        public List<Cluster> GetClustersOfUser(string user) => this.GetClusters().Where(cluster =>
+            this.GetMembers(cluster.Identifier).Any(member => member.Identifier == user)).ToList();
+
         public Cluster GetCluster(string identifier)
         {
             if (this._clusters.ContainsKey(identifier))
