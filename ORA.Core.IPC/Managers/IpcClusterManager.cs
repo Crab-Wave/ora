@@ -19,6 +19,9 @@ namespace ORA.Core.IPC.Managers
 
         public List<Cluster> GetClusters() => this._client.InvokeAsync(manager => manager.GetClusters()).Result;
 
+        public List<Cluster> GetClustersOfUser(string user) =>
+            this._client.InvokeAsync(manager => manager.GetClustersOfUser(user)).Result;
+
         public Cluster GetCluster(string cluster) =>
             this._client.InvokeAsync(manager => manager.GetCluster(cluster)).Result;
 
@@ -31,7 +34,22 @@ namespace ORA.Core.IPC.Managers
         public Member GetMember(string cluster, string member) =>
             this._client.InvokeAsync(manager => manager.GetMember(cluster, member)).Result;
 
+        public bool InviteMember(string cluster, string user) =>
+            this._client.InvokeAsync(manager => manager.InviteMember(cluster, user)).Result;
+
+        public bool JoinCluster(string cluster, string displayName) =>
+            this._client.InvokeAsync(manager => manager.JoinCluster(cluster, displayName)).Result;
+
         public bool RemoveMember(string cluster, string member) =>
             this._client.InvokeAsync(manager => manager.RemoveMember(cluster, member)).Result;
+
+        public bool AddAdmin(string cluster, string member) =>
+            this._client.InvokeAsync(manager => manager.AddAdmin(cluster, member)).Result;
+
+        public bool RemoveAdmin(string cluster, string member) =>
+            this._client.InvokeAsync(manager => manager.RemoveAdmin(cluster, member)).Result;
+
+        public List<string> GetAdmins(string cluster) =>
+            this._client.InvokeAsync(manager => manager.GetAdmins(cluster)).Result;
     }
 }

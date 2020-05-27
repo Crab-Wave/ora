@@ -31,20 +31,22 @@ namespace ORA.Core.Managers
 
         public string RefreshToken()
         {
-            Identity identity = Ora.GetIdentityManager().GetIdentity();
             HttpResponse response = Ora.GetHttpClient()
-                .Post("/refreshtoken", new HttpRequest().Set("Authorization", this.GetToken()));
-            if (response.Code == 200)
+                .Post("/refreshtoken", new HttpRequest().Set("Authorization", "Bearer " + this.GetToken()));
+            if (response.Code != 200)
             {
-                RsaCipher rsaCipher = new RsaCipher(identity.PublicKey, identity.PrivateKey);
-                this._token = Encoding.UTF8.GetString(rsaCipher.Decrypt(Convert.FromBase64String(response.Body)));
+                Exception exception = new Exception("Couldn't refresh user token");
+                Ora.GetLogger().Error(exception);
+                throw exception;
             }
-            else
-                Ora.GetLogger().Error(new Exception("Couldn't refresh user token"));
 
             return this._token;
         }
 
         public bool IsAuthenticated() => this._token != null;
+
+        public void Disconnect() =>
+            Ora.GetHttpClient().Delete("/disconnect",
+                new HttpRequest().Set("Authorization", "Bearer " + Ora.GetAuthManager().GetToken()));
     }
 }
