@@ -25,7 +25,9 @@ namespace ORA.App.GUI.ViewModels
         public MainWindowViewModel()
         {
             this.Content = this.Home =
-                new HomeViewModel(Ora.GetClusterManager().GetClusters().Select(cluster => new ClusterItem(this, cluster)));
+                new HomeViewModel(Ora.GetClusterManager().GetClustersOfUser(
+                    Ora.GetIdentityManager().GetIdentity().GetIdentifier()
+                ).Select(cluster => new ClusterItem(this, cluster)));
             this.Settings = new SettingsViewModel();
         }
 
