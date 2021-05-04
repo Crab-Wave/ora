@@ -441,3 +441,9 @@ tools
 
 # Keys
 *.pub
+
+# tags
+tags
+
+# Build directory
+build/
