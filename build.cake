@@ -22,20 +22,34 @@ Task("Build")
 
 Task("CLI")
   .Does(() => {
-    if (!DirectoryExists(buildDir))
+    if (!DirectoryExists(buildDir)) {
       CreateDirectory(buildDir);
+    }
 
     DotNetCoreBuild(cliCsProject, buildSettings);
-    CopyFile("./build/ORA.Application.CLI.CoreWrapper.exe", "./build/ora-cli.exe");
+
+    var linuxBinary = "./build/ORA.Application.CLI.CoreWrapper";
+    if (FileExists(linuxBinary)) {
+        CopyFile(linuxBinary, "./build/ora-cli");
+    } else {
+        CopyFile(linuxBinary + ".exe", "./build/ora-cli.exe");
+    }
   });
 
 Task("GUI")
   .Does(() => {
-    if (!DirectoryExists(buildDir))
+    if (!DirectoryExists(buildDir)) {
       CreateDirectory(buildDir);
+    }
 
     DotNetCoreBuild(guiCsProject, buildSettings);
-    CopyFile("./build/ORA.Application.GUI.CoreWrapper.exe", "./build/ora-gui.exe");
+
+    var linuxBinary = "./build/ORA.Application.GUI.CoreWrapper";
+    if (FileExists(linuxBinary)) {
+        CopyFile(linuxBinary, "./build/ora-gui");
+    } else {
+        CopyFile(linuxBinary + ".exe", "./build/ora-gui.exe");
+    }
   });
 
 Task("Clean")
