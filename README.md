@@ -2,6 +2,9 @@
     ORA
 </h1>
 
+>> ORA is an application that allows you to share your file directly with your
+friends using Peer-to-Peer
+
 ## Requirements
 - [.NET Core 3.0 SDK](https://dotnet.microsoft.com/download/dotnet/3.0)
 
